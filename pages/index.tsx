@@ -4,6 +4,7 @@ import styles from '../styles/Home.module.css'
 
 export default function Home() {
   useEffect(() => {
+    console.log('start');
     window.location.href="https://dongmin-jang.medium.com"
   }, []);
   return (
