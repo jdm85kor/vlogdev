@@ -1,18 +1,20 @@
 import { useEffect } from 'react';
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   useEffect(() => {
     console.log('start');
-    window.location.href="https://dongmin-jang.medium.com"
+    setTimeout(() => {
+      window.location.href="https://dongmin-jang.medium.com";
+    }, 2000);
   }, []);
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>v-log.dev</title>
         <meta name="description" content="Loading..." />
       </Head>
+      <div>페이지 이동합니다</div>
     </div>
   )
 }

@@ -13,6 +13,7 @@ const Ga: React.FC = ({ children }) => {
 
     window.dataLayer = window.dataLayer || [];
     function gtag(...props: any[]){
+      console.log(props);
       
       window.dataLayer.push(props);
     }
