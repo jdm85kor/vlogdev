@@ -12,10 +12,9 @@ const Ga: React.FC = ({ children }) => {
     if (process.env.NODE_ENV !== 'production') return;
 
     window.dataLayer = window.dataLayer || [];
-    function gtag(...props: any[]){
-      console.log(props);
+    function gtag(...props: any){
       
-      window.dataLayer.push(props);
+      window.dataLayer.push(arguments);
     }
     gtag('js', new Date());
 
