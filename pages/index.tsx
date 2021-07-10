@@ -11,10 +11,11 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>v-log.dev</title>
-        <meta name="description" content="Loading..." />
+        <title>VLOG</title>
+        <meta name="description" content="Record yourself just for you" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Head>
-      <div>페이지 이동합니다</div>
+      <span>페이지 이동합니다</span>
     </div>
   )
 }
