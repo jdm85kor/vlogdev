@@ -3,10 +3,9 @@ import Head from 'next/head'
 
 export default function Home() {
   useEffect(() => {
-    console.log('start');
-    setTimeout(() => {
-      window.location.href="https://dongmin-jang.medium.com";
-    }, 2000);
+    // setTimeout(() => {
+    //   window.location.href="https://dongmin-jang.medium.com";
+    // }, 2000);
   }, []);
   return (
     <div>
@@ -15,7 +14,7 @@ export default function Home() {
         <meta name="description" content="Record yourself just for you" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Head>
-      <span>페이지 이동합니다</span>
+      
     </div>
   )
 }
