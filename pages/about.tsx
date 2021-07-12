@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-const about: React.FC = () => {
+const About: React.FC = () => {
   return (
     <div>
       <Head>
@@ -12,4 +12,4 @@ const about: React.FC = () => {
   );
 };
 
-export default about;
+export default About;

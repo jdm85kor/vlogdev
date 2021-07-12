@@ -1,15 +1,15 @@
 import Head from 'next/head'
 
-const playground: React.FC = () => {
+const Playground: React.FC = () => {
   return (
     <div>
       <Head>
         <title>Lab</title>
         <meta name="description" content="Let's play and study." />
       </Head>
-      You can't access this page
+      You can&apos;t access this page
     </div>
   );
 };
 
-export default playground;
+export default Playground;

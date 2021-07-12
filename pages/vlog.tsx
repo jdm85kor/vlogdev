@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Head from 'next/head'
 
-const about: React.FC = () => {
+const About: React.FC = () => {
   useEffect(() => {
     setTimeout(() => {
       window.location.href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA";
@@ -18,4 +18,4 @@ const about: React.FC = () => {
   );
 };
 
-export default about;
+export default About;
