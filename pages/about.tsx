@@ -1,15 +1,15 @@
 import Head from 'next/head'
 
-const profile: React.FC = () => {
+const about: React.FC = () => {
   return (
     <div>
       <Head>
         <title>JDM</title>
         <meta name="description" content="Who is he?" />
       </Head>
-      profile page
+      refactoring
     </div>
   );
 };
 
-export default profile;
+export default about;

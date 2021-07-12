@@ -11,6 +11,10 @@ const Nav = styled.nav`
   justify-content: space-around;
 `;
 
+const Img = styled.img`
+  vertical-align: middle;
+`;
+
 const A = styled.a`
   color: #F37021;
   text-decoration: none;
@@ -28,10 +32,10 @@ const A = styled.a`
 const Gnb: React.FC = () => {
   return (
     <Nav>
-      <Link href="/" passHref><A>LOGO</A></Link>
+      <Link href="/" passHref><A><Img src="/logo.png" alt="VLOG" width="30" height="30" /></A></Link>
       <Link href="https://dongmin-jang.medium.com" passHref><A>Dev</A></Link>
       <Link href="/vlog" passHref><A>VLOG</A></Link>
-      <Link href="/parenting" passHref><A>Parenting</A></Link>
+      {/* <Link href="/parenting" passHref><A>Parenting</A></Link> */}
       <Link href="/playground" passHref><A>Playground</A></Link>
       <Link href="/about" passHref><A>About</A></Link>
     </Nav>
