@@ -3,12 +3,13 @@ import Link from 'next/link';
 
 const Nav = styled.nav`
   display: flex;
-  margin: 0;
+  margin: 0 auto;
   padding: 0 50px;
   max-width: 1920px;
   height: 50px;
   flex-direction: row;
   justify-content: space-around;
+  box-sizing: border-box;
 `;
 
 const Img = styled.img`

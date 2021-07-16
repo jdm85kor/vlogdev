@@ -1,10 +1,28 @@
 
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import Head from 'next/head'
+
+const figureStyle = (url: string) => css`
+  margin: 0 auto;
+  width: 362px;
+  height: 350px;
+  background: no-repeat 100%/contain url(${url});
+`;
+const imgTitleStyle = css`
+display: block;
+height: 30px;
+padding-top: 20px;
+text-align: center;
+font-size: 24px;
+color: #000;
+`;
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div css={css`
+      margin: 0 auto;
+      max-width: 1920px;
+    `}>
       <Head>
         <title>VLOG</title>
         <meta name="description" content="Record yourself just for you" />
@@ -23,31 +41,20 @@ const Home: React.FC = () => {
           height: 500px;
         `}>
           <div css={css`
-            margin: 50px;
+            margin: 30px;
+            padding: 20px;
+            &:hover {
+              border-color: red;
+            }
           `}>
-            <div css={css`
-              margin: 0 auto;
-              width: 362px;
-              height: 350px;
-              background: no-repeat center center url("letter.png");
-            `} />
-            <div css={css`
-              height: 50px;
-              text-align: center;
-            `}>Job offer</div>
+            <figure css={figureStyle('letter.png')} />
+            <span css={imgTitleStyle}>Job offer</span>
           </div>
           <div css={css`
             margin: 50px;
           `}>
-            <div css={css`
-              width: 362px;
-              height: 350px;
-              background: no-repeat center center url("develop.png");
-            `} />
-            <div css={css`
-              height: 50px;
-              text-align: center;
-            `}>Outsourcing development</div>
+            <figure css={figureStyle('develop.png')} />
+            <span css={imgTitleStyle}>Outsourcing development</span>
           </div>
         </div>
         <div css={css`
@@ -57,30 +64,14 @@ const Home: React.FC = () => {
           <div css={css`
             margin: 50px;
           `}>
-            <div css={css`
-              display: inline-block;
-              width: 362px;
-              height: 350px;
-              background: no-repeat center center url("partnership.png");
-            `} />
-            <div css={css`
-                height: 50px;
-                text-align: center;
-              `}>Contents partnership</div>
+            <figure css={figureStyle('partnership.png')} />
+            <span css={imgTitleStyle}>Contents partnership</span>
           </div>
           <div css={css`
             margin: 50px;
           `}>
-            <div css={css`
-              display: inline-block;
-              width: 362px;
-              height: 350px;
-              background: no-repeat center center url("golf.png");
-            `} />
-            <div css={css`
-                height: 50px;
-                text-align: center;
-              `}>Play golf</div>
+            <figure css={figureStyle('golf.png')} />
+            <span css={imgTitleStyle}>Play golf</span>
           </div>
         </div>
       </div>
