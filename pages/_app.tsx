@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Ga />
       <Gnb />
       <Component {...pageProps} />
+      <div id="modal-root" />
     </>
   );
 };

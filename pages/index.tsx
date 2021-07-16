@@ -1,6 +1,20 @@
-
+import { useState, useCallback } from 'react';
 import { css } from '@emotion/react';
 import Head from 'next/head'
+import Modal from '../components/common/Modal';
+
+
+const buttonStyle = css`
+margin: 30px;
+padding: 20px;
+background: #fff;
+border: 1px solid #fff;
+border-radius: 10px;
+cursor: pointer;
+
+&:hover {
+  border-color: #F37021
+}`;
 
 const figureStyle = (url: string) => css`
   margin: 0 auto;
@@ -18,6 +32,16 @@ color: #000;
 `;
 
 const Home: React.FC = () => {
+  const [isShowRequest, setIsShowRequest] = useState(false);
+
+  const handleClickButton = useCallback(() => {
+    window.alert('개발 작업 중 입니다. jdm85kor@gmail.com로 문의 주세요.');
+    // setIsShowRequest(true);
+  }, []);
+
+  const handleClickCloseModal = useCallback(() => {
+    setIsShowRequest(false);
+  }, [isShowRequest]);
   return (
     <div css={css`
       margin: 0 auto;
@@ -40,41 +64,34 @@ const Home: React.FC = () => {
           display: flex;
           height: 500px;
         `}>
-          <div css={css`
-            margin: 30px;
-            padding: 20px;
-            &:hover {
-              border-color: red;
-            }
-          `}>
+          <button css={buttonStyle} type="button" onClick={handleClickButton}>
             <figure css={figureStyle('letter.png')} />
             <span css={imgTitleStyle}>Job offer</span>
-          </div>
-          <div css={css`
-            margin: 50px;
-          `}>
+          </button>
+          <button css={buttonStyle} type="button" onClick={handleClickButton}>
             <figure css={figureStyle('develop.png')} />
             <span css={imgTitleStyle}>Outsourcing development</span>
-          </div>
+          </button>
         </div>
         <div css={css`
           display: flex;
           justify-content: space-between;
         `}>
-          <div css={css`
-            margin: 50px;
-          `}>
+          <button css={buttonStyle} type="button" onClick={handleClickButton}>
             <figure css={figureStyle('partnership.png')} />
             <span css={imgTitleStyle}>Contents partnership</span>
-          </div>
-          <div css={css`
-            margin: 50px;
-          `}>
+          </button>
+          <button css={buttonStyle} type="button" onClick={handleClickButton}>
             <figure css={figureStyle('golf.png')} />
             <span css={imgTitleStyle}>Play golf</span>
-          </div>
+          </button>
         </div>
       </div>
+      {
+        isShowRequest && <Modal isShow={isShowRequest} onClose={handleClickCloseModal}>
+          Modal
+        </Modal>
+      }
     </div>
   )
 }
