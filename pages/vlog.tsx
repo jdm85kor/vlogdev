@@ -13,7 +13,8 @@ const About: React.FC = () => {
         <title>Video</title>
         <meta name="description" content="Show me your record" />
       </Head>
-      react, aws 기반으로 동작하는 프로젝트입니다.
+      작업 중입니다.
+      youtube로 이동 됩니다.
     </div>
   );
 };

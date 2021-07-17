@@ -12,17 +12,50 @@ const Modal: React.FC<Props> = ({ isShow, onClose, children }) => {
       <div>
         <ModalPortal>
           <div css={css`
-            height: 400px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 10000;
+            background-color: rgba(0, 0, 0, 0.6);
+            text-align: center;
           `}>
-            <header css={css`
-              width: 200px;
-              height: 50px;
+            <section css={css`
+              display: inline-block;
+              position: relative;
+              margin: 100px auto;
+              width: 400px;
+              min-height: 500px;
+              background: #fff;
+              overflow: hidden;
+              box-sizing: border-box;
             `}>
-              <button type="button" onClick={onClose}>close</button>
-            </header>
-            <body>
-              { children }
-            </body>
+              <header css={css`
+                padding-top: 10px;
+                height: 50px;
+                font-size: 24px;
+                text-align: center;
+              `}>
+                Notice
+                <button
+                  type="button"
+                  onClick={onClose}
+                  css={css`
+                    position: absolute;
+                    top: 10px;
+                    right: 30px;
+                    font-size: 18px;
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                  `}
+                >X</button>
+              </header>
+              <body>
+                { children }
+              </body>
+            </section>
           </div>
         </ModalPortal>
 

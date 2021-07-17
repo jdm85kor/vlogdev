@@ -7,7 +7,7 @@ const About: React.FC = () => {
         <title>JDM</title>
         <meta name="description" content="Who is he?" />
       </Head>
-      refactoring
+      react, nextjs, aws 기반으로 동작하는 프로젝트입니다.
     </div>
   );
 };

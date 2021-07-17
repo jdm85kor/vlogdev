@@ -35,13 +35,12 @@ const Home: React.FC = () => {
   const [isShowRequest, setIsShowRequest] = useState(false);
 
   const handleClickButton = useCallback(() => {
-    window.alert('개발 작업 중 입니다. jdm85kor@gmail.com로 문의 주세요.');
-    // setIsShowRequest(true);
+    setIsShowRequest(true);
   }, []);
 
   const handleClickCloseModal = useCallback(() => {
     setIsShowRequest(false);
-  }, [isShowRequest]);
+  }, []);
   return (
     <div css={css`
       margin: 0 auto;
@@ -89,7 +88,8 @@ const Home: React.FC = () => {
       </div>
       {
         isShowRequest && <Modal isShow={isShowRequest} onClose={handleClickCloseModal}>
-          Modal
+          개발 작업 중 입니다.<br />
+          jdm85kor@gmail.com로 문의 주세요.
         </Modal>
       }
     </div>
