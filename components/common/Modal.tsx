@@ -52,9 +52,9 @@ const Modal: React.FC<Props> = ({ isShow, onClose, children }) => {
                   `}
                 >X</button>
               </header>
-              <body>
+              <main>
                 { children }
-              </body>
+              </main>
             </section>
           </div>
         </ModalPortal>

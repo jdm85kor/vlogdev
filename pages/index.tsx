@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { css } from '@emotion/react';
+import axios from 'axios';
 import Head from 'next/head'
 import Modal from '../components/common/Modal';
 
@@ -87,10 +88,14 @@ const Home: React.FC = () => {
         </div>
       </div>
       {
-        isShowRequest && <Modal isShow={isShowRequest} onClose={handleClickCloseModal}>
-          개발 작업 중 입니다.<br />
-          jdm85kor@gmail.com로 문의 주세요.
-        </Modal>
+        isShowRequest &&
+          <Modal
+            isShow={isShowRequest}
+            onClose={handleClickCloseModal}
+          >
+            개발 작업 중 입니다.<br />
+            jdm85kor@gmail.com로 문의 주세요.
+          </Modal>
       }
     </div>
   )
