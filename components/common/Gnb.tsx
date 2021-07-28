@@ -34,8 +34,10 @@ const Gnb: React.FC = () => {
   return (
     <Nav>
       <Link href="/" passHref><A><Img src="/logo.png" alt="VLOG" width="30" height="30" /></A></Link>
-      <Link href="https://dongmin-jang.medium.com" passHref><A>Dev</A></Link>
-      <Link href="/vlog" passHref><A>VLOG</A></Link>
+      <A href="https://dongmin-jang.medium.com" target="_blank">Dev</A>
+      {/* <Link href="https://dongmin-jang.medium.com" passHref><A>Dev</A></Link> */}
+      {/* <Link href="/vlog" passHref><A>VLOG</A></Link> */}
+      <A href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank">VLOG</A>
       {/* <Link href="/parenting" passHref><A>Parenting</A></Link> */}
       <Link href="/playground" passHref><A>Playground</A></Link>
       <Link href="/about" passHref><A>About</A></Link>

@@ -31,14 +31,16 @@ const About: React.FC = () => {
         padding-left: 100px;
       `}>
         <h1>V-LOG.DEV</h1>
-        <h2>about</h2>
+        <h2>About</h2>
         <dl css={css`
           font-size: 20px;
           margin-bottom: 80px;
         `}>
-          <dt css={dtStyle}>구성</dt>
-          <dd css={ddStyle}>next.js + AWS ( Rout53 + CloudFront + S3 )</dd>
-          <dt css={dtStyle}>git project</dt>
+          <dt css={dtStyle}>Front-end</dt>
+          <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
+          <dt css={dtStyle}>Back-end</dt>
+          <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
+          <dt css={dtStyle}>Git project</dt>
           <dd css={ddStyle}>
             <a
               href="https://github.com/jdm85kor/vlogdev"
@@ -57,7 +59,7 @@ const About: React.FC = () => {
         <dl css={css`
           font-size: 20px;
         `}>
-          <dt css={dtStyle}>blog</dt>
+          <dt css={dtStyle}>Blog</dt>
           <dd css={ddStyle}>
           <a
               href="https://github.com/jdm85kor/vlogdev"
@@ -69,9 +71,9 @@ const About: React.FC = () => {
               rel="noopener noreferrer nofollow"
             >https://dongmin-jang.medium.com/</a>
             </dd>
-          <dt css={dtStyle}>email</dt>
+          <dt css={dtStyle}>Email</dt>
           <dd css={ddStyle}>jdm85kor@gmail.com</dd>
-          <dt css={dtStyle}>career</dt>
+          <dt css={dtStyle}>Career</dt>
           <dd css={ddStyle}>센트비, 위메프, 원티드, 무신사</dd>
         </dl>
       </div>
