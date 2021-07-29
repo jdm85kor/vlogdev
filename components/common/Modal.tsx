@@ -3,10 +3,11 @@ import ModalPortal from './ModalPortal';
 
 type Props = {
   isShow: boolean,
+  title: string,
   onClose: () => void,
   children: React.ReactNode,
 }
-const Modal: React.FC<Props> = ({ isShow, onClose, children }) => {
+const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
   return (
     isShow ?
       <div>
@@ -37,7 +38,7 @@ const Modal: React.FC<Props> = ({ isShow, onClose, children }) => {
                 font-size: 24px;
                 text-align: center;
               `}>
-                Notice
+                { title || 'Notice' }
                 <button
                   type="button"
                   onClick={onClose}
