@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Link from 'next/link';
+import { colors } from '@styles/theme';
 
 const Nav = styled.nav`
   display: flex;
@@ -17,7 +18,7 @@ const Img = styled.img`
 `;
 
 const A = styled.a`
-  color: #F37021;
+  color: ${colors.hermes};
   text-decoration: none;
   &:hover {
     color: #f3a621;

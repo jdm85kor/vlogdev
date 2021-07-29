@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import axios from 'axios';
 import Head from 'next/head'
 import Modal from '../components/common/Modal';
+import { colors } from '@styles/theme';
 
 
 const buttonStyle = css`
@@ -14,7 +15,7 @@ border-radius: 10px;
 cursor: pointer;
 
 &:hover {
-  border-color: #F37021
+  border-color: ${colors.hermes}
 }`;
 
 const figureStyle = (url: string) => css`
