@@ -26,6 +26,9 @@ const About: React.FC = () => {
         <title>JDM</title>
         <meta name="description" content="Who is he?" />
       </Head>
+      <h1 css={css`
+        display: none;
+      `}>This page was made by jdm.</h1>
       <div css={css`
         margin: 100px auto 0;
         padding-left: 100px;
@@ -54,7 +57,7 @@ const About: React.FC = () => {
           </dd>
         </dl>
         <h2>
-          작업자
+          Developer
         </h2>
         <dl css={css`
           font-size: 20px;
@@ -74,7 +77,7 @@ const About: React.FC = () => {
           <dt css={dtStyle}>Email</dt>
           <dd css={ddStyle}>jdm85kor@gmail.com</dd>
           <dt css={dtStyle}>Career</dt>
-          <dd css={ddStyle}>센트비, 위메프, 원티드, 무신사</dd>
+          <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
         </dl>
       </div>
     </div>

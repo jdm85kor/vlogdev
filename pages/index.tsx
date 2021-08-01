@@ -26,8 +26,9 @@ const figureStyle = (url: string) => css`
 `;
 const imgTitleStyle = css`
 display: block;
+margin: 20px 0 0;
+padding: 0;
 height: 30px;
-padding-top: 20px;
 text-align: center;
 font-size: 24px;
 color: #000;
@@ -60,14 +61,26 @@ const Home: React.FC = () => {
     tel: '',
     email: '',
     contents: '',
+    type: '',
   });
 
-  const handleClickButton = useCallback(() => {
+  const handleClickButton = useCallback((type: string) => {
     setIsShowRequest(true);
+    setModalInfo(prev => ({
+      ...prev,
+      type,
+    }));
   }, []);
 
   const handleClickCloseModal = useCallback(() => {
     setIsShowRequest(false);
+    setModalInfo({
+      name: '',
+      tel: '',
+      email: '',
+      contents: '',
+      type: '',
+    });
   }, []);
   
   const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,48 +104,52 @@ const Home: React.FC = () => {
     `}>
       <Head>
         <title>VLOG</title>
-        <meta name="description" content="Record yourself just for you" />
+        <meta name="description" content="Record yourself" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Head>
+      <h1 css={css`
+        display: none;
+      `}>Record yourself</h1>
       <div css={css`
         margin: 0 auto;
         padding: 0 50px;
         width: 100%;
         max-width: 1024px;
         box-sizing: border-box;
-        
       `}>
         <div css={css`
           display: flex;
           height: 500px;
+          justify-content: space-around;
         `}>
-          <button css={buttonStyle} type="button" onClick={handleClickButton}>
+          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
             <figure css={figureStyle('letter.png')} />
-            <span css={imgTitleStyle}>Job offer</span>
+            <h2 css={imgTitleStyle}>Job offer</h2>
           </button>
-          <button css={buttonStyle} type="button" onClick={handleClickButton}>
+          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
             <figure css={figureStyle('develop.png')} />
-            <span css={imgTitleStyle}>Outsourcing development</span>
+            <h2 css={imgTitleStyle}>Outsourcing development</h2>
           </button>
         </div>
         <div css={css`
           display: flex;
-          justify-content: space-between;
+          height: 500px;
+          justify-content: space-around;
         `}>
-          <button css={buttonStyle} type="button" onClick={handleClickButton}>
+          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
             <figure css={figureStyle('partnership.png')} />
-            <span css={imgTitleStyle}>Contents partnership</span>
+            <h2 css={imgTitleStyle}>Contents partnership</h2>
           </button>
-          <button css={buttonStyle} type="button" onClick={handleClickButton}>
+          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
             <figure css={figureStyle('golf.png')} />
-            <span css={imgTitleStyle}>Play golf</span>
+            <h2 css={imgTitleStyle}>Play golf</h2>
           </button>
         </div>
       </div>
       {
         isShowRequest &&
           <Modal
-            title="Request"
+            title={modalInfo.type}
             isShow={isShowRequest}
             onClose={handleClickCloseModal}
           >
@@ -200,13 +217,7 @@ const Home: React.FC = () => {
                   });
                   if (response.status === 200) {
                     alert("Registration is complete");
-                    setIsShowRequest(false);
-                    setModalInfo({
-                      name: '',
-                      tel: '',
-                      email: '',
-                      contents: '',
-                    });
+                    handleClickCloseModal();
                   } else {
                     alert('Registration failed');
                   }
