@@ -26,41 +26,18 @@ const About: React.FC = () => {
         <title>JDM</title>
         <meta name="description" content="Who is he?" />
       </Head>
-      <h1 css={css`
-        display: none;
-      `}>This page was made by jdm.</h1>
       <div css={css`
         margin: 100px auto 0;
         padding-left: 100px;
       `}>
         <h1>V-LOG.DEV</h1>
-        <h2>About</h2>
+        <div css={css`
+          display: none;
+        `}>This page was made by jdm to introduce v-log.</div>
+        <h2>Develop</h2>
         <dl css={css`
           font-size: 20px;
-          margin-bottom: 80px;
-        `}>
-          <dt css={dtStyle}>Front-end</dt>
-          <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
-          <dt css={dtStyle}>Back-end</dt>
-          <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
-          <dt css={dtStyle}>Git project</dt>
-          <dd css={ddStyle}>
-            <a
-              href="https://github.com/jdm85kor/vlogdev"
-              css={css`
-                text-decoration: none;
-                color: blue;
-            `}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >https://github.com/jdm85kor/vlogdev</a>
-          </dd>
-        </dl>
-        <h2>
-          Developer
-        </h2>
-        <dl css={css`
-          font-size: 20px;
+          margin-bottom: 20px;
         `}>
           <dt css={dtStyle}>Blog</dt>
           <dd css={ddStyle}>
@@ -78,6 +55,29 @@ const About: React.FC = () => {
           <dd css={ddStyle}>jdm85kor@gmail.com</dd>
           <dt css={dtStyle}>Career</dt>
           <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
+        </dl>
+        <h2>
+          Developer
+        </h2>
+        <dl css={css`
+          font-size: 20px;
+        `}>
+          <dt css={dtStyle}>Front-end</dt>
+          <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
+          <dt css={dtStyle}>Back-end</dt>
+          <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
+          <dt css={dtStyle}>Git project</dt>
+          <dd css={ddStyle}>
+            <a
+              href="https://github.com/jdm85kor/vlogdev"
+              css={css`
+                text-decoration: none;
+                color: blue;
+            `}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+            >https://github.com/jdm85kor/vlogdev</a>
+          </dd>
         </dl>
       </div>
     </div>
