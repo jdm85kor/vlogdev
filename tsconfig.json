@@ -22,7 +22,8 @@
       "@public/*":["public/*"]
     },
     "typeRoots": [
-      "./@type"
+      "./type",
+      "./node_modules/@types"
     ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

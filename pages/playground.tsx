@@ -2,10 +2,11 @@ import { useState } from 'react';
 import Head from 'next/head'
 import { css } from '@emotion/react';
 import { colors } from '@styles/theme';
-import Hamberger from '@public/hamberger.svg';
+import Hamberger from '@public/svg/hamberger.svg';
 
 const Playground: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState(true);
+
   return (
     <div css={css`
       position: relative;

@@ -5,7 +5,6 @@ import Head from 'next/head'
 import Modal from '../components/common/Modal';
 import { colors } from '@styles/theme';
 
-
 const buttonStyle = css`
 margin: 30px;
 padding: 20px;
@@ -89,14 +88,14 @@ const Home: React.FC = () => {
       ...prev,
       [id]: value,
     }));
-  }, [modalInfo]);
+  }, []);
   const handleChangeTextarea = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setModalInfo(prev => ({
       ...prev,
       [id]: value,
     }));
-  }, [modalInfo]);
+  }, []);
   return (
     <div css={css`
       margin: 0 auto;
