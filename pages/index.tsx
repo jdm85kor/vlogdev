@@ -17,11 +17,11 @@ cursor: pointer;
   border-color: ${colors.hermes}
 }`;
 
-const figureStyle = (url: string) => css`
+const imgStyle = css`
   margin: 0 auto;
   width: 362px;
   height: 350px;
-  background: no-repeat 100%/contain url(${url});
+  border: none;
 `;
 const imgTitleStyle = css`
 display: block;
@@ -105,6 +105,7 @@ const Home: React.FC = () => {
         <title>VLOG</title>
         <meta name="description" content="Record yourself" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <link rel="shortcut icon" href="/logo.png"></link>
       </Head>
       <h1 css={css`
         display: none;
@@ -122,12 +123,12 @@ const Home: React.FC = () => {
           justify-content: space-around;
         `}>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
-            <figure css={figureStyle('letter.png')} />
-            <h2 css={imgTitleStyle}>Job offer</h2>
+            <img css={imgStyle} src="/letter.png"/>
+            <span css={imgTitleStyle}>Job offer</span>
           </button>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
-            <figure css={figureStyle('develop.png')} />
-            <h2 css={imgTitleStyle}>Outsourcing development</h2>
+            <img css={imgStyle} src="/develop.png" />
+            <span css={imgTitleStyle}>Outsourcing development</span>
           </button>
         </div>
         <div css={css`
@@ -136,12 +137,12 @@ const Home: React.FC = () => {
           justify-content: space-around;
         `}>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
-            <figure css={figureStyle('partnership.png')} />
-            <h2 css={imgTitleStyle}>Contents partnership</h2>
+            <img css={imgStyle} src="/partnership.png" />
+            <span css={imgTitleStyle}>Contents partnership</span>
           </button>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
-            <figure css={figureStyle('golf.png')} />
-            <h2 css={imgTitleStyle}>Play golf</h2>
+            <img css={imgStyle} src="/golf.png" />
+            <span css={imgTitleStyle}>Play golf</span>
           </button>
         </div>
       </div>

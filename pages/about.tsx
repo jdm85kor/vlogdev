@@ -69,19 +69,19 @@ const About: React.FC = () => {
           <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
           <dt css={dtStyle}>SNS</dt>
           <dd css={ddStyle}>
-            <a href="https://www.facebook.com/jdm85kor" target="_blank">
+            <a href="https://www.facebook.com/jdm85kor" target="_blank" rel="noreferrer">
               <Facebook css={iconStyle}/>
             </a>
-            <a href="https://www.instagram.com/jdm_kor/" target="_blank">
+            <a href="https://www.instagram.com/jdm_kor/" target="_blank" rel="noreferrer">
               <Instagram css={iconStyle}/>
             </a>
-            <a href="https://www.linkedin.com/in/dongmin-jang-b3495255/" target="_blank">
+            <a href="https://www.linkedin.com/in/dongmin-jang-b3495255/" target="_blank" rel="noreferrer">
               <Linkedin css={iconStyle}/>
             </a>
-            <a href="https://twitter.com/Dongmin_JANG" target="_blank">
+            <a href="https://twitter.com/Dongmin_JANG" target="_blank" rel="noreferrer">
               <Twitter css={iconStyle}/>
             </a>
-            <a href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank">
+            <a href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank" rel="noreferrer">
               <Youtube css={iconStyle}/>
             </a>
           </dd>
