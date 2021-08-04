@@ -17,11 +17,12 @@ cursor: pointer;
   border-color: ${colors.hermes}
 }`;
 
-const imgStyle = css`
+const imgStyle = (src: string) => css`
   margin: 0 auto;
+  border: none;
   width: 362px;
   height: 350px;
-  border: none;
+  background: no-repeat 100%/contain url(${src});
 `;
 const imgTitleStyle = css`
 display: block;
@@ -96,6 +97,7 @@ const Home: React.FC = () => {
       [id]: value,
     }));
   }, []);
+  
   return (
     <div css={css`
       margin: 0 auto;
@@ -123,11 +125,11 @@ const Home: React.FC = () => {
           justify-content: space-around;
         `}>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
-            <img css={imgStyle} src="/letter.png"/>
+            <div css={imgStyle('letter.png')} />
             <span css={imgTitleStyle}>Job offer</span>
           </button>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
-            <img css={imgStyle} src="/develop.png" />
+            <div css={imgStyle('develop.png')} />
             <span css={imgTitleStyle}>Outsourcing development</span>
           </button>
         </div>
@@ -137,11 +139,11 @@ const Home: React.FC = () => {
           justify-content: space-around;
         `}>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
-            <img css={imgStyle} src="/partnership.png" />
+            <div css={imgStyle('partnership.png')} />
             <span css={imgTitleStyle}>Contents partnership</span>
           </button>
           <button css={buttonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
-            <img css={imgStyle} src="/golf.png" />
+            <div css={imgStyle('golf.png')} />
             <span css={imgTitleStyle}>Play golf</span>
           </button>
         </div>
