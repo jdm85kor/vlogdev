@@ -59,7 +59,7 @@ const Gnb: React.FC = () => {
       <Nav>
         <Link href="/" passHref>
           <A>
-            <Img src="/logo.png" alt="VLOG" width="30" height="30" />
+            <Img src="/logo144.png" alt="VLOG" width="30" height="30" />
           </A>
         </Link>
         <Ul>

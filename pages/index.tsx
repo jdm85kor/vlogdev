@@ -107,7 +107,6 @@ const Home: React.FC = () => {
         <title>VLOG</title>
         <meta name="description" content="Record yourself" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-        <link rel="shortcut icon" href="/logo.png"></link>
       </Head>
       <h1 css={css`
         display: none;

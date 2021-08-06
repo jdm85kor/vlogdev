@@ -9,7 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href="/logo.png" />
+        <link rel="shortcut icon" href="/logo144.png"></link>
+        <link rel="icon" href="/logo144.png" sizes="144x144"></link>
       </Head>
       <Ga />
       <Gnb />
