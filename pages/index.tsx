@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { css } from '@emotion/react';
 import axios from 'axios';
 import Head from 'next/head'
 import Modal from '../components/common/Modal';
+import Loading from "@components/common/Loading";
 import { colors } from '@styles/theme';
 
 const buttonStyle = css`
@@ -19,7 +20,6 @@ cursor: pointer;
 
 const imgStyle = (src: string) => css`
   margin: 0 auto;
-  border: none;
   width: 362px;
   height: 350px;
   background: no-repeat 100%/contain url(${src});
@@ -56,6 +56,7 @@ const instance = axios.create({
 
 const Home: React.FC = () => {
   const [isShowRequest, setIsShowRequest] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [modalInfo, setModalInfo] = useState<Record<string, string>>({
     name: '',
     tel: '',
@@ -97,6 +98,12 @@ const Home: React.FC = () => {
       [id]: value,
     }));
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  } ,[]);
   
   return (
     <div css={css`
@@ -105,48 +112,59 @@ const Home: React.FC = () => {
     `}>
       <Head>
         <title>VLOG</title>
-        <meta name="description" content="Record yourself" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </Head>
-      <h1 css={css`
-        display: none;
-      `}>Record yourself</h1>
-      <div css={css`
-        margin: 0 auto;
-        padding: 0 50px;
-        width: 100%;
-        max-width: 1024px;
-        box-sizing: border-box;
-      `}>
+      {
+        isLoading ?
         <div css={css`
-          display: flex;
-          height: 500px;
-          justify-content: space-around;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         `}>
-          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
-            <div css={imgStyle('letter.png')} />
-            <span css={imgTitleStyle}>Job offer</span>
-          </button>
-          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
-            <div css={imgStyle('develop.png')} />
-            <span css={imgTitleStyle}>Outsourcing development</span>
-          </button>
-        </div>
-        <div css={css`
-          display: flex;
-          height: 500px;
-          justify-content: space-around;
-        `}>
-          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
-            <div css={imgStyle('partnership.png')} />
-            <span css={imgTitleStyle}>Contents partnership</span>
-          </button>
-          <button css={buttonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
-            <div css={imgStyle('golf.png')} />
-            <span css={imgTitleStyle}>Play golf</span>
-          </button>
-        </div>
-      </div>
+          <Loading />
+        </div> :
+        <>
+          <h1 css={css`
+            display: none;
+          `}>Record yourself</h1>
+          <div css={css`
+            margin: 0 auto;
+            padding: 0 50px;
+            width: 100%;
+            max-width: 1024px;
+            box-sizing: border-box;
+          `}>
+            <div css={css`
+              display: flex;
+              height: 500px;
+              justify-content: space-around;
+            `}>
+              <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
+                <div css={imgStyle('letter.png')} />
+                <span css={imgTitleStyle}>Job offer</span>
+              </button>
+              <button css={buttonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
+                <div css={imgStyle('develop.png')} />
+                <span css={imgTitleStyle}>Outsourcing development</span>
+              </button>
+            </div>
+            <div css={css`
+              display: flex;
+              height: 500px;
+              justify-content: space-around;
+            `}>
+              <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
+                <div css={imgStyle('partnership.png')} />
+                <span css={imgTitleStyle}>Contents partnership</span>
+              </button>
+              <button css={buttonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
+                <div css={imgStyle('golf.png')} />
+                <span css={imgTitleStyle}>Play golf</span>
+              </button>
+            </div>
+          </div>
+        </>
+      }
       {
         isShowRequest &&
           <Modal

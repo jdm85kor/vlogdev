@@ -31,8 +31,8 @@ const iconStyle = css`
 const About: React.FC = () => {
   return (
     <div css={css`
-      margin: 0 auto;
-      max-width: 1920px;
+    margin: 0 auto;
+    max-width: 1920px;
     `}>
       <Head>
         <title>JDM</title>
@@ -47,68 +47,79 @@ const About: React.FC = () => {
           display: none;
         `}>This page was made by jdm to introduce v-log.</div>
         <h2>Owner</h2>
-        <dl css={css`
-          font-size: 20px;
-          margin-bottom: 20px;
-        `}>
-          <dt css={dtStyle}>Blog</dt>
-          <dd css={ddStyle}>
-          <a
-              href="https://github.com/jdm85kor/vlogdev"
-              css={css`
-                text-decoration: none;
-                color: blue;
-            `}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >https://dongmin-jang.medium.com/</a>
-            </dd>
-          <dt css={dtStyle}>Email</dt>
-          <dd css={ddStyle}>jdm85kor@gmail.com</dd>
-          <dt css={dtStyle}>Career</dt>
-          <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
-          <dt css={dtStyle}>SNS</dt>
-          <dd css={ddStyle}>
-            <a href="https://www.facebook.com/jdm85kor" target="_blank" rel="noreferrer">
-              <Facebook css={iconStyle}/>
-            </a>
-            <a href="https://www.instagram.com/jdm_kor/" target="_blank" rel="noreferrer">
-              <Instagram css={iconStyle}/>
-            </a>
-            <a href="https://www.linkedin.com/in/dongmin-jang-b3495255/" target="_blank" rel="noreferrer">
-              <Linkedin css={iconStyle}/>
-            </a>
-            <a href="https://twitter.com/Dongmin_JANG" target="_blank" rel="noreferrer">
-              <Twitter css={iconStyle}/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank" rel="noreferrer">
-              <Youtube css={iconStyle}/>
-            </a>
-          </dd>
-        </dl>
-        <h2>
-          Develop
-        </h2>
-        <dl css={css`
-          font-size: 20px;
-        `}>
-          <dt css={dtStyle}>Front-end</dt>
-          <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
-          <dt css={dtStyle}>Back-end</dt>
-          <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
-          <dt css={dtStyle}>Git project</dt>
-          <dd css={ddStyle}>
+        <section>
+          <div css={css`
+            width: 250px;
+            height: 365px;
+            background: no-repeat 100%/contain url(/jdm.jpg);
+          `} />
+          <dl css={css`
+            display: inline-block;
+            font-size: 20px;
+            margin: 10px 0 20px;
+          `}>
+            <dt css={dtStyle}>Blog</dt>
+            <dd css={ddStyle}>
             <a
-              href="https://github.com/jdm85kor/vlogdev"
-              css={css`
-                text-decoration: none;
-                color: blue;
-            `}
-              target="_blank"
-              rel="noopener noreferrer nofollow"
-            >https://github.com/jdm85kor/vlogdev</a>
-          </dd>
-        </dl>
+                href="https://github.com/jdm85kor/vlogdev"
+                css={css`
+                  text-decoration: none;
+                  color: blue;
+              `}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >https://dongmin-jang.medium.com/</a>
+              </dd>
+            <dt css={dtStyle}>Email</dt>
+            <dd css={ddStyle}>jdm85kor@gmail.com</dd>
+            <dt css={dtStyle}>Career</dt>
+            <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
+            <dt css={dtStyle}>SNS</dt>
+            <dd css={ddStyle}>
+              <a href="https://www.facebook.com/jdm85kor" target="_blank" rel="noreferrer">
+                <Facebook css={iconStyle}/>
+              </a>
+              <a href="https://www.instagram.com/jdm_kor/" target="_blank" rel="noreferrer">
+                <Instagram css={iconStyle}/>
+              </a>
+              <a href="https://www.linkedin.com/in/dongmin-jang-b3495255/" target="_blank" rel="noreferrer">
+                <Linkedin css={iconStyle}/>
+              </a>
+              <a href="https://twitter.com/Dongmin_JANG" target="_blank" rel="noreferrer">
+                <Twitter css={iconStyle}/>
+              </a>
+              <a href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank" rel="noreferrer">
+                <Youtube css={iconStyle}/>
+              </a>
+            </dd>
+          </dl>
+        </section>
+        
+        <h2>
+          Develop environment
+        </h2>
+        <section>
+          <dl css={css`
+            font-size: 20px;
+          `}>
+            <dt css={dtStyle}>Front-end</dt>
+            <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
+            <dt css={dtStyle}>Back-end</dt>
+            <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
+            <dt css={dtStyle}>Git project</dt>
+            <dd css={ddStyle}>
+              <a
+                href="https://github.com/jdm85kor/vlogdev"
+                css={css`
+                  text-decoration: none;
+                  color: blue;
+              `}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >https://github.com/jdm85kor/vlogdev</a>
+            </dd>
+          </dl>
+        </section>
       </div>
     </div>
   );
