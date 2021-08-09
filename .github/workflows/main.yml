@@ -40,8 +40,6 @@ jobs:
       - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-
-      - uses: actions/checkout@v2
       
       - name: Build
         run: yarn run static-build
