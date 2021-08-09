@@ -41,6 +41,8 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
 
+      - uses: actions/checkout@v2
+      
       - name: Build
         run: yarn run static-build
         
@@ -48,9 +50,5 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run : | # Delete previous and Upload next
-          aws s3 rm s3://vlogdev/resource/ --recursive
-          aws s3 cp \
-            --recursive \
-            --region ap-northeast-2 \
-            resource s3://vlogdev/resource/
+        run : | # Delete previous and upload next
+          aws s3 sync resource  s3://vlogdev/resource/
