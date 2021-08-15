@@ -73,7 +73,7 @@ const Home: React.FC = () => {
     }));
   }, []);
 
-  const handleClickCloseModal = useCallback(() => {
+  const handleClickCloseModal = useCallback((): void => {
     setIsShowRequest(false);
     setModalInfo({
       name: '',
