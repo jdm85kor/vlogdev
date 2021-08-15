@@ -7,7 +7,9 @@ import { mq } from '@styles/theme';
 
 const Div = styled.div`
   margin: 0 auto;
-  padding: 0 50px;
+  ${mq({
+    padding: ['0 20px', '0 50px', '0 50px'],
+  })}
   max-width: 1920px;
   box-sizing: border-box;
 `;

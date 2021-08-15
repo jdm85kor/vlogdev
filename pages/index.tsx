@@ -133,7 +133,9 @@ const Home: React.FC = () => {
           `}>Record yourself</h1>
           <div css={css`
             margin: 0 auto;
-            padding: 0 50px;
+            ${mq({
+              padding: ['0 20px', '0 50px', '0 50px'],
+            })}
             width: 100%;
             max-width: 1024px;
             box-sizing: border-box;
