@@ -5,33 +5,37 @@ import Head from 'next/head'
 import Modal from '../components/common/Modal';
 import Loading from "@components/common/Loading";
 import { colors } from '@styles/theme';
+import { mq } from '@styles/theme';
 
 const buttonStyle = css`
-margin: 30px;
-padding: 20px;
-background: #fff;
-border: 1px solid #fff;
-border-radius: 10px;
-cursor: pointer;
+  margin: 30px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
 
-&:hover {
-  border-color: ${colors.hermes}
-}`;
+  &:hover {
+    border-color: ${colors.hermes}
+  }
+`;
 
 const imgStyle = (src: string) => css`
   margin: 0 auto;
-  width: 362px;
+  ${mq({
+    width: ['200px', '280px', '362px']
+  })}
   height: 350px;
   background: no-repeat 100%/contain url(${src});
 `;
 const imgTitleStyle = css`
-display: block;
-margin: 20px 0 0;
-padding: 0;
-height: 30px;
-text-align: center;
-font-size: 24px;
-color: #000;
+  display: block;
+  margin: 20px 0 0;
+  padding: 0;
+  height: 30px;
+  text-align: center;
+  font-size: 24px;
+  color: #000;
 `;
 
 const modalLabel = css`
@@ -136,7 +140,10 @@ const Home: React.FC = () => {
           `}>
             <div css={css`
               display: flex;
-              height: 500px;
+              ${mq({
+                height: ['auto', '500px', '500px'],
+                'flex-direction': ['column', 'row', 'row'],
+              })}
               justify-content: space-around;
             `}>
               <button css={buttonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
@@ -150,7 +157,10 @@ const Home: React.FC = () => {
             </div>
             <div css={css`
               display: flex;
-              height: 500px;
+              ${mq({
+                height: ['auto', '500px', '500px'],
+                'flex-direction': ['column', 'row', 'row'],
+              })}
               justify-content: space-around;
             `}>
               <button css={buttonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
