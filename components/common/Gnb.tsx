@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import Link from 'next/link';
 import { colors } from '@styles/theme';
 import Setting from '@public/svg/setting.svg';
+import { mq } from '@styles/theme';
 
 const Div = styled.div`
   margin: 0 auto;
@@ -35,7 +36,9 @@ const Li = styled.li`
   display: inline-block;
   height: inherit;
   & > a {
-    padding: 0 50px;
+    ${mq({
+      padding: ['0 7px', '0 30px', '0 50px'],
+    })}
   }
 `;
 
