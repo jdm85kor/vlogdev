@@ -51,7 +51,7 @@ const About: React.FC = () => {
           <div css={css`
             width: 250px;
             height: 365px;
-            background: no-repeat 100%/contain url(/jdm.jpg);
+            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/jdm.jpg);
           `} />
           <dl css={css`
             display: inline-block;

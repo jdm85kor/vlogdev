@@ -26,7 +26,7 @@ const imgStyle = (src: string) => css`
     width: ['200px', '280px', '362px']
   })}
   height: 350px;
-  background: no-repeat 100%/contain url(${src});
+  background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/${src});
 `;
 const imgTitleStyle = css`
   display: block;
@@ -144,7 +144,7 @@ const Home: React.FC = () => {
               display: flex;
               ${mq({
                 height: ['auto', '500px', '500px'],
-                'flex-direction': ['column', 'row', 'row'],
+                'flexDirection': ['column', 'row', 'row'],
               })}
               justify-content: space-around;
             `}>
@@ -161,7 +161,7 @@ const Home: React.FC = () => {
               display: flex;
               ${mq({
                 height: ['auto', '500px', '500px'],
-                'flex-direction': ['column', 'row', 'row'],
+                'flexDirection': ['column', 'row', 'row'],
               })}
               justify-content: space-around;
             `}>
