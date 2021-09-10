@@ -1,24 +1,14 @@
 import { useState } from 'react';
-import Head from 'next/head'
 import { css } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
+import { useRouter } from 'next/router'
 
-const Playground: React.FC = () => {
+const Menu: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState(true);
-
+  const router = useRouter();
   return (
-    <div css={css`
-      position: relative;
-      margin: 0 auto;
-      max-width: 1920px;
-      height: calc(100vh - 50px);
-    `}>
-      <Head>
-        <title>Lab</title>
-        <meta name="description" content="Let's play and study." />
-      </Head>
-      <div
+    <div
         css={css`
           position: relative;
           display: inline-block;
@@ -83,21 +73,27 @@ const Playground: React.FC = () => {
               }
             `}
             >
-              react-fetch
+              <button
+                type="button"
+                onClick={() => {
+                  router.push('/playground/react-fetch');
+                }}
+                css={css`
+                  maring: 0;
+                  padding: 0;
+                  background: inherit;
+                  border: none;
+                  cursor: pointer;
+                  color: white;
+                `}
+              >
+                react-fetch
+              </button>
             </li>
           </ul>
         }
       </div>
-      <div css={css`
-        display: inline-block;
-        vertical-align: top;
-        margin: 20px;
-      `}>
-      You can&apos;t access this page
-      </div>
-
-    </div>
   );
 };
 
-export default Playground;
+export default Menu;
