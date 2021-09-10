@@ -31,6 +31,7 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
               background: #fff;
               overflow: hidden;
               box-sizing: border-box;
+              border-radius: 10px;
             `}>
               <header css={css`
                 padding-top: 10px;
