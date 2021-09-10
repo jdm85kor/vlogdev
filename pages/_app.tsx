@@ -4,8 +4,13 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import Ga from '../components/common/Ga';
 import Gnb from '../components/common/Gnb';
+import { useRouter } from 'next/router';
+import PlaygroundLayout from '@components/playground/Layout';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const isPlaygroundPages = router.route.includes('/playground');
+  
   return (
     <>
       <Head>
@@ -16,7 +21,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Ga />
       <Gnb />
-      <Component {...pageProps} />
+      {
+        isPlaygroundPages ?
+        <PlaygroundLayout>
+          <Component {...pageProps} />
+        </PlaygroundLayout> :
+        <Component {...pageProps} />
+      }
       <div id="modal-root" />
     </>
   );
