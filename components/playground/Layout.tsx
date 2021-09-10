@@ -2,9 +2,11 @@ import Head from 'next/head'
 import { css } from '@emotion/react';
 import Menu from '@components/playground/Menu';
 
-const Playground: React.FC = () => {
-  
+interface Props {
+  children?: React.ReactNode;
+};
 
+const Template: React.FC<Props> = ({ children }) => {
   return (
     <div css={css`
       position: relative;
@@ -20,13 +22,11 @@ const Playground: React.FC = () => {
       <div css={css`
         display: inline-block;
         vertical-align: top;
-        margin: 20px;
       `}>
-      You can&apos;t access this page
+        {children}
       </div>
-
     </div>
   );
 };
 
-export default Playground;
+export default Template;
