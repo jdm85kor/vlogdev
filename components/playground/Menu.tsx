@@ -60,12 +60,13 @@ const Menu: React.FC = () => {
               position: relative;
               color: #fff;
               font-size: 18px;
+              padding: 10px;
               &::before {
                 content: '';
                 display: inline-block;
                 position: absolute;
                 top: 50%;
-                left: -8px;
+                left: 0;
                 background: #fff;
                 width: 2px;
                 height: 2px;
@@ -85,6 +86,9 @@ const Menu: React.FC = () => {
                   border: none;
                   cursor: pointer;
                   color: white;
+                  &:hover {
+                    opacity: 0.5;
+                  }
                 `}
               >
                 react-fetch

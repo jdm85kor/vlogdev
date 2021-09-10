@@ -1,11 +1,8 @@
-import Layout from '@components/playground/Layout';
-import { css } from '@emotion/react';
-
 const ReactFetch: React.FC = () => {
   return (
-    <Layout>
+    <main>
         react fetch
-    </Layout>
+    </main>
   );
 };
 
