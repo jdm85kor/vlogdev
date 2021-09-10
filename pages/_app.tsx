@@ -16,8 +16,8 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <meta name="description" content="Record yourself. Record do something. Record whatever." />
-        <link rel="shortcut icon" href="/logo144.png"></link>
-        <link rel="icon" href="/logo144.png" sizes="144x144"></link>
+        <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png"></link>
+        <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
       </Head>
       <Ga />
       <Gnb />
