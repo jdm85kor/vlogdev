@@ -73,7 +73,7 @@ const About: React.FC = () => {
             <dt css={dtStyle}>Email</dt>
             <dd css={ddStyle}>jdm85kor@gmail.com</dd>
             <dt css={dtStyle}>Career</dt>
-            <dd css={ddStyle}>sentbe, wemakeprice, wantedlab, musinsa</dd>
+            <dd css={ddStyle}>SENTBE, WeMakePrice, Wantedlab, Musinsa</dd>
             <dt css={dtStyle}>SNS</dt>
             <dd css={ddStyle}>
               <a href="https://www.facebook.com/jdm85kor" target="_blank" rel="noreferrer">
@@ -103,9 +103,9 @@ const About: React.FC = () => {
             font-size: 20px;
           `}>
             <dt css={dtStyle}>Front-end</dt>
-            <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 (AWS)</dd>
+            <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 + Amplify(AWS)</dd>
             <dt css={dtStyle}>Back-end</dt>
-            <dd css={ddStyle}>lambda + Api gateway + DynamoDB (AWS)</dd>
+            <dd css={ddStyle}>lambda + Api gateway + DynamoDB + Cognito(AWS)</dd>
             <dt css={dtStyle}>Git project</dt>
             <dd css={ddStyle}>
               <a
