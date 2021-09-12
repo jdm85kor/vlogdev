@@ -32,8 +32,8 @@ const awsmobile = {
         "SMS"
     ],
     "aws_cognito_password_protection_settings": {
-        "passwordPolicyMinLength": 8,
-        "passwordPolicyCharacters": []
+        "passwordPolicyMinLength": 10,
+        "passwordPolicyCharacters": ["RequireLowercase", "RequireNumbers", "RequireSymbols", "RequireUppercase"]
     }
 };
 
