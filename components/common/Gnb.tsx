@@ -58,8 +58,6 @@ const A = styled.a`
   }
 `;
 
-const loginUrl: string = 'https://v-log.auth.ap-northeast-2.amazoncognito.com/login?client_id=3kvrs1co551opb4tr7qd6qde4a&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://v-log.dev';
-
 const Gnb: React.FC = () => {
   return (
     <Div>
@@ -83,7 +81,7 @@ const Gnb: React.FC = () => {
             <Link href="/about" passHref><A>About</A></Link>
           </Li>
         </Ul>
-        <Link href={loginUrl} passHref>
+        <Link href="/admin" passHref>
           <A>
             <Setting css={css`
               width: 20px;
