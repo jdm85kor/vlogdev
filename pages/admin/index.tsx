@@ -43,7 +43,8 @@ const Admin: React.FC = () => {
           Admin Page
           { user &&
             <p>
-              provider name: {JSON.parse((user as any).attributes.identities)[0].providerName}<br />
+              provider name: {((user as any).attributes?.identities || [{}])[0]?.providerName || ''}<br />
+              username: {(user as any)?.username || ''}<br />
               email: {(user as any).attributes.email}
             </p>
           }
