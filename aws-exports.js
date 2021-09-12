@@ -16,8 +16,8 @@ const awsmobile = {
             "profile",
             "aws.cognito.signin.user.admin"
         ],
-        "redirectSignIn": "https://v-log.dev/,http://localhost:3000/",
-        "redirectSignOut": "https://v-log.dev/,http://localhost:3000/",
+        "redirectSignIn": "http://localhost:3000/",
+        "redirectSignOut": "http://localhost:3000/",
         "responseType": "code"
     },
     "federationTarget": "COGNITO_USER_POOLS",
@@ -32,8 +32,8 @@ const awsmobile = {
         "SMS"
     ],
     "aws_cognito_password_protection_settings": {
-        "passwordPolicyMinLength": 8,
-        "passwordPolicyCharacters": []
+        "passwordPolicyMinLength": 10,
+        "passwordPolicyCharacters": ["RequireLowercase", "RequireNumbers", "RequireSymbols", "RequireUppercase"]
     }
 };
 
