@@ -5,6 +5,7 @@ import Instagram from '@public/svg/instagram.svg';
 import Linkedin from '@public/svg/linkedin.svg';
 import Twitter from '@public/svg/twitter.svg';
 import Youtube from '@public/svg/youtube.svg';
+import { mq } from '@styles/theme';
 
 const dtStyle = css`
   display: inline-block;
@@ -39,8 +40,10 @@ const About: React.FC = () => {
         <meta name="description" content="Who is he?" />
       </Head>
       <div css={css`
-        margin: 100px auto 0;
-        padding-left: 100px;
+        margin: 50px auto 0;
+        ${mq({
+          padding: ['0 30px', '0 50px', '0 50px'],
+        })}
       `}>
         <h1>V-LOG.DEV</h1>
         <div css={css`

@@ -104,9 +104,10 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
+    return () => clearTimeout(timer);
   } ,[]);
   
   return (
