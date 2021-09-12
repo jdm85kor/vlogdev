@@ -7,7 +7,7 @@ import Gnb from '../components/common/Gnb';
 import { useRouter } from 'next/router';
 import PlaygroundLayout from '@components/playground/Layout';
 import Amplify from 'aws-amplify';
-import awsconfig from '../aws-exports';
+import awsconfig from '../aws-exports.js';
 
 Amplify.configure(awsconfig);
 
