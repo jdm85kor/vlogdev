@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Head from 'next/head'
 
 const About: React.FC = () => {
   useEffect(() => {
@@ -9,12 +8,10 @@ const About: React.FC = () => {
   }, []);
   return (
     <div>
-      <Head>
-        <title>Video</title>
-        <meta name="description" content="Show me your records" />
-      </Head>
       작업 중입니다.
       youtube로 이동 됩니다.
+      <title>Video</title>
+      <meta name="description" content="Show me your records" />
     </div>
   );
 };
