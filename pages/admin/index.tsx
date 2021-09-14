@@ -54,7 +54,8 @@ const Admin: React.FC = () => {
     }, 3000)
   };
   useEffect(() => {
-    user && call(user.signInUserSession.idToken.jwtToken);
+    if (!user) return;
+    call((user as any).signInUserSession.idToken.jwtToken);
   }, [user]);
 
   return (
