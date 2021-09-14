@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import 'normalize.css/normalize.css';
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router';
@@ -15,6 +16,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   
   return (
     <>
+      <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+          <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png"></link>
+          <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
+        </Head>
       <Gnb />
       {
         isPlaygroundPages ?

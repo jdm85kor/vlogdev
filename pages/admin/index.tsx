@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { css } from '@emotion/react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
+import axios from 'axios';
 
 const Admin: React.FC = () => {
   const [user, setUser] = useState(null);
@@ -36,6 +37,24 @@ const Admin: React.FC = () => {
   const isAdmin = useMemo((): boolean => {
     const groups = (user as any)?.signInUserSession?.accessToken?.payload["cognito:groups"] || [];
     return groups.includes('admin');
+  }, [user]);
+
+  const call = (Authorization: string) => {
+    const instance = axios.create({
+      baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
+      headers: { Authorization: isAdmin && Authorization }
+    });
+    setTimeout(async () => {
+      try {
+        const response = await instance.get('/vlogdev/request');
+        console.log('===> ', response.data);
+      } catch(e) {
+        console.error(e);
+      }
+    }, 3000)
+  };
+  useEffect(() => {
+    user && call(user.signInUserSession.idToken.jwtToken);
   }, [user]);
 
   return (
