@@ -10,11 +10,7 @@ class Document extends Doc {
   render() {
     return (
       <Html>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-          <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png"></link>
-          <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
-        </Head>
+        <Head />
         <body>
           <Ga />
           <Main />

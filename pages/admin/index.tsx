@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import Head from 'next/head'
 import { css } from '@emotion/react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
+import axios from 'axios';
 
 const Admin: React.FC = () => {
   const [user, setUser] = useState(null);
@@ -26,26 +28,55 @@ const Admin: React.FC = () => {
     getUser().then(userData => setUser(userData));
   }, []);
 
-  function getUser() {
+  const getUser = () => {
     return Auth.currentAuthenticatedUser()
       .then(userData => userData)
       .catch(() => console.log('Not signed in'));
-  }
+  };
+
+  const isAdmin = useMemo((): boolean => {
+    const groups = (user as any)?.signInUserSession?.accessToken?.payload["cognito:groups"] || [];
+    return groups.includes('admin');
+  }, [user]);
+
+  const call = (Authorization: string) => {
+    const instance = axios.create({
+      baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
+      headers: { Authorization: isAdmin && Authorization }
+    });
+    setTimeout(async () => {
+      try {
+        const response = await instance.get('/vlogdev/request');
+        console.log('===> ', response.data);
+      } catch(e) {
+        console.error(e);
+      }
+    }, 3000)
+  };
+  useEffect(() => {
+    user && call(user.signInUserSession.idToken.jwtToken);
+  }, [user]);
 
   return (
     <div css={css`
       margin: 0 auto;
       max-width: 1920px;
       `}>
+        <Head>
+          <title>VLOG admin</title>
+        </Head>
         <div css={css`
         margin: 50px;
         `}>
           Admin Page
-          { user &&
+          { isAdmin ?
             <p>
-              provider name: {((user as any).attributes?.identities || [{}])[0]?.providerName || ''}<br />
+              provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
               username: {(user as any)?.username || ''}<br />
-              email: {(user as any).attributes.email}
+              email: {(user as any)?.attributes.email}
+            </p> : 
+            <p>
+              This page is for admin.
             </p>
           }
           {user ? (
