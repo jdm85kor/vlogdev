@@ -1,4 +1,4 @@
-import Document as Doc, { Html, Head, Main, NextScript, DocumentContext  } from 'next/document'
+import Doc, { Html, Head, Main, NextScript, DocumentContext  } from 'next/document'
 import Ga from '@components/common/Ga';
 
 class Document extends Doc {
