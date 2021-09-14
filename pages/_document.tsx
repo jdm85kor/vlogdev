@@ -3,7 +3,7 @@ import Ga from '@components/common/Ga';
 
 class Document extends Doc {
   static async getInitialProps(ctx: DocumentContext ) {
-    const initialProps = await Document.getInitialProps(ctx)
+    const initialProps = await Doc.getInitialProps(ctx)
     return { ...initialProps }
   }
 
