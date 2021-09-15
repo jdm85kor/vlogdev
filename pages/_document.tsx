@@ -16,7 +16,6 @@ class Document extends Doc {
           <Main />
           <NextScript />
           <div id="modal-root" />
-          <meta name="description" content="Record yourself. Record do something. Record whatever." />
         </body>
       </Html>
     )
