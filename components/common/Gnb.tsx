@@ -60,11 +60,11 @@ const A = styled.a`
 
 const Gnb: React.FC = () => {
   return (
-    <Div>
+    <Div role="banner">
       <Nav>
         <Link href="/" passHref>
           <A>
-            <Img src="https://d6c63ppcwec2x.cloudfront.net/logo144.png" alt="VLOG" width="30" height="30" />
+            <Img src="https://d6c63ppcwec2x.cloudfront.net/logo144.png" alt width="30" height="30" />
           </A>
         </Link>
         <Ul>
