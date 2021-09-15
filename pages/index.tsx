@@ -131,7 +131,7 @@ const Home: React.FC = () => {
         <>
           <h1 css={css`
             display: none;
-          `}>Record yourself</h1>
+          `}>Record yourself. Record do something. Record whatever.</h1>
           <div css={css`
             margin: 0 auto;
             ${mq({
