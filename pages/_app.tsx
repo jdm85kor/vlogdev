@@ -36,9 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       {
         isPlaygroundPages ?
         <PlaygroundLayout>
-          <Component {...pageProps} />
+          <Component role="main" {...pageProps} />
         </PlaygroundLayout> :
-        <Component {...pageProps} />
+        <Component role="main" {...pageProps} />
       }
     </>
   );
