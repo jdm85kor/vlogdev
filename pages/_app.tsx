@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="twitter:url" content="https://v-log.dev/" />
         <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
         <meta name="twitter:description" content="Record yourself. Record do something. Record whatever." />
-        <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_32x32.png" type="image/x-icon">
+        <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_32x32.png" type="image/x-icon"></link>
         // <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_16x16.png" sizes="16x16"></link>
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_32x32.png" sizes="32x32"></link>
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_48x48.png" sizes="48x48"></link>
