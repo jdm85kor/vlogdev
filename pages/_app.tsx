@@ -17,18 +17,18 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-        <meta name="apple-mobile-web-app-title" content="VLOG">
-        <meta name="description" content="Record yourself. Record do something. Record whatever.">
-        <meta property="og:title" content="VLOG">
-        <meta property="og:url" content="https://vlog.dev/">
-        <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png">
-        <meta property="og:description" content="Record yourself. Record do something. Record whatever.">
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="VLOG">
-        <meta name="twitter:url" content="https://v-log.dev/">
-        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png">
-        <meta name="twitter:description" content="Record yourself. Record do something. Record whatever.">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+        <meta name="apple-mobile-web-app-title" content="VLOG" />
+        <meta name="description" content="Record yourself. Record do something. Record whatever." />
+        <meta property="og:title" content="VLOG" />
+        <meta property="og:url" content="https://vlog.dev/" />
+        <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
+        <meta property="og:description" content="Record yourself. Record do something. Record whatever." />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="VLOG" />
+        <meta name="twitter:url" content="https://v-log.dev/" />
+        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
+        <meta name="twitter:description" content="Record yourself. Record do something. Record whatever." />
         <link rel="shortcut icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png"></link>
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
       </Head>
