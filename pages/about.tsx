@@ -130,7 +130,7 @@ const About: React.FC = () => {
           </dl>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 
