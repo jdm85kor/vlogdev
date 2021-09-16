@@ -26,7 +26,7 @@ const Template: React.FC<Props> = ({ children }) => {
       `}>
           <Menu />
           <div css={css`
-            flex: 1 1 auto;
+            flex: auto;
           `}>
             <div css={css`
               margin: 0 auto;

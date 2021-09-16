@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
 import { useRouter } from 'next/router'
@@ -14,8 +14,9 @@ const Menu: React.FC = () => {
         position: relative;
         display: inline-block;
         background: ${colors.hermes};
-        width: ${isFoldMenu ? '50px' : '400px'};
+        width: ${isFoldMenu ? '50px' : '320px'};
         height: 100%;
+        flex: 0 0 320px;
         &::after {
           display: block;
           content: '';
