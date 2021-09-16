@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
 import { useRouter } from 'next/router'
 
-const Menu: React.FC = () => {
+interface Props {
+  styles: SerializedStyles;
+};
+const Menu: React.FC<Props> = ({ styles }) => {
   const [isFoldMenu, setIsFoldMenu] = useState(true);
   const router = useRouter();
   return (
@@ -21,6 +24,7 @@ const Menu: React.FC = () => {
           content: '';
           clear: both;
         }
+        {styles}
       `}
     >
       <div css={css`
