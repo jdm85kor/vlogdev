@@ -26,7 +26,7 @@ const Img = styled.img`
 `;
 
 const Ul = styled.ul`
-  flex: 1 1 1024;
+  flex: 1 1 1024px;
   display: flex;
   margin: 0;
   padding: 0;
