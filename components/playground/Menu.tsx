@@ -5,7 +5,7 @@ import Hamberger from '@public/svg/hamberger.svg';
 import { useRouter } from 'next/router'
 
 const Menu: React.FC = () => {
-  const [isFoldMenu, setIsFoldMenu] = useState(true);
+  const [isFoldMenu, setIsFoldMenu] = useState(false);
   const router = useRouter();
   return (
     <div
@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
         background: ${colors.hermes};
         width: ${isFoldMenu ? '50px' : '320px'};
         height: 100%;
-        flex: 0 0 320px;
+        flex: 0 0 ${isFoldMenu ? '50px' : '320px'};
         &::after {
           display: block;
           content: '';
