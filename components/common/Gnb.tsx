@@ -17,7 +17,6 @@ const Div = styled.div`
 const Nav = styled.nav`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   box-sizing: border-box;
   height: 50px;
 `;
@@ -27,7 +26,8 @@ const Img = styled.img`
 `;
 
 const Ul = styled.ul`
-  display: block;
+  flex: 1 1 1024;
+  display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -36,12 +36,10 @@ const Ul = styled.ul`
 `;
 const Li = styled.li`
   display: inline-block;
+  flex: auto;
   height: inherit;
   & > a {
     font-size: 16px;
-    ${mq({
-      padding: ['0 7px', '0 30px', '0 50px'],
-    })}
     @media (max-width: 374px) {
       padding: 0 3px;
       font-size: 14px;
