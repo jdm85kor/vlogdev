@@ -75,10 +75,10 @@ const Gnb: React.FC = () => {
             <Link href="/vlog" passHref><A>VLOG</A></Link>
           </Li>
           <Li>
-            <Link href="/playground" passHref><A>Playground</A></Link>
+            <Link href="/playground" passHref><A>PLAYGROUND</A></Link>
           </Li>
           <Li>
-            <Link href="/about" passHref><A>About</A></Link>
+            <Link href="/about" passHref><A>ABOUT</A></Link>
           </Li>
         </Ul>
         <Link href="/admin" passHref>
