@@ -10,7 +10,9 @@ import { mq } from '@styles/theme';
 const dtStyle = css`
   display: inline-block;
   margin: 0 0 10px;
-  width: 15%;
+  ${mq({
+    width: ['15%', '100%', '100%'];
+  })}
   min-width: 110px;
   &::after {
     content: ':';
@@ -18,7 +20,9 @@ const dtStyle = css`
 `;
 const ddStyle = css`
   display: inline-block;
-  width: 85%;
+  ${mq({
+    width: ['85%', '100%', '100%'];
+  })}
   margin: 0 0 10px;
 `;
 const iconStyle = css`
@@ -31,9 +35,9 @@ const iconStyle = css`
 
 const About: React.FC = () => {
   return (
-    <div css={css`
-    margin: 0 auto;
-    max-width: 1920px;
+    <main css={css`
+      margin: 0 auto;
+      max-width: 1920px;
     `}>
       <Head>
         <title>JDM</title>
@@ -42,8 +46,10 @@ const About: React.FC = () => {
       <div css={css`
         margin: 50px auto 0;
         ${mq({
-          padding: ['0 30px', '0 50px', '0 50px'],
+          padding: ['0 30px 30px', '0 50px', '0 50px'],
         })}
+        max-width: 1024px;
+        word-break: break-word;
       `}>
         <h1>V-LOG.DEV</h1>
         <div css={css`
