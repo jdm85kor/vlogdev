@@ -24,9 +24,7 @@ const Template: React.FC<Props> = ({ children }) => {
         flex-direction: row;
         align-items: stretch;
       `}>
-          <Menu styles={css`
-            flex: none;
-          `} />
+          <Menu />
           <div css={css`
             flex: auto;
           `}>
