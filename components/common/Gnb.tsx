@@ -42,7 +42,7 @@ const Li = styled.li`
       padding: ['0 7px', '0 30px', '0 50px'],
       fontSize: ['', '16px', '16px'],
     })}
-    @media (max-width: 320px) {
+    @media (max-width: 374px) {
       padding: 0 3px;
       font-size: 14px;
     }
