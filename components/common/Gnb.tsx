@@ -38,9 +38,9 @@ const Li = styled.li`
   display: inline-block;
   height: inherit;
   & > a {
+    font-size: 16px;
     ${mq({
       padding: ['0 7px', '0 30px', '0 50px'],
-      fontSize: ['', '16px', '16px'],
     })}
     @media (max-width: 374px) {
       padding: 0 3px;
