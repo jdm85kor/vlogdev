@@ -8,7 +8,7 @@ import { colors } from '@styles/theme';
 import { mq } from '@styles/theme';
 
 const sectionStyle = css`
-  margin: 0 auto;
+  margin: 0 auto 20px;
   ${mq({
     padding: ['0 20px', '0 50px', '0 50px'],
   })}
@@ -24,7 +24,7 @@ const backgroundImg = (file: string) => css`
   padding 0;
   width: 100%;
   height: 400px;
-  background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/${file});
+  background: no-repeat 100%/cover url(https://d6c63ppcwec2x.cloudfront.net/${file});
 
 `;
 const buttonStyle = css`
