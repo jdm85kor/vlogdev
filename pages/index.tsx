@@ -7,6 +7,26 @@ import Loading from "@components/common/Loading";
 import { colors } from '@styles/theme';
 import { mq } from '@styles/theme';
 
+const sectionStyle = css`
+  margin: 0 auto;
+  ${mq({
+    padding: ['0 20px', '0 50px', '0 50px'],
+  })}
+  width: 100%;
+  max-width: 1024px;
+  box-sizing: border-box;
+  & > h2 {
+    font-size: 30px;
+  }
+`;
+const backgroundImg = (file: string) => css`
+  margin: 0 auto;
+  padding 0;
+  width: 100%;
+  height: 400px;
+  background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/${file});
+
+`;
 const buttonStyle = css`
   margin: 30px;
   padding: 20px;
@@ -111,12 +131,12 @@ const Home: React.FC = () => {
   } ,[]);
   
   return (
-    <div css={css`
+    <main css={css`
       margin: 0 auto;
       max-width: 1920px;
     `}>
       <Head>
-        <title>VLOG</title>
+        <title>VLOG | Video Log</title>
       </Head>
       {
         isLoading ?
@@ -131,16 +151,31 @@ const Home: React.FC = () => {
         <>
           <h1 css={css`
             display: none;
-          `}>Record yourself. Record do something. Record whatever.</h1>
-          <div css={css`
-            margin: 0 auto;
-            ${mq({
-              padding: ['0 20px', '0 50px', '0 50px'],
-            })}
-            width: 100%;
-            max-width: 1024px;
-            box-sizing: border-box;
           `}>
+            Record yourself. Record do something. Record whatever.
+          </h1>
+          <section css={sectionStyle}>
+            <h2>
+              New Video
+            </h2>
+            <div css={backgroundImg('pungmu_morning_s.jpg')} />
+          </section>
+          <section css={sectionStyle}>
+            <h2>
+              New Blog
+            </h2>
+            <div css={backgroundImg('pungmu_afternoon_s.jpg')} />
+          </section>
+          <section css={sectionStyle}>
+            <h2>
+              Weekly News
+            </h2>
+            <div css={backgroundImg('pungmu_evening_s.jpg')} />
+          </section>
+          <section css={sectionStyle}>
+            <h2>
+              To manager
+            </h2>
             <div css={css`
               display: flex;
               ${mq({
@@ -175,7 +210,7 @@ const Home: React.FC = () => {
                 <span css={imgTitleStyle}>Play golf</span>
               </button>
             </div>
-          </div>
+          </section>
         </>
       }
       {
@@ -258,7 +293,7 @@ const Home: React.FC = () => {
             </div>
           </Modal>
       }
-    </div>
+    </main>
   )
 }
 
