@@ -43,7 +43,7 @@ const buttonStyle = css`
 const imgStyle = (src: string) => css`
   margin: 0 auto;
   ${mq({
-    width: ['200px', '280px', '362px']
+    width: ['200px', '230px', '362px']
   })}
   height: 350px;
   background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/${src});
