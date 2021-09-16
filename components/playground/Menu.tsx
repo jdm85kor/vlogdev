@@ -17,8 +17,9 @@ const Menu: React.FC<Props> = ({ styles }) => {
         position: relative;
         display: inline-block;
         background: ${colors.hermes};
-        width: ${isFoldMenu ? '50px' : '400px'};
+        width: ${isFoldMenu ? '50px' : '320px'};
         height: 100%;
+        flex: 0 0 320px;
         &::after {
           display: block;
           content: '';
