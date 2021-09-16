@@ -10,7 +10,7 @@ import { mq } from '@styles/theme';
 const sectionStyle = css`
   margin: 0 auto 20px;
   ${mq({
-    padding: ['0 20px', '0 50px', '0 50px'],
+    padding: ['0 20px 10px', '0 50px 20px', '0 50px 20px'],
   })}
   width: 100%;
   max-width: 1024px;
