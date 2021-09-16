@@ -26,15 +26,20 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
               display: inline-block;
               position: relative;
               margin: 100px auto;
+              padding: 0 0 20px;
               width: 400px;
               min-height: 500px;
               background: #fff;
               overflow: hidden;
               box-sizing: border-box;
               border-radius: 10px;
+              
+              @media (min-width: 420px) {
+                width: 90%;
+              }
             `}>
               <header css={css`
-                padding-top: 10px;
+                padding-top: 15px;
                 height: 50px;
                 font-size: 24px;
                 text-align: center;
@@ -46,7 +51,7 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
                   css={css`
                     position: absolute;
                     top: 10px;
-                    right: 30px;
+                    right: 15px;
                     font-size: 18px;
                     background: transparent;
                     border: none;
