@@ -17,6 +17,7 @@ const Div = styled.div`
 const Nav = styled.nav`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   box-sizing: border-box;
   height: 50px;
 `;
@@ -26,13 +27,15 @@ const Img = styled.img`
 `;
 
 const Ul = styled.ul`
-  flex: 1 1 1024;
+  flex: 1 1 1024px;
   display: flex;
   margin: 0;
   padding: 0;
   list-style: none;
   height: inherit;
   text-align: center;
+  max-width: 1024px;
+  min-width: 230px;
 `;
 const Li = styled.li`
   display: inline-block;
@@ -48,8 +51,10 @@ const Li = styled.li`
 `;
 
 const A = styled.a`
+  flex: 1 1 auto;
   color: ${colors.hermes};
   text-decoration: none;
+  text-align: center;
   &:hover {
     color: #f3a621;
   }
