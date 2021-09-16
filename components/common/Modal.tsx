@@ -34,7 +34,7 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
               box-sizing: border-box;
               border-radius: 10px;
               
-              @media (min-width: 420px) {
+              @media (max-width: 420px) {
                 width: 90%;
               }
             `}>
