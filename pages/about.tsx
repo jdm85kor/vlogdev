@@ -11,7 +11,7 @@ const dtStyle = css`
   display: inline-block;
   margin: 0 0 10px;
   ${mq({
-    width: ['15%', '100%', '100%'];
+    width: ['15%', '100%', '100%'],
   })}
   min-width: 110px;
   &::after {
@@ -21,7 +21,7 @@ const dtStyle = css`
 const ddStyle = css`
   display: inline-block;
   ${mq({
-    width: ['85%', '100%', '100%'];
+    width: ['85%', '100%', '100%'],
   })}
   margin: 0 0 10px;
 `;
