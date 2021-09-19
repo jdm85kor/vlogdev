@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Menu: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
-  const router = useRouter();
   const [importsFiles, setImportsFiles] = useState<string[]>([]);
 
   useEffect(() => {
@@ -15,7 +14,7 @@ const Menu: React.FC = () => {
 
     for (const c of context.keys().filter(name => name.startsWith('./') && name !== './index.tsx')) {
       const splitedName = c.split('/');
-      if (splitedName.length === 2) imports.push(splitedName[1].replace('.tsx', '').toUpperCase());
+      if (splitedName.length === 2) imports.push(splitedName[1].replace('.tsx', ''));
     }
     setImportsFiles(imports);
   }, []);
@@ -76,42 +75,48 @@ const Menu: React.FC = () => {
               <li
                 key={`${f}-${idx}`}
                 css={css`
-                position: relative;
-                color: #fff;
-                font-size: 18px;
-                padding: 10px;
-                &::before {
-                  content: '';
-                  display: inline-block;
-                  position: absolute;
-                  top: 50%;
-                  left: 0;
-                  background: #fff;
-                  width: 2px;
-                  height: 2px;
-                  border-radius: 100%;
-                }
+                  position: relative;
+                  color: #fff;
+                  font-size: 18px;
+                  padding: 10px 0;
+                  height: 30px;
               `}
               >
-                <button
-                  type="button"
-                  onClick={() => {
-                    router.push('/playground/react-fetch');
-                  }}
-                  css={css`
-                    maring: 0;
-                    padding: 0;
-                    background: inherit;
-                    border: none;
-                    cursor: pointer;
-                    color: white;
-                    &:hover {
-                      opacity: 0.5;
-                    }
-                  `}
+                <Link
+                  href={`/playground/${f}`}
+                  passHref
                 >
-                  {f}
-                </button>
+                  <a
+                    css={css`
+                      position: absolute;
+                      left: 0;
+                      right: 0;
+                      top: 0;
+                      bottom: 0;
+                      margin: 0;
+                      padding: 0;
+                      background: inherit;
+                      border: none;
+                      cursor: pointer;
+                      color: white;
+                      text-decoration: none;
+                      &:hover {
+                        opacity: 0.5;
+                      }
+                    `}
+                  >
+                    <span
+                      css={css`
+                        display: inline-block;
+                        position: absolute;
+                        top: 50%;
+                        transform: translateY(-50%);
+                      `}
+                    >
+                      {f.toUpperCase()}
+                    </span>
+                  </a>
+                </Link>
               </li>
             ))
           }

@@ -8,14 +8,14 @@ const About: React.FC = () => {
     }, 2000);
   }, []);
   return (
-    <div>
+    <main>
       <Head>
         <title>Blog</title>
         <meta name="description" content="" />
       </Head>
       작업 중입니다.
       medium으로 이동 됩니다.
-    </div>
+    </main>
   );
 };
 
