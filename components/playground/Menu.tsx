@@ -68,7 +68,7 @@ const Menu: React.FC = () => {
         <ul css={css`
           list-style: none;
           margin: 0;
-          padding: 0 0 0 20px;
+          padding: 0;
         `}>
           {
             importsFiles.map((f, idx) => (
@@ -110,7 +110,11 @@ const Menu: React.FC = () => {
                         display: inline-block;
                         position: absolute;
                         top: 50%;
+                        left: 10px;
                         transform: translateY(-50%);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 90%;
                       `}
                     >
                       {f.toUpperCase()}
