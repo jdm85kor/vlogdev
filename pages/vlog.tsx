@@ -8,14 +8,14 @@ const About: React.FC = () => {
     }, 2000);
   }, []);
   return (
-    <div>
+    <main>
       <Head>
         <title>Video</title>
         <meta name="description" content="Show me your records" />
       </Head>
       작업 중입니다.
       youtube로 이동 됩니다.
-    </div>
+    </main>
   );
 };
 
