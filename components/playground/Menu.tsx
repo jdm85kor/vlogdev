@@ -1,12 +1,25 @@
-import { useState } from 'react';
-import { css, SerializedStyles } from '@emotion/react';
+import { useState, useEffect } from 'react';
+import { css } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
 import { useRouter } from 'next/router'
 
 const Menu: React.FC = () => {
-  const [isFoldMenu, setIsFoldMenu] = useState(false);
+  const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const router = useRouter();
+  const [importsFiles, setImportsFiles] = useState<string[]>([]);
+
+  useEffect(() => {
+    const imports = [];
+    const context = require.context('../../pages/playground', true, /\.tsx$/);
+
+    for (const c of context.keys().filter(name => name.startsWith('./') && name !== './index.tsx')) {
+      const splitedName = c.split('/');
+      if (splitedName.length === 2) imports.push(splitedName[1].replace('.tsx', '').toUpperCase());
+    }
+    setImportsFiles(imports);
+  }, []);
+  
   return (
     <div
       role="navigation"
@@ -58,44 +71,50 @@ const Menu: React.FC = () => {
           margin: 0;
           padding: 0 0 0 20px;
         `}>
-          <li css={css`
-            position: relative;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px;
-            &::before {
-              content: '';
-              display: inline-block;
-              position: absolute;
-              top: 50%;
-              left: 0;
-              background: #fff;
-              width: 2px;
-              height: 2px;
-              border-radius: 100%;
-            }
-          `}
-          >
-            <button
-              type="button"
-              onClick={() => {
-                router.push('/playground/react-fetch');
-              }}
-              css={css`
-                maring: 0;
-                padding: 0;
-                background: inherit;
-                border: none;
-                cursor: pointer;
-                color: white;
-                &:hover {
-                  opacity: 0.5;
+          {
+            importsFiles.map((f, idx) => (
+              <li
+                key={`${f}-${idx}`}
+                css={css`
+                position: relative;
+                color: #fff;
+                font-size: 18px;
+                padding: 10px;
+                &::before {
+                  content: '';
+                  display: inline-block;
+                  position: absolute;
+                  top: 50%;
+                  left: 0;
+                  background: #fff;
+                  width: 2px;
+                  height: 2px;
+                  border-radius: 100%;
                 }
               `}
-            >
-              react-fetch
-            </button>
-          </li>
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push('/playground/react-fetch');
+                  }}
+                  css={css`
+                    maring: 0;
+                    padding: 0;
+                    background: inherit;
+                    border: none;
+                    cursor: pointer;
+                    color: white;
+                    &:hover {
+                      opacity: 0.5;
+                    }
+                  `}
+                >
+                  {f}
+                </button>
+              </li>
+            ))
+          }
         </ul>
       }
     </div>
