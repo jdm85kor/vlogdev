@@ -42,7 +42,7 @@ const Admin: React.FC = () => {
   const call = (Authorization: string) => {
     const instance = axios.create({
       baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
-      headers: { Authorization: isAdmin && Authorization }
+      headers: { Authorization }
     });
     setTimeout(async () => {
       try {
