@@ -3,12 +3,15 @@ import Head from 'next/head'
 import { css } from '@emotion/react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
-import axios from 'axios';
+import { apiCall } from '@utils/apis';
+import { colors } from '@styles/theme';
+import { mq } from '@styles/theme';
 
 const Admin: React.FC = () => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<Record<string, any> | null>(null);
+  const [requestData, setRequestData] = useState<any[]>([]);
 
-  useEffect(() => {
+  useEffect((): void => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
       switch (event) {
         case 'signIn':
@@ -39,23 +42,21 @@ const Admin: React.FC = () => {
     return groups.includes('admin');
   }, [user]);
 
-  const call = (Authorization: string) => {
-    const instance = axios.create({
-      baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
-      headers: { Authorization }
-    });
-    setTimeout(async () => {
-      try {
-        const response = await instance.get('/vlogdev/request');
-        console.log('===> ', response.data);
-      } catch(e) {
-        console.error(e);
-      }
-    }, 3000)
+  const fetch = async (Authorization: string) => {
+    try {
+      const res = await apiCall({
+        method: 'get',
+        url: '/vlogdev/request', 
+        headers: { Authorization },
+      });
+      setRequestData(res.data.items);;
+    } catch(e) {
+      console.error(e);
+    }
   };
   useEffect(() => {
     if (!user) return;
-    call((user as any).signInUserSession.idToken.jwtToken);
+    fetch((user as any).signInUserSession.idToken.jwtToken);
   }, [user]);
 
   return (
@@ -67,15 +68,60 @@ const Admin: React.FC = () => {
           <title>VLOG admin</title>
         </Head>
         <div css={css`
-        margin: 50px;
+          ${mq({
+            margin: ['10px', '40px', '50px'],
+          })}
         `}>
-          Admin Page
+          
+          <h1>Admin Page</h1>
           { isAdmin ?
-            <p>
-              provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
-              username: {(user as any)?.username || ''}<br />
-              email: {(user as any)?.attributes.email}
-            </p> : 
+            <>
+            <h2>
+              Owner
+            </h2>
+              <p>
+                provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
+                username: {(user as any)?.username || ''}<br />
+                email: {(user as any)?.attributes.email}
+              </p>
+              <h2>Requests</h2>
+              { requestData.length &&
+                <ul css={css`
+                  padding: 0;
+                  list-style: none;
+                  border-top: solid 1px ${colors.hermes}
+                `}>
+                  {
+                    requestData.map(d => (
+                      <li
+                        key={d.id}
+                        css={css`
+                          padding: 20px;
+                          border-bottom: solid 1px ${colors.hermes};
+                          white-space: pre-line;
+                        `}
+                      >
+                        <p>
+                          { d.type }
+                        </p>
+                        <p>
+                          { d.name }
+                        </p>
+                        <p>
+                          { d.tel }
+                        </p>
+                        <p>
+                          { d.email }
+                        </p>
+                        <p>
+                          { d.contents }
+                        </p>
+                      </li>
+                    ))
+                  }
+                </ul>
+              }
+            </> : 
             <p>
               This page is for admin.
             </p>

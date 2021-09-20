@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { css } from '@emotion/react';
-import axios from 'axios';
 import Head from 'next/head'
 import Modal from '../components/common/Modal';
 import Loading from "@components/common/Loading";
 import { colors } from '@styles/theme';
 import { mq } from '@styles/theme';
+import { apiCall } from '@utils/apis';
 
 const sectionStyle = css`
   margin: 0 auto 20px;
@@ -73,10 +73,6 @@ const modalTextarea = css`
   height: 200px;
   box-sizing: border-box;
 `;
-
-const instance = axios.create({
-  baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
-});
 
 const Home: React.FC = () => {
   const [isShowRequest, setIsShowRequest] = useState(false);
@@ -279,11 +275,14 @@ const Home: React.FC = () => {
                 `}
                 type="button"
                 onClick={async () => {
-                  const response = await instance.post('/vlogdev/request', {
-                    ...modalInfo
+                  const response = await apiCall({
+                    method: 'post',
+                    url: '/vlogdev/request',
+                    data: modalInfo,
                   });
+
                   if (response.status === 200) {
-                    alert("Registration is complete");
+                    alert("Registration completed");
                     handleClickCloseModal();
                   } else {
                     alert('Registration failed');
