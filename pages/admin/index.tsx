@@ -46,7 +46,7 @@ const Admin: React.FC = () => {
     try {
       const res = await apiCall({
         method: 'get',
-        url: '/vlogdev/request', 
+        url: '/vlogdev/request',
         headers: { Authorization },
       });
       setRequestData(res.data.items);;

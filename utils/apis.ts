@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import camelcaseKeys from 'camelcase-keys';;
+import qs from 'qs';
 
 const instance: AxiosInstance = axios.create({
   baseURL: 'https://utcrpcgdq0.execute-api.ap-northeast-2.amazonaws.com/dev',
@@ -11,17 +12,18 @@ instance.interceptors.response.use(function (res) {
   return res;
 });
 
-const apiCall = ({ method, headers, data, url }: {
+const apiCall = ({ method, headers, data, url, query }: {
   method: AxiosRequestConfig['method'],
   url: string,
-  data?: { [key: string]: string | number; },
-  headers?: { [key: string]: string | number; },
+  data?: { [key: string]: string | number },
+  headers?: { [key: string]: string | number },
+  query? : { [key: string]: string | number },
 }) => {
   return instance({
     method,
     headers,
-    data,
-    url,
+    data: qs.stringify(data),
+    url: query ? `${url}?${qs.stringify(query)}` : url,
   });
 };
 
