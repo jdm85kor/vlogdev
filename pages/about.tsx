@@ -50,6 +50,7 @@ const About: React.FC = () => {
         })}
         max-width: 1024px;
         word-break: break-word;
+        box-sizing: border-box;
       `}>
         <h1>V-LOG.DEV</h1>
         <div css={css`
