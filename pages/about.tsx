@@ -50,6 +50,7 @@ const About: React.FC = () => {
         })}
         max-width: 1024px;
         word-break: break-word;
+        box-sizing: border-box;
       `}>
         <h1>V-LOG.DEV</h1>
         <div css={css`
@@ -114,7 +115,7 @@ const About: React.FC = () => {
             <dt css={dtStyle}>Front-end</dt>
             <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 + Amplify(AWS)</dd>
             <dt css={dtStyle}>Back-end</dt>
-            <dd css={ddStyle}>lambda + Api gateway + DynamoDB + Cognito(AWS)</dd>
+            <dd css={ddStyle}>lambda + Api gateway + DynamoDB + Cognito + EventBridge(AWS)</dd>
             <dt css={dtStyle}>Git project</dt>
             <dd css={ddStyle}>
               <a

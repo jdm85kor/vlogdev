@@ -46,7 +46,7 @@ const Admin: React.FC = () => {
     try {
       const res = await apiCall({
         method: 'get',
-        url: '/vlogdev/request', 
+        url: '/vlogdev/request',
         headers: { Authorization },
       });
       setRequestData(res.data.items);;
@@ -85,7 +85,7 @@ const Admin: React.FC = () => {
                 email: {(user as any)?.attributes.email}
               </p>
               <h2>Requests</h2>
-              { requestData.length &&
+              { requestData.length ?
                 <ul css={css`
                   padding: 0;
                   list-style: none;
@@ -119,7 +119,8 @@ const Admin: React.FC = () => {
                       </li>
                     ))
                   }
-                </ul>
+                </ul> :
+                <></>
               }
             </> : 
             <p>
