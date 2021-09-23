@@ -5,7 +5,9 @@ import { apiCall } from '@utils/apis';
 import { AxiosRequestConfig } from 'axios';
 
 const About: React.FC = () => {
-  const [videos, setVideos] = useState();
+  const [channels, setChannels] = useState<any[]>([]);
+  const [videos, setVideos] = useState<any[]>([]);
+
   const fetchYoutubeData = async () => {
     const size = 50;
     const offset = null;
@@ -22,12 +24,13 @@ const About: React.FC = () => {
       query: { size },
     };
     offset && (options.query['offset'] = offset);
-    const res = await apiCall(options);
-    console.log(res);
-    // setVideos();
+    const { data } = await apiCall(options);
+    console.log(data);
+    setChannels(data.channel);
+    setVideos(data.video);
   };
   useEffect(() => {
-    // fetchYoutubeData();
+    fetchYoutubeData();
     setTimeout(() => {
       window.open("https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA", '_blank');
     }, 2000);
