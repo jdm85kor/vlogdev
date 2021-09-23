@@ -60,80 +60,79 @@ const Admin: React.FC = () => {
   }, [user]);
 
   return (
-    <div css={css`
+    <main css={css`
       margin: 0 auto;
       max-width: 1920px;
+    `}>
+      <Head>
+        <title>VLOG admin</title>
+      </Head>
+      <div css={css`
+        ${mq({
+          margin: ['10px', '40px', '50px'],
+        })}
       `}>
-        <Head>
-          <title>VLOG admin</title>
-        </Head>
-        <div css={css`
-          ${mq({
-            margin: ['10px', '40px', '50px'],
-          })}
-        `}>
-          
-          <h1>Admin Page</h1>
-          { isAdmin ?
-            <>
-            <h2>
-              Owner
-            </h2>
-              <p>
-                provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
-                username: {(user as any)?.username || ''}<br />
-                email: {(user as any)?.attributes.email}
-              </p>
-              <h2>Requests</h2>
-              { requestData.length ?
-                <ul css={css`
-                  padding: 0;
-                  list-style: none;
-                  border-top: solid 1px ${colors.hermes}
-                `}>
-                  {
-                    requestData.map(d => (
-                      <li
-                        key={d.id}
-                        css={css`
-                          padding: 20px;
-                          border-bottom: solid 1px ${colors.hermes};
-                          white-space: pre-line;
-                        `}
-                      >
-                        <p>
-                          { d.type }
-                        </p>
-                        <p>
-                          { d.name }
-                        </p>
-                        <p>
-                          { d.tel }
-                        </p>
-                        <p>
-                          { d.email }
-                        </p>
-                        <p>
-                          { d.contents }
-                        </p>
-                      </li>
-                    ))
-                  }
-                </ul> :
-                <></>
-              }
-            </> : 
+        <h1>Admin Page</h1>
+        { isAdmin ?
+          <>
+          <h2>
+            Owner
+          </h2>
             <p>
-              This page is for admin.
+              provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
+              username: {(user as any)?.username || ''}<br />
+              email: {(user as any)?.attributes.email}
             </p>
-          }
-          {user ? (
-            <AmplifySignOut />
-          ) : (
-            <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
-          )}
-        </div>
-    </div>
+            <h2>Requests</h2>
+            { requestData.length ?
+              <ul css={css`
+                padding: 0;
+                list-style: none;
+                border-top: solid 1px ${colors.hermes}
+              `}>
+                {
+                  requestData.map(d => (
+                    <li
+                      key={d.id}
+                      css={css`
+                        padding: 20px;
+                        border-bottom: solid 1px ${colors.hermes};
+                        white-space: pre-line;
+                      `}
+                    >
+                      <p>
+                        { d.type }
+                      </p>
+                      <p>
+                        { d.name }
+                      </p>
+                      <p>
+                        { d.tel }
+                      </p>
+                      <p>
+                        { d.email }
+                      </p>
+                      <p>
+                        { d.contents }
+                      </p>
+                    </li>
+                  ))
+                }
+              </ul> :
+              <></>
+            }
+          </> : 
+          <p>
+            This page is for admin.
+          </p>
+        }
+        {user ? (
+          <AmplifySignOut />
+        ) : (
+          <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
+        )}
+      </div>
+    </main>
   );
 };
 
