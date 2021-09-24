@@ -99,102 +99,109 @@ const block = (left: number, top: number) => css`
 const Loading: React.FC = () => {
   return (
     <div css={css`
-      position: relative;
-      display: block;
-      margin: 0 auto;
-      width: 105px;
-      height: 135px;
-      border-left: 1px solid ${colors.hermes};
-      border-right: 1px solid ${colors.hermes};
-      border-bottom: 1px solid ${colors.hermes};
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     `}>
       <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block1} 3s infinite linear;
-        & > span {
-          background: inherit;
-        }
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        width: 105px;
+        height: 135px;
+        border-left: 1px solid ${colors.hermes};
+        border-right: 1px solid ${colors.hermes};
+        border-bottom: 1px solid ${colors.hermes};
       `}>
-        <span css={block(0, 0)} />
-        <span css={block(0, 15)} />
-        <span css={block(15, 15)} />
-        <span css={block(0, 30)} />
-      </div>
-      <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block2} 3s infinite linear;
-        & > span {
-          background: inherit;
-        }
-      `}>
-        <span css={block(0, 15)} />
-        <span css={block(15, 15)} />
-        <span css={block(15, 0)} />
-        <span css={block(30, 0)} />
-      </div>
-      <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block3} 3s infinite linear;
-        & > span {
-          background: inherit;
-        }
-      `}>
-        <span css={block(0, 15)} />
-        <span css={block(15, 15)} />
-        <span css={block(30, 15)} />
-        <span css={block(15, 0)} />
-      </div>
-      <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block4} 3s infinite linear;
-        & > span {
-          background: inherit;
-        }
-      `}>
-        <span css={block(0, 0)} />
-        <span css={block(15, 0)} />
-        <span css={block(30, 0)} />
-        <span css={block(30, 15)} />
-      </div>
-      <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block5} 3s infinite linear;
-        & > span {
-          background: inherit;
-
-          &:first-of-type,
-          &:last-of-type {
-            background: #d70f37;
-          }
-        }
-      `}>
-        <span css={block(0, 0)} />
-        <span css={block(0, 15)} />
-        <span css={block(15, 15)} />
-        <span css={block(15, 0)} />
-      </div>
-      <div css={css`
-        position: absolute;
-        left: 45px; top: 0px;
-        animation: ${block6} 3s infinite linear;
-        & > span {
-          &:not(:first-of-type) {
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block1} 3s infinite linear;
+          & > span {
             background: inherit;
           }
-          &:first-of-type {
-            background: ${colors.hermes};
+        `}>
+          <span css={block(0, 0)} />
+          <span css={block(0, 15)} />
+          <span css={block(15, 15)} />
+          <span css={block(0, 30)} />
+        </div>
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block2} 3s infinite linear;
+          & > span {
+            background: inherit;
           }
-        }
-      `}>
-        <span css={block(0, 0)} />
-        <span css={block(0, 15)} />
-        <span css={block(0, 30)} />
-        <span css={block(0, 45)} />
+        `}>
+          <span css={block(0, 15)} />
+          <span css={block(15, 15)} />
+          <span css={block(15, 0)} />
+          <span css={block(30, 0)} />
+        </div>
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block3} 3s infinite linear;
+          & > span {
+            background: inherit;
+          }
+        `}>
+          <span css={block(0, 15)} />
+          <span css={block(15, 15)} />
+          <span css={block(30, 15)} />
+          <span css={block(15, 0)} />
+        </div>
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block4} 3s infinite linear;
+          & > span {
+            background: inherit;
+          }
+        `}>
+          <span css={block(0, 0)} />
+          <span css={block(15, 0)} />
+          <span css={block(30, 0)} />
+          <span css={block(30, 15)} />
+        </div>
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block5} 3s infinite linear;
+          & > span {
+            background: inherit;
+
+            &:first-of-type,
+            &:last-of-type {
+              background: #d70f37;
+            }
+          }
+        `}>
+          <span css={block(0, 0)} />
+          <span css={block(0, 15)} />
+          <span css={block(15, 15)} />
+          <span css={block(15, 0)} />
+        </div>
+        <div css={css`
+          position: absolute;
+          left: 45px; top: 0px;
+          animation: ${block6} 3s infinite linear;
+          & > span {
+            &:not(:first-of-type) {
+              background: inherit;
+            }
+            &:first-of-type {
+              background: ${colors.hermes};
+            }
+          }
+        `}>
+          <span css={block(0, 0)} />
+          <span css={block(0, 15)} />
+          <span css={block(0, 30)} />
+          <span css={block(0, 45)} />
+        </div>
       </div>
     </div>
   );
