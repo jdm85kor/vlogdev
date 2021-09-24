@@ -56,7 +56,7 @@ const Admin: React.FC = () => {
     }
   };
 
-  const addChannel = (id: string) => {
+  const addChannel = async (id: string) => {
     try {
       const res = await apiCall({
         method: 'post',
