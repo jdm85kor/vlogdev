@@ -29,7 +29,7 @@ const About: React.FC = () => {
     }
   }, []);
 
-  const fetchVideos = useCallback(async (id: string) => {
+  const fetchVideos = async (id: string) => {
     const size = 50;
     const offset = null;
     const options: {
@@ -47,11 +47,12 @@ const About: React.FC = () => {
     };
     offset && (options.query['offset'] = offset);
     const { data } = await apiCall(options);
+    const r = data.items.reverse().slice(0, 102);
     setVideos(prev => ({
       ...prev,
-      [data.items[0].channelId]: data.items.reverse().slice(0, 102),
+      [id]: r,
     }));
-  }, []);
+  };
 
   const onClickChannel = (channelId: string)=> {
     if (!channelId) return;
