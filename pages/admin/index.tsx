@@ -56,12 +56,15 @@ const Admin: React.FC = () => {
     }
   };
 
-  const addChannel = async (id: string) => {
+  const addChannel = async (channelId: string) => {
     try {
       const res = await apiCall({
         method: 'post',
         url: '/vlogdev/channel',
         headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
+        body: {
+          channelId,
+        },
       });
       console.log('add channel => ', res);
     } catch(e) {
