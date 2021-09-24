@@ -59,7 +59,7 @@ const Admin: React.FC = () => {
   const addChannel = async (channelId: string, channelTitle: string) => {
     try {
       const res = await apiCall({
-        method: 'delete',
+        method: 'post',
         url: '/vlogdev/channel',
         headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
         data: {
@@ -73,10 +73,27 @@ const Admin: React.FC = () => {
     }
   };
 
+  const deleteChannel = async (channelId: string, channelTitle: string) => {
+    try {
+      const res = await apiCall({
+        method: 'delete',
+        url: '/vlogdev/channel',
+        headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
+        data: {
+          channelId,
+          channelTitle,
+        },
+      });
+      console.log('delete channel => ', res);
+    } catch(e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     if (!user) return;
     fetchRequest((user as any).signInUserSession.idToken.jwtToken);
-    addChannel('UCvc8kv-i5fvFTJBFAk6n1SA', 'aa');
+//     addChannel('UCvc8kv-i5fvFTJBFAk6n1SA', 'aa');
   }, [user]);
 
   return (
