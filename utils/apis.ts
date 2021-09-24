@@ -22,7 +22,7 @@ const apiCall = ({ method, headers, data, url, query }: {
   return instance({
     method,
     headers,
-    data: qs.stringify(data),
+    data,
     url: query ? `${url}?${qs.stringify(query)}` : url,
   });
 };
