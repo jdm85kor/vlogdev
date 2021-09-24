@@ -150,16 +150,13 @@ const About: React.FC = () => {
           chooseChannel ?
           <>
             <h2>Videos</h2>
-            <section css={css`
-              width: 100%;
-            `}>
+            <section>
               <ul css={css`
                 display: flex;
                 margin: 0;
                 padding: 0;
                 list-style: none;
                 flex-wrap: wrap;
-                width: 100%;
               `}>
                 {
                   videos[chooseChannel]?.map(v => (
