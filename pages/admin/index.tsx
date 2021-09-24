@@ -62,7 +62,7 @@ const Admin: React.FC = () => {
         method: 'post',
         url: '/vlogdev/channel',
         headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
-        body: {
+        data: {
           channelId,
         },
       });
