@@ -56,14 +56,15 @@ const Admin: React.FC = () => {
     }
   };
 
-  const addChannel = async (channelId: string) => {
+  const addChannel = async (channelId: string, channelTitle: string) => {
     try {
       const res = await apiCall({
-        method: 'post',
+        method: 'delete',
         url: '/vlogdev/channel',
         headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
         data: {
           channelId,
+          channelTitle,
         },
       });
       console.log('add channel => ', res);
@@ -75,7 +76,7 @@ const Admin: React.FC = () => {
   useEffect(() => {
     if (!user) return;
     fetchRequest((user as any).signInUserSession.idToken.jwtToken);
-    addChannel('UCvc8kv-i5fvFTJBFAk6n1SA');
+    addChannel('UCvc8kv-i5fvFTJBFAk6n1SA', 'aa');
   }, [user]);
 
   return (
