@@ -9,7 +9,8 @@ import { mq } from '@styles/theme';
 
 const Admin: React.FC = () => {
   const [user, setUser] = useState<Record<string, any> | null>(null);
-  const [requestData, setRequestData] = useState<any[]>([]);
+  const [requests, setRequests] = useState<any[]>([]);
+  const [currentTab, setCurrentTab] = useState<'youtubeChannel' | 'request'>('youtubeChannel');
 
   useEffect((): void => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -42,21 +43,36 @@ const Admin: React.FC = () => {
     return groups.includes('admin');
   }, [user]);
 
-  const fetch = async (Authorization: string) => {
+  const fetchRequest = async (Authorization: string) => {
     try {
       const res = await apiCall({
         method: 'get',
         url: '/vlogdev/request',
         headers: { Authorization },
       });
-      setRequestData(res.data.items);;
+      setRequests(res.data.items);;
     } catch(e) {
       console.error(e);
     }
   };
+
+  const addChannel = (id: string) => {
+    try {
+      const res = await apiCall({
+        method: 'post',
+        url: '/vlogdev/channel',
+        headers: { Authorization },
+      });
+      console.log('add channel => ', res);
+    } catch(e) {
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
     if (!user) return;
-    fetch((user as any).signInUserSession.idToken.jwtToken);
+    fetchRequest((user as any).signInUserSession.idToken.jwtToken);
+    addChannel('UCvc8kv-i5fvFTJBFAk6n1SA');
   }, [user]);
 
   return (
@@ -75,23 +91,31 @@ const Admin: React.FC = () => {
         <h1>Admin Page</h1>
         { isAdmin ?
           <>
-          <h2>
-            Owner
-          </h2>
+            <h2>
+              Owner
+            </h2>
             <p>
               provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
               username: {(user as any)?.username || ''}<br />
               email: {(user as any)?.attributes.email}
             </p>
+            
+            {
+              // tab
+              // <AdminTab />
+              //  |- <YoutubeChannels />
+              //  |- <Request />
+            }
+            
             <h2>Requests</h2>
-            { requestData.length ?
+            { requests.length ?
               <ul css={css`
                 padding: 0;
                 list-style: none;
                 border-top: solid 1px ${colors.hermes}
               `}>
                 {
-                  requestData.map(d => (
+                  requests.map(d => (
                     <li
                       key={d.id}
                       css={css`
