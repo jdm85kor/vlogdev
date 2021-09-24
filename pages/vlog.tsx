@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head'
 import { apiCall } from '@utils/apis';
 import { AxiosRequestConfig } from 'axios';
-import { mq } from '@styles/theme';
+import { mq, colors } from '@styles/theme';
 import Link from 'next/link';
 
 const About: React.FC = () => {
@@ -59,6 +59,12 @@ const About: React.FC = () => {
         max-width: 1024px;
         box-sizing: border-box;
       `}>
+        <div css={css`
+          text-align: right;
+          color: ${colors.hermes};
+        `}>
+          <span>매일 1회 업데이트 됩니다</span>
+        </div>
         <h1>VLOG</h1>
         <h2>Channels</h2>
         <section>
