@@ -163,15 +163,17 @@ const About: React.FC = () => {
                     <li
                       key={v.videoId}
                       css={css`
-                        display: inline-flex;
-                        margin: 5px;
-                        flex: none;
-                        flex-direction: column;
+                        padding: 5px;
                         ${mq({
-                          width:  ['120px', '140px', '180px']
+                          width:  ['calc(100% / 3)', 'calc(100% / 4)', 'calc(100% / 5)']
                         })};
+                        ${mq({
+                          flex:  ['0 0 calc(100% / 3)', '0 0 calc(100% / 4)', '0 0 calc(100% / 5)']
+                        })};
+                        flex-direction: column;
                         text-align: center;
                         font-size: 12px;
+                        box-sizing: border-box;
                       `}
                     >
                       <Link href={`https://www.youtube.com/watch?v=${v.videoId}`} passHref>
