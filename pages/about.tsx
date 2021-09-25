@@ -5,7 +5,7 @@ import Instagram from '@public/svg/instagram.svg';
 import Linkedin from '@public/svg/linkedin.svg';
 import Twitter from '@public/svg/twitter.svg';
 import Youtube from '@public/svg/youtube.svg';
-import { mq } from '@styles/theme';
+import { mq, colors } from '@styles/theme';
 
 const dtStyle = css`
   display: inline-block;
@@ -129,6 +129,27 @@ const About: React.FC = () => {
               >https://github.com/jdm85kor/vlogdev</a>
             </dd>
           </dl>
+        </section>
+        <h2>
+          History
+        </h2>
+        <section>
+          <p>
+            21.08 site 오픈
+          </p>
+          <p>
+            21.09 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가
+          </p>
+          <a
+            href="https://github.com/jdm85kor/vlogdev/projects/1"
+            target="_blank"
+            rel="noreferrer"
+            css={css`
+              text-decoration: none;
+              color: ${colors.hermes};
+            `}
+          >
+              추가 예정 기능들</a> 
         </section>
       </div>
     </main>
