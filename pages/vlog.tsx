@@ -105,9 +105,11 @@ const About: React.FC = () => {
                 margin: 0;
                 padding: 0;
                 list-style: none;
+                width: 100%;
+                overflow-x: auto;
               `}>
                 {
-                  channels.map(c => (
+                  channels.filter(c => !!c.publishTime).map(c => (
                     <li
                       key={c.channelId}
                       css={css`
