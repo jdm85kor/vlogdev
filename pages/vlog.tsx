@@ -27,6 +27,7 @@ const About: React.FC = () => {
     } finally {
       setIsLoadingChannel(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchVideos = async (id: string) => {
@@ -62,6 +63,7 @@ const About: React.FC = () => {
   
   useEffect(() => {
     fetchChannels();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <main css={css`
