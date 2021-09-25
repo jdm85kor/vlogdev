@@ -106,7 +106,9 @@ const About: React.FC = () => {
                 padding: 0;
                 list-style: none;
                 width: 100%;
+                height: 140px;
                 overflow-x: auto;
+                white-space: nowrap;
               `}>
                 {
                   channels.filter(c => !!c.publishTime).map(c => (
@@ -127,6 +129,8 @@ const About: React.FC = () => {
                         type="button"
                         onClick={() => onClickChannel(c.channelId)}
                         css={css`
+                          display: inline-flex;
+                          flex-direction: column;
                           padding: 0;
                           background: inherit;
                           border: none;
@@ -139,7 +143,13 @@ const About: React.FC = () => {
                           height: 100px;
                           background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
                         `} />
-                        <span>{ c.channelTitle }</span>
+                        <span css={css`
+                          display: inline-block;
+                          width: 100%;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        `}>{ c.channelTitle }</span>
                       </button>
                     </li>
                   ))
