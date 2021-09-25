@@ -28,12 +28,12 @@ const Menu: React.FC = () => {
         background: ${colors.hermes};
         width: ${isFoldMenu ? '50px' : '320px'};
         height: 100%;
+        transition: all 0.5s ease;
         &::after {
           display: block;
           content: '';
           clear: both;
         }
-        transition: all 0.5s ease;
       `}
     >
       <div css={css`

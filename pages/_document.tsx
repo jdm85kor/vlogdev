@@ -22,4 +22,4 @@ class Document extends Doc {
   }
 }
 
-export default Document
+export default Document;
