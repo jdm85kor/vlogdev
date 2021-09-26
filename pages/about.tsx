@@ -44,7 +44,7 @@ const About: React.FC = () => {
         <meta name="description" content="Who is he?" />
       </Head>
       <div css={css`
-        margin: 50px auto 0;
+        margin: 50px auto;
         ${mq({
           padding: ['0 30px 30px', '0 50px', '0 50px'],
         })}
@@ -140,6 +140,14 @@ const About: React.FC = () => {
           <p>
             21.09 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가
           </p>
+        </section>
+        <h2>
+          Plan
+        </h2>
+        <section>
+          <p>
+            blog, youtube 기반의 컨텐츠 제공을 기본으로 하고, 실험적으로 개발되는 기능은 playground 메뉴에서 볼 수 있게 하여 반응이 좋으면 주요 feature로 옮김.
+          </p>
           <a
             href="https://github.com/jdm85kor/vlogdev/projects/1"
             target="_blank"
@@ -149,7 +157,8 @@ const About: React.FC = () => {
               color: ${colors.hermes};
             `}
           >
-              추가 예정 기능들</a> 
+            추가 예정 기능들
+          </a> 
         </section>
       </div>
     </main>
