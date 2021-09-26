@@ -26,7 +26,28 @@ const channelLiStyle = (isBorder: boolean) => css`
   border: 5px solid ${isBorder ? colors.hermes : '#fff'};
   box-sizing: border-box;
 `;
-
+const buttonStyle = css`
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0;
+  background: inherit;
+  border: none;
+  cursor: pointer;
+`;
+const thumbnailStyle = (url: string) => css`
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  background: no-repeat 100%/contain url(${url});
+`;
+const titleStyle = css`
+  display: inline-block;
+  margin-top: 5px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 const About: React.FC = () => {
   const [channels, setChannels] = useState<any[]>([]);
@@ -133,28 +154,10 @@ const About: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => onClickChannel(c.channelId)}
-                        css={css`
-                          display: inline-flex;
-                          flex-direction: column;
-                          padding: 0;
-                          background: inherit;
-                          border: none;
-                          cursor: pointer;
-                        `}
+                        css={buttonStyle}
                       >
-                        <div css={css`
-                          display: inline-block;
-                          width: 100px;
-                          height: 100px;
-                          background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
-                        `} />
-                        <span css={css`
-                          display: inline-block;
-                          width: 100%;
-                          overflow: hidden;
-                          text-overflow: ellipsis;
-                          white-space: nowrap;
-                        `}>{ c.channelTitle }</span>
+                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
                   ))
@@ -175,28 +178,10 @@ const About: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => onClickChannel(c.channelId)}
-                        css={css`
-                          display: inline-flex;
-                          flex-direction: column;
-                          padding: 0;
-                          background: inherit;
-                          border: none;
-                          cursor: pointer;
-                        `}
+                        css={buttonStyle}
                       >
-                        <div css={css`
-                          display: inline-block;
-                          width: 100px;
-                          height: 100px;
-                          background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
-                        `} />
-                        <span css={css`
-                          display: inline-block;
-                          width: 100%;
-                          overflow: hidden;
-                          text-overflow: ellipsis;
-                          white-space: nowrap;
-                        `}>{ c.channelTitle }</span>
+                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
                   ))
@@ -217,28 +202,58 @@ const About: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => onClickChannel(c.channelId)}
-                        css={css`
-                          display: inline-flex;
-                          flex-direction: column;
-                          padding: 0;
-                          background: inherit;
-                          border: none;
-                          cursor: pointer;
-                        `}
+                        css={buttonStyle}
                       >
-                        <div css={css`
-                          display: inline-block;
-                          width: 100px;
-                          height: 100px;
-                          background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
-                        `} />
-                        <span css={css`
-                          display: inline-block;
-                          width: 100%;
-                          overflow: hidden;
-                          text-overflow: ellipsis;
-                          white-space: nowrap;
-                        `}>{ c.channelTitle }</span>
+                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <span css={titleStyle}>{ c.channelTitle }</span>
+                      </button>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <h3>HEALTH</h3>
+            <section css={css`
+              margin-bottom: 50px;
+            `}>
+              <ul css={channelUlStyle}>
+                {
+                  channels.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
+                    <li
+                      key={c.channelId}
+                      css={channelLiStyle(chooseChannel === c.channelId)}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => onClickChannel(c.channelId)}
+                        css={buttonStyle}
+                      >
+                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <span css={titleStyle}>{ c.channelTitle }</span>
+                      </button>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <h3>COMMONSENSE</h3>
+            <section css={css`
+              margin-bottom: 50px;
+            `}>
+              <ul css={channelUlStyle}>
+                {
+                  channels.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
+                    <li
+                      key={c.channelId}
+                      css={channelLiStyle(chooseChannel === c.channelId)}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => onClickChannel(c.channelId)}
+                        css={buttonStyle}
+                      >
+                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
                   ))
