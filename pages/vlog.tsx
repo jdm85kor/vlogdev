@@ -7,6 +7,27 @@ import { mq, colors } from '@styles/theme';
 import Link from 'next/link';
 import Loading from '@components/common/Loading';
 
+const channelUlStyle = css`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  height: 140px;
+  overflow-x: auto;
+  white-space: nowrap;
+`;
+const channelLiStyle = (isBorder: boolean) => css`
+  display: inline-flex;
+  flex-direction: column;
+  width: 114px;
+  text-align: center;
+  padding: 2px;
+  border-radius: 10px;
+  border: 5px solid ${isBorder ? colors.hermes : '#fff'};
+  box-sizing: border-box;
+`;
+
+
 const About: React.FC = () => {
   const [channels, setChannels] = useState<any[]>([]);
   const [videos, setVideos] = useState<Record<string, any[]>>({});
@@ -98,32 +119,100 @@ const About: React.FC = () => {
           <Loading /> :
           <>
             <h2>Channels</h2>
+            <h3>DEV</h3>
             <section css={css`
               margin-bottom: 50px;
             `}>
-              <ul css={css`
-                margin: 0;
-                padding: 0;
-                list-style: none;
-                width: 100%;
-                height: 140px;
-                overflow-x: auto;
-                white-space: nowrap;
-              `}>
+              <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime).map(c => (
+                  channels.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
                     <li
                       key={c.channelId}
-                      css={css`
-                        display: inline-flex;
-                        flex-direction: column;
-                        width: 114px;
-                        text-align: center;
-                        padding: 2px;
-                        border-radius: 10px;
-                        border: 5px solid ${chooseChannel === c.channelId ? colors.hermes : '#fff'};
-                        box-sizing: border-box;
-                      `}
+                      css={channelLiStyle(chooseChannel === c.channelId)}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => onClickChannel(c.channelId)}
+                        css={css`
+                          display: inline-flex;
+                          flex-direction: column;
+                          padding: 0;
+                          background: inherit;
+                          border: none;
+                          cursor: pointer;
+                        `}
+                      >
+                        <div css={css`
+                          display: inline-block;
+                          width: 100px;
+                          height: 100px;
+                          background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
+                        `} />
+                        <span css={css`
+                          display: inline-block;
+                          width: 100%;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        `}>{ c.channelTitle }</span>
+                      </button>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <h3>ECONOMIC</h3>
+            <section css={css`
+              margin-bottom: 50px;
+            `}>
+              <ul css={channelUlStyle}>
+                {
+                  channels.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
+                    <li
+                      key={c.channelId}
+                      css={channelLiStyle(chooseChannel === c.channelId)}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => onClickChannel(c.channelId)}
+                        css={css`
+                          display: inline-flex;
+                          flex-direction: column;
+                          padding: 0;
+                          background: inherit;
+                          border: none;
+                          cursor: pointer;
+                        `}
+                      >
+                        <div css={css`
+                          display: inline-block;
+                          width: 100px;
+                          height: 100px;
+                          background: no-repeat 100%/contain url(${c.thumbnails.medium.url});
+                        `} />
+                        <span css={css`
+                          display: inline-block;
+                          width: 100%;
+                          overflow: hidden;
+                          text-overflow: ellipsis;
+                          white-space: nowrap;
+                        `}>{ c.channelTitle }</span>
+                      </button>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+            <h3>GOLF</h3>
+            <section css={css`
+              margin-bottom: 50px;
+            `}>
+              <ul css={channelUlStyle}>
+                {
+                  channels.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
+                    <li
+                      key={c.channelId}
+                      css={channelLiStyle(chooseChannel === c.channelId)}
                     >
                       <button
                         type="button"
@@ -173,7 +262,8 @@ const About: React.FC = () => {
                 flex-wrap: wrap;
               `}>
                 {
-                  videos[chooseChannel]?.map(v => (
+                  videos[chooseChannel] ?
+                  videos[chooseChannel].map(v => (
                     <li
                       key={v.videoId}
                       css={css`
@@ -220,7 +310,14 @@ const About: React.FC = () => {
                         </a>
                       </Link>
                     </li>
-                  ))
+                  )) :
+                  <div css={css`
+                    position: relative;
+                    width: 100%;
+                    height: 150px;
+                  `}>
+                    <Loading />
+                  </div>
                 }
               </ul>
             </section>

@@ -1,10 +1,10 @@
 import React from 'react';
-const webRTC = () => {
+const WebRTC = () => {
   return (
     <main>
-      web rtc
+      You can&apos;t access this page
     </main>
   );
 };
 
-export default webRTC;
+export default WebRTC;

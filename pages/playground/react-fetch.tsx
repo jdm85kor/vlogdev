@@ -1,7 +1,7 @@
 const ReactFetch: React.FC = () => {
   return (
     <main>
-        react fetch
+        You can&apos;t access this page
     </main>
   );
 };
