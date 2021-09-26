@@ -145,13 +145,13 @@ const Home: React.FC = () => {
           </h1>
           <section css={sectionStyle}>
             <h2>
-              New Video
+              New Videos
             </h2>
             <div css={backgroundImg('pungmu_morning_s.jpg')} />
           </section>
           <section css={sectionStyle}>
             <h2>
-              New Blog
+              New Blog posts
             </h2>
             <div css={backgroundImg('pungmu_afternoon_s.jpg')} />
           </section>
