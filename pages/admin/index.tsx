@@ -109,6 +109,38 @@ const Admin: React.FC = () => {
           margin: ['10px', '40px', '50px'],
         })}
       `}>
+        <div>
+          <ul css={css`
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-direction: row;
+            justify-content: space-around;
+          `}>
+            <li css={css`
+              display: inline-block;
+            `}>
+              <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
+                Request
+              </button>
+            </li>
+            <li css={css`
+              display: inline-block;
+            `}>
+              <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
+                Vlog
+              </button>
+            </li>
+            <li css={css`
+              display: inline-block;
+            `}>
+              <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
+                Settings
+              </button>
+            </li>
+          </ul>
+        </div>
         <h1>Admin Page</h1>
         { isAdmin ?
           <>
