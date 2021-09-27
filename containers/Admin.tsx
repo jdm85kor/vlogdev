@@ -1,15 +1,21 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { css } from '@emotion/react';
 import { Auth, Hub } from 'aws-amplify';
-import { apiCall } from '@utils/apis';
-import { colors } from '@styles/theme';
 import { mq } from '@styles/theme';
+import Request from '@components/admin/RequestInfo';
+import Youtube from '@components/admin/YoutubeInfo';
 
-const Admin = () => {
+type Tab = 'YoutubeChannel' | 'Request' | 'Vlog'
+const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog'];
+
+const Admin: React.FC = () => {
   const [user, setUser] = useState<Record<string, any> | null>(null);
-  const [requests, setRequests] = useState<any[]>([]);
-  const [currentTab, setCurrentTab] = useState<'youtubeChannel' | 'request'>('youtubeChannel');
+  const [currentTab, setCurrentTab] = useState<Tab>('YoutubeChannel');
+
+  const handleClickTab = useCallback((id: Tab): void => {
+    setCurrentTab(id);
+  }, []);
 
   useEffect((): void => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -31,176 +37,91 @@ const Admin = () => {
     getUser().then(userData => setUser(userData));
   }, []);
 
-  const getUser = () => {
+  const getUser = useCallback(() => {
     return Auth.currentAuthenticatedUser()
       .then(userData => userData)
       .catch(() => console.log('Not signed in'));
-  };
+  }, []);
 
   const isAdmin = useMemo((): boolean => {
     const groups = (user as any)?.signInUserSession?.accessToken?.payload["cognito:groups"] || [];
     return groups.includes('admin');
   }, [user]);
 
-  const fetchRequest = async (Authorization: string) => {
-    try {
-      const res = await apiCall({
-        method: 'get',
-        url: '/vlogdev/request',
-        headers: { Authorization },
-      });
-      setRequests(res.data.items);;
-    } catch(e) {
-      console.error(e);
-    }
-  };
-
-  const addChannel = async (channelId: string, channelTitle: string) => {
-    try {
-      const res = await apiCall({
-        method: 'post',
-        url: '/vlogdev/channel',
-        headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
-        data: {
-          channelId,
-          channelTitle,
-        },
-      });
-      console.log('add channel => ', res);
-    } catch(e) {
-      console.error(e);
-    }
-  };
-
-  const deleteChannel = async (channelId: string, channelTitle: string) => {
-    try {
-      const res = await apiCall({
-        method: 'delete',
-        url: '/vlogdev/channel',
-        headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
-        data: {
-          channelId,
-          channelTitle,
-        },
-      });
-      console.log('delete channel => ', res);
-    } catch(e) {
-      console.error(e);
-    }
-  };
-
-  useEffect(() => {
-    if (!user) return;
-    fetchRequest((user as any).signInUserSession.idToken.jwtToken);
-    // addChannel('UCvc8kv-i5fvFTJBFAk6n1SA', 'aa');
-  }, [user]);
   return (
-    <div css={css`
-      ${mq({
-        margin: ['10px', '40px', '50px'],
-      })}
+    <main css={css`
+      margin: 0 auto;
+      max-width: 1920px;
     `}>
-      <div>
-        <ul css={css`
-          display: flex;
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          flex-direction: row;
-          justify-content: space-around;
-        `}>
-          <li css={css`
-            display: inline-block;
+      <div css={css`
+        margin: 50px auto;
+        ${mq({
+          padding: ['0 30px 30px', '0 50px', '0 50px'],
+        })}
+        max-width: 1024px;
+        word-break: break-word;
+        box-sizing: border-box;
+      `}>
+        <div>
+          <ul css={css`
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            flex-direction: row;
           `}>
-            <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
-              Request
-            </button>
-          </li>
-          <li css={css`
-            display: inline-block;
-          `}>
-            <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
-              Vlog
-            </button>
-          </li>
-          <li css={css`
-            display: inline-block;
-          `}>
-            <button type="button" onClick={() => {}} css={css`cursor: pointer;`}>
-              Settings
-            </button>
-          </li>
-        </ul>
-      </div>
-      <h1>Admin Page</h1>
-      { isAdmin ?
-        <>
-          <h2>
-            Owner
-          </h2>
-          <p>
-            provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
-            username: {(user as any)?.username || ''}<br />
-            email: {(user as any)?.attributes.email}
-          </p>
-          
-          {
-            // tab
-            // <AdminTab />
-            //  |- <YoutubeChannels />
-            //  |- <Request />
-          }
-          
-          <h2>Requests</h2>
-          { requests.length ?
-            <ul css={css`
-              padding: 0;
-              list-style: none;
-              border-top: solid 1px ${colors.hermes}
-            `}>
-              {
-                requests.map(d => (
-                  <li
-                    key={d.id}
-                    css={css`
-                      padding: 20px;
-                      border-bottom: solid 1px ${colors.hermes};
-                      white-space: pre-line;
-                    `}
+            {
+              tabs.map((c, id) => (
+                <li
+                  key={id}
+                  css={css`
+                    display: inline-block;
+                    padding: 0 5px;
+                  `}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleClickTab(c)}
+                    css={css`cursor: pointer;`}
                   >
-                    <p>
-                      { d.type }
-                    </p>
-                    <p>
-                      { d.name }
-                    </p>
-                    <p>
-                      { d.tel }
-                    </p>
-                    <p>
-                      { d.email }
-                    </p>
-                    <p>
-                      { d.contents }
-                    </p>
-                  </li>
-                ))
-              }
-            </ul> :
-            <></>
-          }
-        </> : 
-        <p>
-          This page is for admin.
-        </p>
-      }
-      {user ? (
-        <AmplifySignOut />
-      ) : (
-        <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
-      )}
+                    { c }
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <h1>Admin Page</h1>
+        { isAdmin ?
+          <>
+            <h2>
+              Owner
+            </h2>
+            <p>
+              provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
+              username: {(user as any)?.username || ''}<br />
+              email: {(user as any)?.attributes.email}
+            </p>
+            {
+              currentTab === 'Request' ?
+              <Request user={user} /> :
+              currentTab === 'YoutubeChannel' ? 
+              <Youtube user={user} /> :
+              <></> 
+            }
+          </> : 
+          <p>
+            This page is for admin.
+          </p>
+        }
+        {user ? (
+          <AmplifySignOut />
+        ) : (
+          <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
+        )}
       </div>
-    );
+    </main>
+  );
 };
 
 export default withAuthenticator(Admin);
