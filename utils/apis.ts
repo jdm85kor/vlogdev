@@ -19,11 +19,12 @@ const apiCall = ({ method, headers, data, url, query }: {
   headers?: { [key: string]: string | number },
   query? : { [key: string]: string | number },
 }) => {
+  const now = new Date().getTime();
   return instance({
     method,
     headers,
     data,
-    url: query ? `${url}?${qs.stringify(query)}` : url,
+    url: query ? `${url}?${qs.stringify(query)}&${now}` : `${url}?${now}`,
   });
 };
 
