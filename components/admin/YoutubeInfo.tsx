@@ -154,6 +154,7 @@ const Vlog: React.FC<Props> = ({ user }) => {
         channels.length &&
         <table css={css`
           margin: 0 auto;
+          text-align: center;
         `}>
           <thead>
             <tr
@@ -164,6 +165,7 @@ const Vlog: React.FC<Props> = ({ user }) => {
                 color: #fff;
               `}
             >
+              <th>Idx</th>
               <th>제목</th>
               <th>그룹</th>
               <th>개설날짜</th>
@@ -174,8 +176,20 @@ const Vlog: React.FC<Props> = ({ user }) => {
           </thead>
           <tbody>
             {
-              channels.map(c => (
-                <tr key={c.channelId}>
+              channels.map((c, idx) => (
+                <tr
+                  key={c.channelId}
+                  css={css`
+                    background: ${c.publishTime > 0 ? 'inherit' : colors.hermes};
+                    opacity: ${c.publishTime > 0 ? 1 : 0.5};
+                    & > td:last-of-type {
+                      background: #fff;
+                    }
+                  `}
+                >
+                  <td>
+                    {idx + 1}
+                  </td>
                   <td>
                     { c.channelTitle }
                   </td>
