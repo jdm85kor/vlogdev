@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import { css } from '@emotion/react';
 import { Auth, Hub } from 'aws-amplify';
-import { mq } from '@styles/theme';
+import { mq, colors } from '@styles/theme';
 import Request from '@components/admin/RequestInfo';
 import Youtube from '@components/admin/YoutubeInfo';
 
@@ -76,13 +76,22 @@ const Admin: React.FC = () => {
                   key={id}
                   css={css`
                     display: inline-block;
-                    padding: 0 5px;
+                    margin: 0 5px;
+                    padding: 0;
+                    border: 1px solid ${colors.hermes};
+                    box-shadow: 2px 2px 2px grey;
                   `}
                 >
                   <button
                     type="button"
                     onClick={() => handleClickTab(c)}
-                    css={css`cursor: pointer;`}
+                    css={css`
+                      cursor: pointer;
+                      background: inherit;
+                      border: none;
+                      padding: 5px;
+                      color: ${colors.hermes};
+                    `}
                   >
                     { c }
                   </button>

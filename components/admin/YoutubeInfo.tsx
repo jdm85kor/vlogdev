@@ -1,16 +1,34 @@
-import { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { apiCall } from '@utils/apis';
+import { dateYYYYMMDD } from '@utils/dates';
+import { css } from '@emotion/react';
+import { mq, colors } from '@styles/theme';
+
+const inputStyle = css`
+  & > label {
+    display: block;
+    margin: 3px auto;
+  }
+  & > input {
+    margin-bottom: 5px;
+    width: 100%;
+    height: 30px;
+    box-sizing: border-box;
+  }
+`;
 
 interface Props {
   user: any;
 };
+type ChannelInfoKeys = 'channelId' | 'channelTitle' | 'group';
+
 
 const Vlog: React.FC<Props> = ({ user }) => {
-  const [channelInfo, setChannelInfo] = useState<{
-    channelId: string,
-    channelTitle: string,
-    group: string,
-  }>({ channelId: '', channelTitle: '', group: '' });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [channels, setChannels] = useState<any[]>([]);
+  const [channelInfo, setChannelInfo] = useState<{[key in ChannelInfoKeys]: string}>({
+    channelId: '', channelTitle: '', group: '',
+  });
 
   const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.currentTarget;
@@ -18,8 +36,29 @@ const Vlog: React.FC<Props> = ({ user }) => {
       ...prev,
       [id]: value,
     }));
-  }, [channelInfo]);
+  }, []);
+
+  const fetchChannels = useCallback(async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+    try {
+      const { data } = await apiCall({
+        method: 'get',
+        url: '/vlogdev/channel',
+      });
+      setChannels(data.items);
+    } catch(e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const addChannel = useCallback(async () => {
+    if (isLoading) return;
+    if (Object.entries(channelInfo).some(i => !i[1])) return window.alert('모든 항목을 입력해주세요.');
+    setIsLoading(true);
     try {
       const res = await apiCall({
         method: 'post',
@@ -27,36 +66,159 @@ const Vlog: React.FC<Props> = ({ user }) => {
         headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
         data: channelInfo,
       });
-      console.log('add channel => ', res);
+      window.alert(`${channelInfo.channelTitle} 채널 등록 완료`);
+      setChannels(prev => ([
+        ...prev,
+        channelInfo,
+      ]));
+      setChannelInfo({ channelId: '', channelTitle: '', group: '' });
     } catch(e) {
       console.error(e);
+    } finally {
+      setIsLoading(false);
     }
-  }, [channelInfo, user]);
+  }, [channelInfo, user, isLoading]);
 
-  const deleteChannel = useCallback(async () => {
-    try {
-      const res = await apiCall({
-        method: 'delete',
-        url: '/vlogdev/channel',
-        headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
-        data: channelInfo,
-      });
-      console.log('delete channel => ', res);
-    } catch(e) {
-      console.error(e);
+  const deleteChannel = useCallback(async (channelTitle: string, group: string) => {
+    if (isLoading) return;
+    if (window.confirm(`${channelTitle} 삭제 하시겠습니까?`)) {
+      setIsLoading(true);
+      try {
+        const res = await apiCall({
+          method: 'delete',
+          url: '/vlogdev/channel',
+          headers: { Authorization: (user as any).signInUserSession.idToken.jwtToken },
+          data: {
+            channelTitle,
+            group,
+          },
+        });
+        setChannels(prev => {
+          const idx = prev.findIndex(p => p.channelTitle === channelTitle && p.group === group);
+          return idx > -1 ? prev.splice(idx, 1) : prev;
+        });
+        window.alert(`${channelTitle} 채널 삭제 완료 `);
+      } catch(e) {
+        console.error(e);
+      } finally {
+        setIsLoading(false);
+      }
     }
-  }, [channelInfo, user]);
+  }, [user, isLoading]);
+
+  useEffect(() => {
+    fetchChannels();
+  }, [fetchChannels]);
   return (
-    <div>
+    <div css={css`
+      margin-bottom: 30px;
+    `}>
+      <h3>YOUTUBE 채널 추가</h3>
       <form>
-        <label>Id</label>
-        <input id="channelId" value={channelInfo.channelId} onChange={handleChangeInput} />
-        <label>Title</label>
-        <input id="channelTitle" value={channelInfo.channelTitle} onChange={handleChangeInput} />
-        <label>Group</label>
-        <input id="group" value={channelInfo.group} onChange={handleChangeInput} />
-        <button type="button" onClick={addChannel}>ADD</button>
+        {
+          ['channelId', 'channelTitle', 'group'].map((v) => (
+            <div key={v} css={inputStyle}>
+              <label htmlFor={v}>
+                {v}
+              </label>
+              <input
+                id={v}
+                value={channelInfo[v as ChannelInfoKeys]}
+                onChange={handleChangeInput}
+              />
+            </div>
+          ))
+        }
+        <div css={css`
+          text-align: right;
+        `}>
+          <button
+            type="button"
+            onClick={addChannel}
+            css={css`
+              margin: 10px auto;
+              height: 40px;
+              width: 100%;
+              border: 1px solid blue;
+              border-radius: 15px;
+              background: blue;
+              color: #fff;
+              cursor: pointer;
+            `}
+          >추가</button>
+        </div>
       </form>
+
+      <h3>YOUTUBE 채널 리스트</h3>
+      {
+        channels.length &&
+        <table css={css`
+          margin: 0 auto;
+        `}>
+          <thead>
+            <tr
+              key="table-head"
+              css={css`
+                background-color: ${colors.hermes};
+                border-color: ${colors.hermes};
+                color: #fff;
+              `}
+            >
+              <th>제목</th>
+              <th>그룹</th>
+              <th>개설날짜</th>
+              <th>썸네일</th>
+              <th>ID</th>
+              <th>삭제</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              channels.map(c => (
+                <tr key={c.channelId}>
+                  <td>
+                    { c.channelTitle }
+                  </td>
+                  <td>
+                    { c.group }
+                  </td>
+                  <td>
+                    { dateYYYYMMDD(c.publishTime) }
+                  </td>
+                  <td>
+                    {
+                      c.thumbnails &&
+                        <div css={css`
+                          background: no-repeat 100%/cover url(${c.thumbnails.high.url});
+                          height: 30px;
+                          width: 30px;
+                        `}/>
+                    }
+                  </td>
+                  <td>
+                    { c.channelId }
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={() => deleteChannel(c.channelTitle, c.group)}
+                      // onClick={() => handleClickRemove(c.channelTitle, c.group)}
+                      css={css`
+                        background: inherit;
+                        border: 1px solid red;
+                        border-radius: 10px;
+                        color: red;
+                        cursor: pointer;
+                      `}
+                    >삭제</button>
+                  </td>
+                </tr>)
+              )
+            }
+
+          </tbody>
+        </table>
+      }
     </div>
   );
 };

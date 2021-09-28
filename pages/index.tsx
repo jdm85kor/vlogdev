@@ -23,10 +23,9 @@ const backgroundImg = (file: string) => css`
   width: 100%;
   height: 400px;
   background: no-repeat 100%/cover url(https://d6c63ppcwec2x.cloudfront.net/${file});
-
 `;
 const buttonStyle = css`
-  margin: 30px;
+  margin: 5px;
   padding: 20px;
   background: #fff;
   border: 1px solid #fff;
@@ -48,9 +47,8 @@ const imgStyle = (src: string) => css`
 `;
 const imgTitleStyle = css`
   display: block;
-  margin: 20px 0 0;
+  margin: 10px 0 0;
   padding: 0;
-  height: 30px;
   text-align: center;
   font-size: 24px;
   color: #000;
