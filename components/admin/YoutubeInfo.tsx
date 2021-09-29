@@ -151,7 +151,7 @@ const Vlog: React.FC<Props> = ({ user }) => {
 
       <h3>YOUTUBE 채널 리스트</h3>
       {
-        channels.length &&
+        !!channels.length &&
         <table css={css`
           margin: 0 auto;
           text-align: center;

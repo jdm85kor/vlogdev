@@ -34,11 +34,21 @@ const buttonStyle = css`
   border: none;
   cursor: pointer;
 `;
-const thumbnailStyle = (url: string) => css`
+const thumbnailStyle = (thumbnails: Record<'default' | 'high' | 'high', {
+  width: number;
+  height: number;
+  url: string;
+}>) => css`
   display: inline-block;
   width: 100px;
   height: 100px;
-  background: no-repeat 100%/contain url(${url});
+  ${mq({
+    background: [
+      `no-repeat 100%/contain url(${thumbnails.default.url})`,
+      `no-repeat 100%/contain url(${thumbnails.default.url})`,
+      `no-repeat 100%/contain url(${thumbnails.high.url})`
+    ]
+  })}
 `;
 const titleStyle = css`
   display: inline-block;
@@ -79,9 +89,7 @@ const About: React.FC = () => {
       method: AxiosRequestConfig['method'];
       url: string;
       query: {
-        size: number;
-        offset?: string;
-        id: string;
+        [key: string]: string | number;
       };
     } = {
       method: 'get',
@@ -156,7 +164,7 @@ const About: React.FC = () => {
                         onClick={() => onClickChannel(c.channelId)}
                         css={buttonStyle}
                       >
-                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <div css={thumbnailStyle(c.thumbnails)} />
                         <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
@@ -180,7 +188,7 @@ const About: React.FC = () => {
                         onClick={() => onClickChannel(c.channelId)}
                         css={buttonStyle}
                       >
-                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <div css={thumbnailStyle(c.thumbnails)} />
                         <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
@@ -204,7 +212,7 @@ const About: React.FC = () => {
                         onClick={() => onClickChannel(c.channelId)}
                         css={buttonStyle}
                       >
-                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <div css={thumbnailStyle(c.thumbnails)} />
                         <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
@@ -228,7 +236,7 @@ const About: React.FC = () => {
                         onClick={() => onClickChannel(c.channelId)}
                         css={buttonStyle}
                       >
-                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <div css={thumbnailStyle(c.thumbnails)} />
                         <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
@@ -236,7 +244,7 @@ const About: React.FC = () => {
                 }
               </ul>
             </section>
-            <h3>COMMONSENSE</h3>
+            <h3>COMMON SENSE</h3>
             <section css={css`
               margin-bottom: 50px;
             `}>
@@ -252,7 +260,7 @@ const About: React.FC = () => {
                         onClick={() => onClickChannel(c.channelId)}
                         css={buttonStyle}
                       >
-                        <div css={thumbnailStyle(c.thumbnails.medium.url)} />
+                        <div css={thumbnailStyle(c.thumbnails)} />
                         <span css={titleStyle}>{ c.channelTitle }</span>
                       </button>
                     </li>
@@ -307,8 +315,14 @@ const About: React.FC = () => {
                           <div css={css`
                             display: inline-block;
                             width: 100%;
-                            padding: 50% 0;
-                            background: no-repeat center/cover url(${v.thumbnails.default.url});
+                            padding: 30% 0;
+                            ${mq({
+                              background: [
+                                `no-repeat center/cover url(${v.thumbnails.default.url})`,
+                                `no-repeat center/cover url(${v.thumbnails.default.url})`,
+                                `no-repeat center/cover url(${v.thumbnails.high.url})`
+                              ]  
+                            })}
                           `} />
                           <span
                             css={css`
