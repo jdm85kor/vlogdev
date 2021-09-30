@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
+import { mq } from '@styles/theme';
 import ModalPortal from './ModalPortal';
 
 type Props = {
@@ -25,11 +26,13 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
           `}>
             <section css={css`
               display: inline-block;
-              position: relative;
-              margin: 100px auto;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
               padding: 0 0 20px;
               width: 400px;
-              min-height: 500px;
+              min-height:400px;
               background: #fff;
               overflow: hidden;
               box-sizing: border-box;
@@ -60,7 +63,9 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
                   `}
                 >X</button>
               </header>
-              <main>
+              <main css={css`
+                overflow-y: auto;
+              `}>
                 { children }
               </main>
             </section>
