@@ -3,8 +3,9 @@ import RequestModal from '@components/RequestModal';
 import { css } from '@emotion/react';
 import Head from 'next/head'
 import Loading from "@components/common/Loading";
-import { mq, colors } from '@styles/theme';
+import { mq } from '@styles/theme';
 import { apiCall } from '@utils/apis';
+import Link from 'next/link'
 
 const sectionStyle = css`
   margin: 0 auto 20px;
@@ -148,24 +149,30 @@ const Home: React.FC = () => {
                       box-sizing: border-box;
                     `}
                   >
-                    <a
-                      css={css`
-                        display: inline-flex;
-                        flex-direction: column;
-                        padding: 0;
-                        background: inherit;
-                        border: none;
-                        cursor: pointer;
-                        text-decoration: none;
-                        color: #555;
-                      `}
+                    <Link
                       href={`https://www.youtube.com/watch?v=${v.videoId}`}
+                      passHref
                     >
-                      <div css={thumbnailStyle(v.thumbnails)} />
-                      <span css={titleStyle}>
-                        { v.videoTitle }
-                      </span>
-                    </a>
+                      <a
+                        css={css`
+                          display: inline-flex;
+                          flex-direction: column;
+                          padding: 0;
+                          background: inherit;
+                          border: none;
+                          cursor: pointer;
+                          text-decoration: none;
+                          color: #555;
+                        `}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                      >
+                        <div css={thumbnailStyle(v.thumbnails)} />
+                        <span css={titleStyle}>
+                          { v.videoTitle }
+                        </span>
+                      </a>
+                    </Link>
                   </li>)
                 )
               }

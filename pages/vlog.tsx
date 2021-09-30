@@ -306,6 +306,7 @@ const About: React.FC = () => {
                       <Link href={`https://www.youtube.com/watch?v=${v.videoId}`} passHref>
                         <a
                           target="_blank"
+                          rel="noopener noreferrer nofollow"
                           css={css`
                             color: #000;
                             text-decoration: none;
