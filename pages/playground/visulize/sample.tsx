@@ -1,5 +1,5 @@
-import React from 'react';
-const WebRTC = () => {
+const Sample: React.FC = () => {
+  
   return (
     <main>
       You can&apos;t access this page
@@ -7,4 +7,4 @@ const WebRTC = () => {
   );
 };
 
-export default WebRTC;
+export default Sample;
