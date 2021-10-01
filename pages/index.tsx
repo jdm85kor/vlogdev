@@ -1,11 +1,10 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import Head from 'next/head'
+import Link from 'next/link'
 import RequestModal from '@components/RequestModal';
 import { css } from '@emotion/react';
-import Head from 'next/head'
-import Loading from "@components/common/Loading";
 import { mq, colors } from '@styles/theme';
 import { apiCall } from '@utils/apis';
-import Link from 'next/link'
 
 const news = [{
   url: 'https://spilist.notion.site/e5b0e192ed494fc699016b95169732ed',
@@ -97,16 +96,24 @@ const titleStyle = css`
 const Home: React.FC = () => {
   const [isShowRequest, setIsShowRequest] = useState(false);
   const [latestVideos, setLatestVideos] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<string>('');
 
   const fetchLatestVideo = useCallback(async () => {
-    const { data } = await apiCall({
-      method: 'get',
-      url: '/vlogdev/video',
-      query: { type: 'latest' },
-    });
-    setLatestVideos(data.items);
+    if (isLoading) return;
+    try {
+      setIsLoading(true);
+      const { data } = await apiCall({
+        method: 'get',
+        url: '/vlogdev/video',
+        query: { type: 'latest' },
+      });
+      setLatestVideos(data.items);
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   const handleClickButton = useCallback((t: string) => {
@@ -115,11 +122,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
     fetchLatestVideo();
-    return () => clearTimeout(timer);
   } ,[fetchLatestVideo]);
   
   const getDayTime: 'morning' | 'afternoon' | 'evening' | 'night' = useMemo(() => {
@@ -152,141 +155,135 @@ const Home: React.FC = () => {
       <Head>
         <title>VLOG | Video Log</title>
       </Head>
-      {
-        isLoading ?
-        <Loading /> :
-        <>
-          <h1 css={css`
-            display: none;
-          `}>
-            Record yourself. Record do something. Record whatever.
-          </h1>
-          <section css={sectionStyle}>
-            <div css={backgroundImg(getLandscapeUrlByTime)}>
-              <p css={css`
-                display: inline-block;
-                position: absolute;
-                left: 50%;
-                top: 20%;
-                transform: translateX(-50%);
-                ${mq({
-                  fontSize: ['30px', '40px', '40px'],
-                })}
-                color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
-                font-style: italic;
-                font-weight: 600;
-              `}>{`Good ${getDayTime}`}</p>
-            </div>
-            <h2>
-              New Videos
-            </h2>
-            <ul css={css`
-              margin: 0;
-              padding: 0;
-              list-style: none;
-              width: 100%;
-              height: 140px;
-              overflow-x: auto;
-              white-space: nowrap;
-            `}>
-              {
-                latestVideos.map((v: any) => (
-                  <li
-                    key={v.videoId}
+      <h1 css={css`
+        display: none;
+      `}>
+        Record yourself. Record do something. Record whatever.
+      </h1>
+      <section css={sectionStyle}>
+        <div css={backgroundImg(getLandscapeUrlByTime)}>
+          <p css={css`
+            display: inline-block;
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            transform: translateX(-50%);
+            ${mq({
+              fontSize: ['30px', '40px', '40px'],
+            })}
+            color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
+            font-style: italic;
+            font-weight: 600;
+          `}>{`Good ${getDayTime}`}</p>
+        </div>
+        <h2>
+          New Videos
+        </h2>
+        <ul css={css`
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          width: 100%;
+          height: 140px;
+          overflow-x: auto;
+          white-space: nowrap;
+        `}>
+          {
+            latestVideos.map((v: any) => (
+              <li
+                key={v.videoId}
+                css={css`
+                  display: inline-flex;
+                  flex-direction: column;
+                  width: 114px;
+                  text-align: center;
+                  padding: 2px;
+                  border-radius: 10px;
+                  box-sizing: border-box;
+                `}
+              >
+                <Link
+                  href={`https://www.youtube.com/watch?v=${v.videoId}`}
+                  passHref
+                >
+                  <a
                     css={css`
                       display: inline-flex;
                       flex-direction: column;
-                      width: 114px;
-                      text-align: center;
-                      padding: 2px;
-                      border-radius: 10px;
-                      box-sizing: border-box;
+                      padding: 0;
+                      background: inherit;
+                      border: none;
+                      cursor: pointer;
+                      text-decoration: none;
+                      color: #555;
                     `}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
                   >
-                    <Link
-                      href={`https://www.youtube.com/watch?v=${v.videoId}`}
-                      passHref
-                    >
-                      <a
-                        css={css`
-                          display: inline-flex;
-                          flex-direction: column;
-                          padding: 0;
-                          background: inherit;
-                          border: none;
-                          cursor: pointer;
-                          text-decoration: none;
-                          color: #555;
-                        `}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                      >
-                        <div css={thumbnailStyle(v.thumbnails)} />
-                        <span css={titleStyle} dangerouslySetInnerHTML={{__html: v.videoTitle}}>
-                        </span>
-                      </a>
-                    </Link>
-                  </li>)
-                )
-              }
-            </ul>
-          </section>
-          <section css={sectionStyle}>
-            <h2>
-              New blog posts
-            </h2>
-            <p>
-              {
-                news.map((n, idx) => (
-                  <Link
-                    key={idx}
-                    href={n.url}
-                    passHref
-                  >
-                    <a
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
-                      css={css`
-                        margin: 10px 0;
-                        text-decoration: underline;
-                        color: #555;
-                        display: block;
-                      `}
-                    >{n.title}</a>
-                  </Link>
-                ))
-              }
-            </p>
-          </section>
-          <section css={sectionStyle}>
-            <h2 css={css`display: none;`}>
-              To manager
-            </h2>
-            <div css={css`
-              display: flex;
-              height: max-content;
-              justify-content: space-around;
-            `}>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
-                <div css={imgStyle('letter.png')} />
-                <span css={imgTitleStyle}>Job offer</span>
-              </button>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Outsourcing')}>
-                <div css={imgStyle('develop.png')} />
-                <span css={imgTitleStyle}>Outsourcing development</span>
-              </button>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Partnership')}>
-                <div css={imgStyle('partnership.png')} />
-                <span css={imgTitleStyle}>Contents partnership</span>
-              </button>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
-                <div css={imgStyle('golf.png')} />
-                <span css={imgTitleStyle}>Play golf</span>
-              </button>
-            </div>
-          </section>
-        </>
-      }
+                    <div css={thumbnailStyle(v.thumbnails)} />
+                    <span css={titleStyle} dangerouslySetInnerHTML={{__html: v.videoTitle}}>
+                    </span>
+                  </a>
+                </Link>
+              </li>)
+            )
+          }
+        </ul>
+      </section>
+      <section css={sectionStyle}>
+        <h2>
+          New blog posts
+        </h2>
+        <p>
+          {
+            news.map((n, idx) => (
+              <Link
+                key={idx}
+                href={n.url}
+                passHref
+              >
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  css={css`
+                    margin: 10px 0;
+                    text-decoration: underline;
+                    color: #555;
+                    display: block;
+                  `}
+                >{n.title}</a>
+              </Link>
+            ))
+          }
+        </p>
+      </section>
+      <section css={sectionStyle}>
+        <h2 css={css`display: none;`}>
+          To manager
+        </h2>
+        <div css={css`
+          display: flex;
+          height: max-content;
+          justify-content: space-around;
+        `}>
+          <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Job offer')}>
+            <div css={imgStyle('letter.png')} />
+            <span css={imgTitleStyle}>Job offer</span>
+          </button>
+          <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Outsourcing')}>
+            <div css={imgStyle('develop.png')} />
+            <span css={imgTitleStyle}>Outsourcing development</span>
+          </button>
+          <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Partnership')}>
+            <div css={imgStyle('partnership.png')} />
+            <span css={imgTitleStyle}>Contents partnership</span>
+          </button>
+          <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Play golf')}>
+            <div css={imgStyle('golf.png')} />
+            <span css={imgTitleStyle}>Play golf</span>
+          </button>
+        </div>
+      </section>
       <RequestModal
         isShow={isShowRequest}
         setShow={(status: boolean) => setIsShowRequest(status)}

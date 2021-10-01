@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Head from 'next/head';
 import 'normalize.css/normalize.css';
 import type { AppProps } from 'next/app'
@@ -7,24 +7,33 @@ import Amplify from 'aws-amplify';
 import Gnb from '@components/common/Gnb';
 import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
+import Loading from "@components/common/Loading";
 
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const isPlaygroundPages = useMemo(() => router.route.includes('/playground'), [router]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  } ,[]);
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
         <meta name="apple-mobile-web-app-title" content="VLOG" />
         <meta name="description" content="Record yourself. Record do something. Record whatever." />
-        <meta property="og:title" content="VLOG" />
+        <meta property="og:title" content="v-log.dev" />
         <meta property="og:url" content="https://vlog.dev/" />
-        <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
+        <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />
         <meta property="og:description" content="Record yourself. Record do something. Record whatever." />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="VLOG" />
+        <meta name="twitter:title" content="v-log.dev" />
         <meta name="twitter:url" content="https://v-log.dev/" />
         <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
         <meta name="twitter:description" content="Record yourself. Record do something. Record whatever." />
@@ -38,11 +47,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Gnb />
       {
-        isPlaygroundPages ?
-        <PlaygroundLayout>
+        isLoading ? 
+          <Loading /> :
+          isPlaygroundPages ?
+          <PlaygroundLayout>
+            <Component role="main" {...pageProps} />
+          </PlaygroundLayout> :
           <Component role="main" {...pageProps} />
-        </PlaygroundLayout> :
-        <Component role="main" {...pageProps} />
       }
     </>
   );
