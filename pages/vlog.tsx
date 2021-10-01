@@ -137,17 +137,17 @@ const About: React.FC = () => {
         max-width: 1024px;
         box-sizing: border-box;
       `}>
-        <div css={css`
-          text-align: right;
-          color: ${colors.hermes};
-        `}>
-          <span>매일 1회 업데이트 됩니다</span>
-        </div>
         {
           isLoadingChannel ?
           <Loading /> :
           <>
             <h2>Channels</h2>
+            <div css={css`
+              text-align: right;
+              color: ${colors.hermes};
+            `}>
+              <span>매일 1회 업데이트 됩니다</span>
+            </div>
             <h3>DEV</h3>
             <section css={css`
               margin-bottom: 50px;
