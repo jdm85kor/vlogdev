@@ -6,6 +6,7 @@ import { AxiosRequestConfig } from 'axios';
 import { mq, colors } from '@styles/theme';
 import Link from 'next/link';
 import Loading from '@components/common/Loading';
+import Footer from "@components/common/Footer";
 
 const channelUlStyle = css`
   margin: 0;
@@ -116,246 +117,249 @@ const About: React.FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <main css={css`
-      margin: 0 auto;
-      max-width: 1920px;
-    `}>
-      <Head>
-        <title>Video</title>
-        <meta name="description" content="Show me your records" />
-      </Head>
-      <h1 css={css`
-        display: none;
+    <>
+      <main css={css`
+        margin: 0 auto;
+        max-width: 1920px;
+        min-height: 100vh;
       `}>
-        VLOG
-      </h1>
-      <div css={css`
-        margin: 50px auto 0;
-        ${mq({
-          padding: ['0 30px 30px', '0 50px', '0 50px'],
-        })}
-        max-width: 1024px;
-        box-sizing: border-box;
-      `}>
-        {
-          isLoadingChannel ?
-          <Loading /> :
-          <>
-            <h2>Channels</h2>
-            <div css={css`
-              text-align: right;
-              color: ${colors.hermes};
-            `}>
-              <span>매일 1회 업데이트 됩니다</span>
-            </div>
-            <h3>DEV</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>ECONOMIC</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>GOLF</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>HEALTH</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>COMMON SENSE</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-          </>
-        }
-
-        {/* Video */}
-        {
-          chooseChannel ?
-          <>
-            <h2>Videos</h2>
-            <section>
-              <ul css={css`
-                display: flex;
-                margin: 0;
-                padding: 0;
-                list-style: none;
-                flex-wrap: wrap;
+        <Head>
+          <title>Video</title>
+          <meta name="description" content="Show me your records" />
+        </Head>
+        <h1 css={css`
+          display: none;
+        `}>
+          VLOG
+        </h1>
+        <div css={css`
+          margin: 50px auto 0;
+          ${mq({
+            padding: ['0 30px 30px', '0 50px', '0 50px'],
+          })}
+          max-width: 1024px;
+          box-sizing: border-box;
+        `}>
+          {
+            isLoadingChannel ?
+            <Loading /> :
+            <>
+              <h2>Channels</h2>
+              <div css={css`
+                text-align: right;
+                color: ${colors.hermes};
               `}>
-                {
-                  videos[chooseChannel] ?
-                  videos[chooseChannel].map(v => (
-                    <li
-                      key={v.videoId}
-                      css={css`
-                        padding: 5px;
-                        ${mq({
-                          width:  ['calc(100% / 3)', 'calc(100% / 4)', 'calc(100% / 5)']
-                        })};
-                        ${mq({
-                          flex:  ['0 0 calc(100% / 3)', '0 0 calc(100% / 4)', '0 0 calc(100% / 5)']
-                        })};
-                        flex-direction: column;
-                        text-align: center;
-                        font-size: 12px;
-                        box-sizing: border-box;
-                      `}
-                    >
-                      <Link href={`https://www.youtube.com/watch?v=${v.videoId}`} passHref>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer nofollow"
-                          css={css`
-                            color: #000;
-                            text-decoration: none;
-                            width: 100%;
-                          `}
+                <span>매일 1회 업데이트 됩니다</span>
+              </div>
+              <h3>DEV</h3>
+              <section css={css`
+                margin-bottom: 50px;
+              `}>
+                <ul css={channelUlStyle}>
+                  {
+                    channels.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
                         >
-                          <div css={css`
-                            display: inline-block;
-                            width: 100%;
-                            padding: 30% 0;
-                            ${mq({
-                              background: [
-                                `no-repeat center/cover url(${v.thumbnails.default.url})`,
-                                `no-repeat center/cover url(${v.thumbnails.default.url})`,
-                                `no-repeat center/cover url(${v.thumbnails.high.url})`
-                              ]  
-                            })}
-                          `} />
-                          <span
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+              <h3>ECONOMIC</h3>
+              <section css={css`
+                margin-bottom: 50px;
+              `}>
+                <ul css={channelUlStyle}>
+                  {
+                    channels.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
+                        >
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+              <h3>GOLF</h3>
+              <section css={css`
+                margin-bottom: 50px;
+              `}>
+                <ul css={channelUlStyle}>
+                  {
+                    channels.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
+                        >
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+              <h3>HEALTH</h3>
+              <section css={css`
+                margin-bottom: 50px;
+              `}>
+                <ul css={channelUlStyle}>
+                  {
+                    channels.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
+                        >
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+              <h3>COMMON SENSE</h3>
+              <section css={css`
+                margin-bottom: 50px;
+              `}>
+                <ul css={channelUlStyle}>
+                  {
+                    channels.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
+                      >
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
+                        >
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+            </>
+          }
+
+          {/* Video */}
+          {
+            chooseChannel &&
+            <>
+              <h2>Videos</h2>
+              <section>
+                <ul css={css`
+                  display: flex;
+                  margin: 0;
+                  padding: 0;
+                  list-style: none;
+                  flex-wrap: wrap;
+                `}>
+                  {
+                    videos[chooseChannel].length ?
+                    videos[chooseChannel].map(v => (
+                      <li
+                        key={v.videoId}
+                        css={css`
+                          padding: 5px;
+                          ${mq({
+                            width:  ['calc(100% / 3)', 'calc(100% / 4)', 'calc(100% / 5)']
+                          })};
+                          ${mq({
+                            flex:  ['0 0 calc(100% / 3)', '0 0 calc(100% / 4)', '0 0 calc(100% / 5)']
+                          })};
+                          flex-direction: column;
+                          text-align: center;
+                          font-size: 12px;
+                          box-sizing: border-box;
+                        `}
+                      >
+                        <Link href={`https://www.youtube.com/watch?v=${v.videoId}`} passHref>
+                          <a
+                            target="_blank"
+                            rel="noopener noreferrer nofollow"
                             css={css`
-                              display: inline-block;
+                              color: #000;
+                              text-decoration: none;
                               width: 100%;
-                              overflow: hidden;
-                              text-overflow: ellipsis;
-                              white-space: nowrap;
                             `}
                           >
-                            {v.videoTitle}
-                          </span>
+                            <div css={css`
+                              display: inline-block;
+                              width: 100%;
+                              padding: 30% 0;
+                              ${mq({
+                                background: [
+                                  `no-repeat center/cover url(${v.thumbnails.default.url})`,
+                                  `no-repeat center/cover url(${v.thumbnails.default.url})`,
+                                  `no-repeat center/cover url(${v.thumbnails.high.url})`
+                                ]  
+                              })}
+                            `} />
+                            <span
+                              css={css`
+                                display: inline-block;
+                                width: 100%;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                              `}
+                            >
+                              {v.videoTitle}
+                            </span>
 
-                        </a>
-                      </Link>
-                    </li>
-                  )) :
-                  <div css={css`
-                    position: relative;
-                    width: 100%;
-                    height: 150px;
-                  `}>
-                    <Loading />
-                  </div>
-                }
-              </ul>
-            </section>
-          </> :
-          <></>
-        }
-      </div>
-    </main>
+                          </a>
+                        </Link>
+                      </li>
+                    )) :
+                    <div css={css`
+                      position: relative;
+                      width: 100%;
+                      height: 350px;
+                    `}>
+                      <Loading />
+                    </div>
+                  }
+                </ul>
+              </section>
+            </>
+          }
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
