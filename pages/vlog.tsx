@@ -288,7 +288,7 @@ const About: React.FC = () => {
                   flex-wrap: wrap;
                 `}>
                   {
-                    videos[chooseChannel].length ?
+                    videos[chooseChannel] ?
                     videos[chooseChannel].map(v => (
                       <li
                         key={v.videoId}

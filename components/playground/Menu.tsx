@@ -66,10 +66,8 @@ const Menu: React.FC = () => {
       // position:fixed;
       // top:0;
       // bottom: 0;
-      document.body.style.position = 'fixed';
       document.body.style.overflowY = 'hidden';
     } else {
-      document.body.style.position = 'relative';
       document.body.style.overflowY = '';
     }
   }, [isFoldMenu]);
