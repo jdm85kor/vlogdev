@@ -63,8 +63,9 @@ const Menu: React.FC = () => {
   useEffect(() => {
     if (document.documentElement.clientWidth < 640 && !isFoldMenu) {
       document.body.style.overflowY = 'hidden';
+    } else {
+      document.body.style.overflowY = '';
     }
-    document.body.style.overflowY = '';
   }, [isFoldMenu]);
   
   return (
