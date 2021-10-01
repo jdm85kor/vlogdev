@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Head from 'next/head';
 import 'normalize.css/normalize.css';
 import type { AppProps } from 'next/app'
@@ -7,12 +7,21 @@ import Amplify from 'aws-amplify';
 import Gnb from '@components/common/Gnb';
 import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
+import Loading from "@components/common/Loading";
 
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const isPlaygroundPages = useMemo(() => router.route.includes('/playground'), [router]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  } ,[]);
   return (
     <>
       <Head>
@@ -38,11 +47,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Gnb />
       {
-        isPlaygroundPages ?
-        <PlaygroundLayout>
+        isLoading ? 
+          <Loading /> :
+          isPlaygroundPages ?
+          <PlaygroundLayout>
+            <Component role="main" {...pageProps} />
+          </PlaygroundLayout> :
           <Component role="main" {...pageProps} />
-        </PlaygroundLayout> :
-        <Component role="main" {...pageProps} />
       }
     </>
   );
