@@ -7,11 +7,15 @@ import { mq } from '@styles/theme';
 
 const Div = styled.div`
   margin: 0 auto;
+  position: sticky;
   ${mq({
     padding: ['0 20px', '0 50px', '0 50px'],
-  })}
+  })};
+  top: 0;
   max-width: 1920px;
   box-sizing: border-box;
+  background: #fff;
+  z-index: 5000;
 `;
 
 const Nav = styled.nav`

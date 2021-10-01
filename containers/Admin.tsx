@@ -40,7 +40,7 @@ const Admin: React.FC = () => {
   const getUser = useCallback(() => {
     return Auth.currentAuthenticatedUser()
       .then(userData => userData)
-      .catch(() => console.log('Not signed in'));
+      .catch(() => console.error('Not signed in'));
   }, []);
 
   const isAdmin = useMemo((): boolean => {
