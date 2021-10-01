@@ -7,13 +7,23 @@ import Twitter from '@public/svg/twitter.svg';
 import Youtube from '@public/svg/youtube.svg';
 import { mq, colors } from '@styles/theme';
 
+const sectionStyle = css`
+  display: block;
+  position: relative;
+  width: 100%;
+`;
+const h2Style = css`
+  color: ${colors.hermes};
+  font-style: italic;
+
+`;
 const dtStyle = css`
   display: inline-block;
   margin: 0 0 10px;
   ${mq({
-    width: ['100%', '15%', '15%'],
+    width: ['100%', '14%', '14%'],
   })}
-  min-width: 110px;
+  font-weight: 600;
   &::after {
     content: ':';
   }
@@ -24,10 +34,17 @@ const ddStyle = css`
     width: ['100%', '85%', '85%'],
   })}
   margin: 0 0 10px;
+  color: #555;
+`;
+const pStyle = css`
+  color: #555;
+  font-size: 17px;
 `;
 const iconStyle = css`
-  width: 50px;
-  height: 50px;
+  ${mq({
+    width: ['30px', '50px'],
+    height: ['30px', '50px'],
+  })}
   vertical-align: top;
   margin: 0 5px;
 `;
@@ -41,7 +58,7 @@ const About: React.FC = () => {
     `}>
       <Head>
         <title>JDM</title>
-        <meta name="description" content="Who is he?" />
+        <meta name="description" content="This page was made by jdm" />
       </Head>
       <div css={css`
         margin: 50px auto;
@@ -52,20 +69,109 @@ const About: React.FC = () => {
         word-break: break-word;
         box-sizing: border-box;
       `}>
-        <h1>V-LOG.DEV</h1>
+        <h1>V-log.dev</h1>
         <div css={css`
           display: none;
-        `}>This page was made by jdm to introduce v-log.</div>
-        <h2>Owner</h2>
-        <section>
+        `}>This page was made by jdm.</div>
+        <section css={sectionStyle}>
           <div css={css`
+            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
+            padding: 23% 0;
+            width: 100%;
+          `}/>
+          <h2 css={h2Style}>
+            Environment
+          </h2>
+          <dl>
+            <dt css={dtStyle}>Front</dt>
+            <dd css={ddStyle}>next.js, Rout53,  CloudFront, S3, Amplify</dd>
+            <dt css={dtStyle}>Back</dt>
+            <dd css={ddStyle}>Lambda, Api gateway, DynamoDB, Cognito, EventBridge</dd>
+            <dt css={dtStyle}>Git</dt>
+            <dd css={ddStyle}>
+              <a
+                href="https://github.com/jdm85kor/vlogdev"
+                css={css`
+                  text-decoration: none;
+                  color: slateblue;
+              `}
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+              >https://github.com/jdm85kor/vlogdev</a>
+            </dd>
+          </dl>
+          <div css={css`
+            font-size: 12px;
+            color: #999;
+          `}>
+            Icons made by&nbsp;
+            <a
+              css={css`
+                text-decoration: none;
+                color: slateblue;
+              `}
+              href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup">
+              Pixelmeetup&nbsp;
+            </a> 
+            from&nbsp;
+            <a
+              css={css`
+                text-decoration: none;
+                color: slateblue;
+              `}
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+            www.flaticon.com 
+            </a>
+          </div>
+        </section>
+        <section css={sectionStyle}>
+          <h2 css={h2Style}>
+            History
+          </h2>
+          <p css={pStyle}>
+            21.8 site 오픈
+          </p>
+          <p css={pStyle}>
+            21.9 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가
+          </p>
+        </section>
+        <section css={sectionStyle}>
+          <h2 css={h2Style}>
+            Plan
+          </h2>
+          <p css={pStyle}>
+            blog, youtube 컨텐츠 정리<br />
+          </p>
+          <p css={pStyle}>
+            다양한 library 실험 및 새로운 학습 자료들 정리<br />
+          </p>
+          <a
+            href="https://github.com/jdm85kor/vlogdev/projects/1"
+            target="_blank"
+            rel="noreferrer"
+            css={css`
+              text-decoration: none;
+              color: #777;
+            `}
+          >
+            추가 예정 기능들
+          </a> 
+        </section>
+
+        <section css={sectionStyle}>
+          <h2 css={h2Style}>
+            Owner
+          </h2>
+          <div css={css`
+            margin: 0 auto;
             width: 250px;
-            height: 365px;
-            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/jdm.jpg);
+            height: 300px;
+            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/profile_s.jpg);
           `} />
           <dl css={css`
             display: inline-block;
-            font-size: 20px;
             margin: 10px 0 20px;
           `}>
             <dt css={dtStyle}>Blog</dt>
@@ -74,8 +180,8 @@ const About: React.FC = () => {
                 href="https://github.com/jdm85kor/vlogdev"
                 css={css`
                   text-decoration: none;
-                  color: blue;
-              `}
+                  color: slateblue;
+                `}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >https://dongmin-jang.medium.com/</a>
@@ -85,7 +191,14 @@ const About: React.FC = () => {
             <dt css={dtStyle}>Career</dt>
             <dd css={ddStyle}>SENTBE, WeMakePrice, Wantedlab, Musinsa</dd>
             <dt css={dtStyle}>SNS</dt>
-            <dd css={ddStyle}>
+            <dd css={css`
+              ${ddStyle}
+              & > a {
+                ${mq({
+                  marginRight: ['5px', '20px', '50px']
+                })}
+              }
+            `}>
               <a href="https://www.facebook.com/jdm85kor" target="_blank" rel="noreferrer">
                 <Facebook css={iconStyle}/>
               </a>
@@ -103,62 +216,6 @@ const About: React.FC = () => {
               </a>
             </dd>
           </dl>
-        </section>
-        
-        <h2>
-          Develop environment
-        </h2>
-        <section>
-          <dl css={css`
-            font-size: 20px;
-          `}>
-            <dt css={dtStyle}>Front-end</dt>
-            <dd css={ddStyle}>next.js + Rout53 + CloudFront + S3 + Amplify(AWS)</dd>
-            <dt css={dtStyle}>Back-end</dt>
-            <dd css={ddStyle}>lambda + Api gateway + DynamoDB + Cognito + EventBridge(AWS)</dd>
-            <dt css={dtStyle}>Git project</dt>
-            <dd css={ddStyle}>
-              <a
-                href="https://github.com/jdm85kor/vlogdev"
-                css={css`
-                  text-decoration: none;
-                  color: blue;
-              `}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-              >https://github.com/jdm85kor/vlogdev</a>
-            </dd>
-          </dl>
-        </section>
-        <h2>
-          History
-        </h2>
-        <section>
-          <p>
-            21.08 site 오픈
-          </p>
-          <p>
-            21.09 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가
-          </p>
-        </section>
-        <h2>
-          Plan
-        </h2>
-        <section>
-          <p>
-            blog, youtube 기반의 컨텐츠 제공을 기본으로 하고, 실험적으로 개발되는 기능은 playground 메뉴에서 볼 수 있게 하여 반응이 좋으면 주요 feature로 옮김.
-          </p>
-          <a
-            href="https://github.com/jdm85kor/vlogdev/projects/1"
-            target="_blank"
-            rel="noreferrer"
-            css={css`
-              text-decoration: none;
-              color: ${colors.hermes};
-            `}
-          >
-            추가 예정 기능들
-          </a> 
         </section>
       </div>
     </main>
