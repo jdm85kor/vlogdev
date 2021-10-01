@@ -3,6 +3,25 @@ import { css } from '@emotion/react';
 import { colors } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
 import Link from 'next/link'
+import Unfold from '@public/svg/unfold.svg';
+import Fold from '@public/svg/fold.svg';
+
+const listItemStyle = css`
+  position: relative;
+  font-size: 18px;
+  padding: 10px 0;
+  height: 30px;
+`;
+const iconStyle = css`
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  vertical-align: top;
+  margin: 0 5px;
+`;
+
 
 interface ImportsFiles {
   [folder: string]: {
@@ -47,10 +66,11 @@ const Menu: React.FC = () => {
       css={css`
         position: relative;
         display: inline-block;
-        background: #bfaea1;
+        background: #fff;
         width: ${isFoldMenu ? '50px' : '320px'};
         height: 100%;
         transition: all 0.5s ease;
+        border: 1px solid ${colors.hermes};
         &::after {
           display: block;
           content: '';
@@ -78,7 +98,7 @@ const Menu: React.FC = () => {
               width: 50px;
               heigth: 50px;
               & > path {
-                fill: #fff;
+                fill: ${colors.hermes};
               }
             `
             }
@@ -94,26 +114,21 @@ const Menu: React.FC = () => {
         `}>
           {
             Object.entries(importsFiles).map((f, fIdx) => (
-              <>
+              <React.Fragment key={`group-${f[0]}-${fIdx}`}>
                 <li
                   key={`${f[0]}-${fIdx}`}
-                  css={css`
-                    position: relative;
-                    color: #fff;
-                    font-size: 18px;
-                    padding: 10px 0;
-                    height: 30px;
-                `}
+                  css={listItemStyle}
                 >
                   <button
                     type="button"
                     css={css`
                       width: 100%;
                       height: 100%;
-                      background: #784d42;
+                      background: inherit;
                       border: none;
-                      color: #aaa;
+                      color: ${colors.hermes};
                       cursor: pointer;
+                      font-weight: 800;
                     `}
                     onClick={() => setImportsFiles(prev => ({
                       ...prev,
@@ -124,18 +139,19 @@ const Menu: React.FC = () => {
                     }))}
                   >
                     {f[0]}
+                    {
+                      f[1].isFold ?
+                      <Unfold css={iconStyle} />:
+                      <Fold css={iconStyle} />
+                    }
                   </button>
                 </li>
                 {
                   f[1].isFold && f[1].list.map((i, iIdx) => (
                     <li
-                      key={iIdx}
+                      key={`${i}-${iIdx}`}
                       css={css`
-                        position: relative;
-                        color: #fff;
-                        font-size: 18px;
-                        padding: 10px 0;
-                        height: 30px;
+                        ${listItemStyle}
                         text-align: right;
                     `}>
                       <Link
@@ -154,9 +170,11 @@ const Menu: React.FC = () => {
                             background: inherit;
                             border: none;
                             cursor: pointer;
-                            color: white;
+                            color: ${colors.hermes};
                             text-decoration: none;
                             &:hover {
+                              background: ${colors.hermes};
+                              color: #fff;
                               opacity: 0.5;
                             }
                           `}
@@ -181,7 +199,7 @@ const Menu: React.FC = () => {
                     </li>
                   ))
                 }
-              </>
+              </React.Fragment>
             ))
           }
         </ul>

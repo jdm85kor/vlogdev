@@ -40,9 +40,7 @@ const backgroundImg = (file: string) => css`
 `;
 const requestButtonStyle = css`
   margin: 0 auto;
-  ${mq({
-    padding: ['10px', '10px', '20px'],
-  })}
+  padding: 10px;
   background: #fff;
   border: 1px solid #fff;
   border-radius: 20px;
@@ -56,7 +54,7 @@ const imgStyle = (src: string) => css`
   margin: 0 auto;
   ${mq({
     width: ['50px', '100px', '130px'],
-    height: ['50px', '120px', '180px'],
+    height: ['50px', '120px', '150px'],
   })}
   background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/${src});
 `;
@@ -224,8 +222,7 @@ const Home: React.FC = () => {
                         rel="noopener noreferrer nofollow"
                       >
                         <div css={thumbnailStyle(v.thumbnails)} />
-                        <span css={titleStyle}>
-                          { v.videoTitle }
+                        <span css={titleStyle} dangerouslySetInnerHTML={{__html: v.videoTitle}}>
                         </span>
                       </a>
                     </Link>
@@ -274,11 +271,11 @@ const Home: React.FC = () => {
                 <div css={imgStyle('letter.png')} />
                 <span css={imgTitleStyle}>Job offer</span>
               </button>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Outsourcing development')}>
+              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Outsourcing')}>
                 <div css={imgStyle('develop.png')} />
                 <span css={imgTitleStyle}>Outsourcing development</span>
               </button>
-              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Contents partnership')}>
+              <button css={requestButtonStyle} type="button" onClick={() => handleClickButton('Partnership')}>
                 <div css={imgStyle('partnership.png')} />
                 <span css={imgTitleStyle}>Contents partnership</span>
               </button>

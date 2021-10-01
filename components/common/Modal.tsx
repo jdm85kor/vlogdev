@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { mq } from '@styles/theme';
 import ModalPortal from './ModalPortal';
+import Close from '@public/svg/close.svg';
 
 type Props = {
   isShow: boolean,
@@ -54,14 +54,21 @@ const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
                   onClick={onClose}
                   css={css`
                     position: absolute;
-                    top: 10px;
-                    right: 15px;
+                    top: 20px;
+                    right: 10px;
                     font-size: 18px;
                     background: transparent;
                     border: none;
                     cursor: pointer;
                   `}
-                >X</button>
+                >
+                  <Close css={css`
+                    width: 20px;
+                    height: 20px;
+                    vertical-align: top;
+                    margin: 0 5px;
+                  `} />
+                </button>
               </header>
               <main css={css`
                 overflow-y: auto;

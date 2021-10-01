@@ -74,8 +74,8 @@ const About: React.FC = () => {
                 href="https://github.com/jdm85kor/vlogdev"
                 css={css`
                   text-decoration: none;
-                  color: blue;
-              `}
+                  color: slateblue;
+                `}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >https://dongmin-jang.medium.com/</a>
@@ -122,13 +122,35 @@ const About: React.FC = () => {
                 href="https://github.com/jdm85kor/vlogdev"
                 css={css`
                   text-decoration: none;
-                  color: blue;
+                  color: slateblue;
               `}
                 target="_blank"
                 rel="noopener noreferrer nofollow"
               >https://github.com/jdm85kor/vlogdev</a>
             </dd>
           </dl>
+          <div>
+            Icons made by&nbsp;
+            <a
+              css={css`
+                text-decoration: none;
+                color: slateblue;
+              `}
+              href="https://www.flaticon.com/authors/pixelmeetup" title="Pixelmeetup">
+              Pixelmeetup&nbsp;
+            </a> 
+            from&nbsp;
+            <a
+              css={css`
+                text-decoration: none;
+                color: slateblue;
+              `}
+              href="https://www.flaticon.com/"
+              title="Flaticon"
+            >
+            www.flaticon.com 
+            </a>
+          </div>
         </section>
         <h2>
           History
