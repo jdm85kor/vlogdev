@@ -80,7 +80,7 @@ const Menu: React.FC = () => {
           position: [isFoldMenu ? 'sticky' : 'fixed', 'sticky'],
           width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
-          height: [isFoldMenu ? 'calc(100vh - 53px)' : '100vh', 'calc(100vh - 53px)'],
+          height: [isFoldMenu ? 'calc(100vh - 103px)' : '100vh', 'calc(100vh - 53px)'],
         })}
         display: inline-block;
         background: #fff;
@@ -129,7 +129,7 @@ const Menu: React.FC = () => {
         <ul css={css`
           list-style: none;
           margin: 0;
-          padding: 0;
+          padding: 0 0 150px;
           height: calc(100vh - 105px);
           overflow-y: auto;
         `}>
