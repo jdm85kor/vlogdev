@@ -127,9 +127,11 @@ const Home: React.FC = () => {
     fetchLatestVideo();
   } ,[fetchLatestVideo]);
   
-  const getDayTime: 'morning' | 'afternoon' | 'evening' | 'night' | null = useMemo(() => {
-    const hours = new Date().getHours() || null;
+  const getDayTime = useCallback((): 'morning' | 'afternoon' | 'evening' | 'night' | null => {
+    const hours = new Date()?.getHours() || null;
+    
     if (!hours) return null;
+
     return hours >= 6 && hours < 12 ? 'morning':
       hours >= 12 && hours < 18 ? 'afternoon':
       hours >= 18 && hours < 22 ? 'evening':
@@ -137,7 +139,7 @@ const Home: React.FC = () => {
   }, []);
 
   const getLandscapeUrlByTime: string = useMemo(() => {
-    switch(getDayTime) {
+    switch(getDayTime()) {
       case 'morning':
         return 'pungmu_morning_s.jpg';
       case 'afternoon':
@@ -166,7 +168,7 @@ const Home: React.FC = () => {
         </h1>
         <section css={sectionStyle}>
           {
-            getDayTime &&
+            getDayTime() &&
             <div css={backgroundImg(getLandscapeUrlByTime)}>
               <p css={css`
                 display: inline-block;
@@ -177,10 +179,10 @@ const Home: React.FC = () => {
                 ${mq({
                   fontSize: ['30px', '40px', '40px'],
                 })}
-                color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
+                color: ${getDayTime() === 'afternoon' ? colors.hermes: '#fff'};
                 font-style: italic;
                 font-weight: 600;
-              `}>{`Good ${getDayTime}`}</p>
+              `}>{`Good ${getDayTime()}`}</p>
             </div>
           }
           <h2>
