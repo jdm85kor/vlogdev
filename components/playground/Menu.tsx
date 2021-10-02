@@ -81,8 +81,10 @@ const Menu: React.FC = () => {
           position: [isFoldMenu ? 'sticky' : 'fixed', 'sticky'],
           width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
-          height: ['calc(100vh - 103px)', 'calc(100vh - 53px)'],
+          height: ['calc(100vh - 153px)', 'calc(100vh - 53px)'],
         })}
+        top: 50px,
+        bottom: 0;
         display: inline-block;
         background: #fff;
         min-height: 100%;
