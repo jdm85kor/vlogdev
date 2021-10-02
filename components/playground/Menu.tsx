@@ -33,7 +33,7 @@ const Menu: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const [importsFiles, setImportsFiles] = useState<ImportsFiles>({});
 
-  const isMobile = useMemo(() => document.documentElement.clientWidth < 640, []);
+  const isMobile = useMemo(() => typeof window !== 'undefined' ? document.documentElement.clientWidth < 640 : false, []);
 
   useEffect(() => {
     const imports: ImportsFiles = {};
