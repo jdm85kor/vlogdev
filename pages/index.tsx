@@ -115,6 +115,7 @@ const Home: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleClickButton = useCallback((t: string) => {
