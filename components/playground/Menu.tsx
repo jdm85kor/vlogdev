@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { colors, mq } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
@@ -32,7 +32,8 @@ interface ImportsFiles {
 const Menu: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const [importsFiles, setImportsFiles] = useState<ImportsFiles>({});
-  const menuDiv = useRef(null);
+
+  const isMobile = useMemo(() => document.documentElement.clientWidth < 640, []);
 
   useEffect(() => {
     const imports: ImportsFiles = {};
@@ -61,7 +62,7 @@ const Menu: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (document.documentElement.clientWidth < 640 && !isFoldMenu) {
+    if (isMobile && !isFoldMenu) {
       // overflow:hidden;
       // position:fixed;
       // top:0;
@@ -70,7 +71,7 @@ const Menu: React.FC = () => {
     } else {
       document.body.style.overflowY = '';
     }
-  }, [isFoldMenu]);
+  }, [isFoldMenu, isMobile]);
   
   return (
     <div
@@ -80,7 +81,7 @@ const Menu: React.FC = () => {
           position: [isFoldMenu ? 'sticky' : 'fixed', 'sticky'],
           width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
-          height: [isFoldMenu ? 'calc(100vh - 103px)' : '100vh', 'calc(100vh - 53px)'],
+          height: ['calc(100vh - 103px)', 'calc(100vh - 53px)'],
         })}
         display: inline-block;
         background: #fff;
@@ -95,7 +96,6 @@ const Menu: React.FC = () => {
           clear: both;
         }
       `}
-      ref={menuDiv}
     >
       <div css={css`
         height: 50px;
@@ -130,7 +130,6 @@ const Menu: React.FC = () => {
           list-style: none;
           margin: 0;
           padding: 0 0 150px;
-          height: calc(100vh - 105px);
           overflow-y: auto;
         `}>
           {
@@ -200,6 +199,7 @@ const Menu: React.FC = () => {
                               opacity: 0.5;
                             }
                           `}
+                          onClick={() => isMobile && setIsFoldMenu(prev => !prev)}
                         >
                           <span
                             css={css`
