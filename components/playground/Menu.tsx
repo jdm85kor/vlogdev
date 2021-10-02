@@ -88,7 +88,6 @@ const Menu: React.FC = () => {
         left: 0;
         display: inline-block;
         background: #fff;
-        min-height: 100%;
         border: 1px solid ${colors.hermes};
         overflow-y: auto;
 
