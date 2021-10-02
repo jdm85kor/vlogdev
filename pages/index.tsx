@@ -99,6 +99,7 @@ const Home: React.FC = () => {
   const [latestVideos, setLatestVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<string>('');
+  const [currentHours, setCurrentHours] = useState<number | null>(null);
 
   const fetchLatestVideo = useCallback(async () => {
     if (isLoading) return;
@@ -125,21 +126,20 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     fetchLatestVideo();
-  } ,[fetchLatestVideo]);
+    setCurrentHours(new Date().getHours());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  } ,[]);
   
-  const getDayTime = useCallback((): 'morning' | 'afternoon' | 'evening' | 'night' | null => {
-    const hours = new Date()?.getHours() || null;
-    
-    if (!hours) return null;
-
-    return hours >= 6 && hours < 12 ? 'morning':
-      hours >= 12 && hours < 18 ? 'afternoon':
-      hours >= 18 && hours < 22 ? 'evening':
+  const getDayTime: 'morning' | 'afternoon' | 'evening' | 'night' | null = useMemo(() => {
+    if (currentHours === null) return null;
+    return currentHours >= 6 && currentHours < 12 ? 'morning':
+      currentHours >= 12 && currentHours < 18 ? 'afternoon':
+      currentHours >= 18 && currentHours < 22 ? 'evening':
       'night';
-  }, []);
+  }, [currentHours]);
 
   const getLandscapeUrlByTime: string = useMemo(() => {
-    switch(getDayTime()) {
+    switch(getDayTime) {
       case 'morning':
         return 'pungmu_morning_s.jpg';
       case 'afternoon':
@@ -168,7 +168,7 @@ const Home: React.FC = () => {
         </h1>
         <section css={sectionStyle}>
           {
-            getDayTime() &&
+            !!currentHours && 
             <div css={backgroundImg(getLandscapeUrlByTime)}>
               <p css={css`
                 display: inline-block;
@@ -179,10 +179,10 @@ const Home: React.FC = () => {
                 ${mq({
                   fontSize: ['30px', '40px', '40px'],
                 })}
-                color: ${getDayTime() === 'afternoon' ? colors.hermes: '#fff'};
+                color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
                 font-style: italic;
                 font-weight: 600;
-              `}>{`Good ${getDayTime()}`}</p>
+              `}>{`Good ${getDayTime}`}</p>
             </div>
           }
           <h2>
