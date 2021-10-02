@@ -46,6 +46,7 @@ const RequestModal: React.FC<Props> = ({
       email: '',
       contents: '',
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
