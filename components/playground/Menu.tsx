@@ -130,7 +130,7 @@ const Menu: React.FC = () => {
         <ul css={css`
           list-style: none;
           margin: 0;
-          padding: 0 0 150px;
+          padding: 0 0 180px;
           overflow-y: auto;
         `}>
           {
