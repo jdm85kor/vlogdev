@@ -12,16 +12,9 @@ import Loading from "@components/common/Loading";
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const isPlaygroundPages = useMemo(() => router.route.includes('/playground'), [router]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  } ,[]);
   return (
     <>
       <Head>
@@ -47,13 +40,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <Gnb />
       {
-        isLoading ? 
-          <Loading /> :
-          isPlaygroundPages ?
-          <PlaygroundLayout>
-            <Component role="main" {...pageProps} />
-          </PlaygroundLayout> :
+        isPlaygroundPages ?
+        <PlaygroundLayout>
           <Component role="main" {...pageProps} />
+        </PlaygroundLayout> :
+        <Component role="main" {...pageProps} />
       }
     </>
   );
