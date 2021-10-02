@@ -4,15 +4,12 @@ import Admin from '@containers/Admin';
 
 const admin: React.FC = () => {
   return (
-    <main css={css`
-      margin: 0 auto;
-      max-width: 1920px;
-    `}>
+    <div>
       <Head>
         <title>VLOG admin</title>
       </Head>
       <Admin />
-    </main>
+    </div>
   );
 };
 
