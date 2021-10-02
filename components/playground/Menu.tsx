@@ -78,17 +78,17 @@ const Menu: React.FC = () => {
       role="navigation"
       css={css`
         ${mq({
-          position: [isFoldMenu ? 'sticky' : 'fixed', 'sticky'],
+          position: [isFoldMenu ? 'fixed' : 'fixed', 'sticky'],
           width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
-          height: ['calc(100vh - 153px)', 'calc(100vh - 53px)'],
+          height: [isFoldMenu ? '53px' : '100vh', 'calc(100vh - 54px)'],
         })}
-        top: 50px,
+        top: 50px;
         bottom: 0;
+        left: 0;
         display: inline-block;
         background: #fff;
         min-height: 100%;
-        top: 50px;
         border: 1px solid ${colors.hermes};
         overflow-y: auto;
 
