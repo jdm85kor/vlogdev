@@ -127,8 +127,9 @@ const Home: React.FC = () => {
     fetchLatestVideo();
   } ,[fetchLatestVideo]);
   
-  const getDayTime: 'morning' | 'afternoon' | 'evening' | 'night' = useMemo(() => {
-    const hours = new Date().getHours();
+  const getDayTime: 'morning' | 'afternoon' | 'evening' | 'night' | null = useMemo(() => {
+    const hours = new Date().getHours() || null;
+    if (!hours) return null;
     return hours >= 6 && hours < 12 ? 'morning':
       hours >= 12 && hours < 18 ? 'afternoon':
       hours >= 18 && hours < 22 ? 'evening':
@@ -164,21 +165,24 @@ const Home: React.FC = () => {
           Record yourself. Record do something. Record whatever.
         </h1>
         <section css={sectionStyle}>
-          <div css={backgroundImg(getLandscapeUrlByTime)}>
-            <p css={css`
-              display: inline-block;
-              position: absolute;
-              left: 50%;
-              top: 20%;
-              transform: translateX(-50%);
-              ${mq({
-                fontSize: ['30px', '40px', '40px'],
-              })}
-              color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
-              font-style: italic;
-              font-weight: 600;
-            `}>{`Good ${getDayTime}`}</p>
-          </div>
+          {
+            getDayTime &&
+            <div css={backgroundImg(getLandscapeUrlByTime)}>
+              <p css={css`
+                display: inline-block;
+                position: absolute;
+                left: 50%;
+                top: 20%;
+                transform: translateX(-50%);
+                ${mq({
+                  fontSize: ['30px', '40px', '40px'],
+                })}
+                color: ${getDayTime === 'afternoon' ? colors.hermes: '#fff'};
+                font-style: italic;
+                font-weight: 600;
+              `}>{`Good ${getDayTime}`}</p>
+            </div>
+          }
           <h2>
             New Videos
           </h2>
