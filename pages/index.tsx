@@ -188,56 +188,88 @@ const Home: React.FC = () => {
           <h2>
             New Videos
           </h2>
-          <ul css={css`
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            width: 100%;
-            height: 140px;
-            overflow-x: auto;
-            white-space: nowrap;
-          `}>
-            {
-              latestVideos.map((v: any) => (
-                <li
-                  key={v.videoId}
-                  css={css`
-                    display: inline-flex;
-                    flex-direction: column;
-                    width: 114px;
-                    text-align: center;
-                    padding: 2px;
-                    border-radius: 10px;
-                    box-sizing: border-box;
-                  `}
-                >
-                  <Link
-                    href={`https://www.youtube.com/watch?v=${v.videoId}`}
-                    passHref
+          <div
+            css={css`
+              position: relative;
+              &::before {
+                position: absolute;
+                display: inline-block;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                content: '';
+                width: 30px;
+                height: 100%;
+                z-index: 100;
+                background-image: linear-gradient(270deg,hsla(0,0%,100%,0),#fff 50%);
+              }
+              &::after {
+                position: absolute;
+                display: inline-block;
+                right: 0;
+                top: 0;
+                bottom: 0;
+                content: '';
+                width: 30px;
+                height: 100%;
+                z-index: 100;
+                background-image: linear-gradient(90deg,hsla(0,0%,100%,0),#fff 50%);
+              }
+            `}
+          >
+            <ul css={css`
+              margin: 0;
+              padding: 0 20px;
+              list-style: none;
+              width: calc(100% - 40px);
+              height: 140px;
+              overflow-x: auto;
+              white-space: nowrap;
+            `}>
+              {
+                latestVideos
+                  .sort((a: {publishTime: number} , b: {publishTime: number}) => b.publishTime - a.publishTime)
+                  .map((v: any) => (
+                  <li
+                    key={v.videoId}
+                    css={css`
+                      display: inline-flex;
+                      flex-direction: column;
+                      width: 114px;
+                      text-align: center;
+                      padding: 2px;
+                      border-radius: 10px;
+                      box-sizing: border-box;
+                    `}
                   >
-                    <a
-                      css={css`
-                        display: inline-flex;
-                        flex-direction: column;
-                        padding: 0;
-                        background: inherit;
-                        border: none;
-                        cursor: pointer;
-                        text-decoration: none;
-                        color: #555;
-                      `}
-                      target="_blank"
-                      rel="noopener noreferrer nofollow"
+                    <Link
+                      href={`https://www.youtube.com/watch?v=${v.videoId}`}
+                      passHref
                     >
-                      <div css={thumbnailStyle(v.thumbnails)} />
-                      <span css={titleStyle} dangerouslySetInnerHTML={{__html: v.videoTitle}}>
-                      </span>
-                    </a>
-                  </Link>
-                </li>)
-              )
-            }
-          </ul>
+                      <a
+                        css={css`
+                          display: inline-flex;
+                          flex-direction: column;
+                          padding: 0;
+                          background: inherit;
+                          border: none;
+                          cursor: pointer;
+                          text-decoration: none;
+                          color: #555;
+                        `}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                      >
+                        <div css={thumbnailStyle(v.thumbnails)} />
+                        <span css={titleStyle} dangerouslySetInnerHTML={{__html: v.videoTitle}}>
+                        </span>
+                      </a>
+                    </Link>
+                  </li>)
+                )
+              }
+            </ul>
+          </div>
         </section>
         <section css={sectionStyle}>
           <h2>

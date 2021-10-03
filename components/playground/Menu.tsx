@@ -82,6 +82,7 @@ const Menu: React.FC = () => {
           width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
           height: [isFoldMenu ? '53px' : '100vh', 'calc(100vh - 54px)'],
+          zIndex: [6000, 'auto', 'auto'],
         })}
         flex: 0 0 ${isFoldMenu? '50px' : '320px'};
         top: 50px;
