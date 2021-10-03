@@ -1,16 +1,15 @@
 import Head from 'next/head'
-import { css } from '@emotion/react';
-import Admin from '@containers/Admin';
+import AdminC from '@containers/Admin';
 
-const admin: React.FC = () => {
+const Admin: React.FC = () => {
   return (
     <div>
       <Head>
         <title>VLOG admin</title>
       </Head>
-      <Admin />
+      <AdminC />
     </div>
   );
 };
 
-export default admin;
+export default Admin;

@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 
 const Ready: React.FC = () => {
-  
   return (
     <div>
       <Head>
