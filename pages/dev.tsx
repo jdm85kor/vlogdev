@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head'
 import { mq } from '@styles/theme';
 
-const About: React.FC = () => {
+const dev: React.FC = () => {
   return (
     <main css={css`
       margin: 0 auto;
@@ -32,4 +32,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default dev;
