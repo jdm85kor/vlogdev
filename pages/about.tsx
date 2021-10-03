@@ -61,7 +61,7 @@ const About: React.FC = () => {
       `}>
         <Head>
           <title>JDM</title>
-          <meta name="description" content="This page was made by jdm" />
+          <meta name="description" content="This service has created DMJ to introduce v-logs." />
         </Head>
         <div css={css`
           margin: 50px auto;
