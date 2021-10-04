@@ -163,7 +163,7 @@ const Home: React.FC = () => {
       </h1>
       <section css={sectionStyle}>
         {
-          !!currentHours && 
+          currentHours !== null && 
           <div css={backgroundImg(getLandscapeUrlByTime)}>
             <p css={css`
               display: inline-block;

@@ -120,7 +120,7 @@ const About: React.FC = () => {
     const opacity = progress < 0.3 ?
       progress / 3 * 10 :
       progress > 0.7 ?
-      Math.abs(1 - progress) / 3 * 10 : 1;
+      Math.abs(1 - progress) / 3 * 10 : 1; 
     canvas.style.opacity = opacity.toString();
   };
   const handleScroll = () => {
@@ -243,6 +243,9 @@ const About: React.FC = () => {
           </p>
           <p css={pStyle}>
             운영 비용 최소화
+          </p>
+          <p css={pStyle}>
+            Frontend Deep Learning 시험 적용
           </p>
           <a
             href="https://github.com/jdm85kor/vlogdev/projects/1"
