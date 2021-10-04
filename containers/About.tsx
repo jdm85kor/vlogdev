@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { css } from '@emotion/react';
 import Facebook from '@public/svg/facebook.svg';
 import Instagram from '@public/svg/instagram.svg';
@@ -9,6 +9,7 @@ import Youtube from '@public/svg/youtube.svg';
 import { mq, colors } from '@styles/theme';
 import Unfold from '@public/svg/unfold.svg';
 import Fold from '@public/svg/fold.svg';
+import { getDeviceSize } from '@utils/device';
 
 const sectionStyle = css`
   display: block;
@@ -66,6 +67,71 @@ const About: React.FC = () => {
   const [collabseStatus, setCollabseStatus] = useState<{ [key: string]: boolean}>({
     indivisual: false,
   });
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const motions = useRef<HTMLImageElement[]>([]);
+
+  const initCanvasResource = () => {
+    const imgs: HTMLImageElement[] = [];
+    let loadedImgsCnt = 0;
+    const total = 201;
+    
+    for (let i = 0 ; i < total ; i++) {
+      const imgEl = new Image();
+      imgEl.src = `https://d6c63ppcwec2x.cloudfront.net/video/golf/motion/wood${i.toString().padStart(3, '0')}.jpg`;
+      imgs.push(imgEl);
+
+      imgEl.addEventListener('load', function () {
+        loadedImgsCnt++;
+        if (loadedImgsCnt === total) {
+          if (!canvasRef.current) return;
+
+          const canvas: HTMLCanvasElement = canvasRef.current;
+          const ctx = canvas.getContext('2d');
+          let progress: number = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+          if (progress < 0) progress = 0;
+          if (progress > 1) progress = 1;
+          (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(200 * progress)], 0, 0);
+
+          window.addEventListener('scroll', handleScroll);
+        }
+      });
+    }
+
+    motions.current = imgs;
+  };
+
+  const animateCanvas = (progress: number) => {
+    if (!canvasRef.current) return;
+
+    const canvas: HTMLCanvasElement = canvasRef.current;
+
+    const ctx = canvas.getContext('2d');
+    const currentFrame = Math.round(200 * progress);
+
+    (ctx as CanvasRenderingContext2D).drawImage(motions.current[currentFrame], 0, 0);
+
+    const opacity = progress < 0.3 ?
+      progress / 3 * 10 :
+      progress > 0.7 ?
+      Math.abs(1 - progress) / 3 * 10 : 1;
+    canvas.style.opacity = opacity.toString();
+  };
+  const handleScroll = () => {
+    let progress: number = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
+    if (progress < 0) progress = 0;
+    if (progress > 1) progress = 1;
+
+    requestAnimationFrame(() => animateCanvas(progress));
+  };
+
+  useEffect(() => {
+    if (getDeviceSize() === 'desktop') {
+      initCanvasResource();
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
+  }, []);
   return (
     <main css={css`
       position: relative;
@@ -96,11 +162,6 @@ const About: React.FC = () => {
           display: none;
         `}>This page was made by jdm.</div>
         <section css={sectionStyle}>
-          {/* <div css={css`
-            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
-            padding: 23% 0;
-            width: 100%;
-          `}/> */}
           <h2 css={h2Style}>
             Environment
           </h2>
@@ -307,24 +368,29 @@ const About: React.FC = () => {
                 <p>
                   취미: 골프, 여행
                 </p>
-                <div css={css`
-                  ${mq({
-                    display: ['none', 'block'],
-                  })}
-                  text-align: right;
-                `}>
-                  <video
-                    width="200"
-                    height="350"
-                    controls
-                  >
-                    <source src="https://d6c63ppcwec2x.cloudfront.net/video/golf/210904WoodPractice.mp4" type="video/mp4" />
-                  </video>
-                </div>
               </div>
             </div>
           }
         </section>
+        <div css={css`
+          position: fixed;
+          bottom: 20%;
+          right: 50px;
+          ${mq({
+            display: ['none', 'none', 'inline-block'],
+          })}
+        `}>
+          <canvas
+            width="2160"
+            height="3840"
+            ref={canvasRef}
+            css={css`
+              width: 100px;
+              z-index: 9200;
+              border-radius: 50%;
+            `}
+          />
+        </div>
       </div>
     </main>
   );
