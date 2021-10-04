@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from '@emotion/react';
-import { mq } from '@styles/theme';
+import { mq, colors } from '@styles/theme';
 
 interface Props {
   children: React.ReactNode,
@@ -16,6 +16,9 @@ const Playground: React.FC<Props> = ({
       ${mq({
         paddingLeft: [0, 0, '20px'],
       })}
+      & > h1 {
+        color: ${colors.hermes}
+      }
     `}>
       { children }
     </main>
