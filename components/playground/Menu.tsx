@@ -95,6 +95,7 @@ const Menu: React.FC = () => {
         background: #fff;
         border: 1px solid ${colors.hermes};
         overflow-y: auto;
+        box-sizing: border-box;
 
         &::after {
           display: block;

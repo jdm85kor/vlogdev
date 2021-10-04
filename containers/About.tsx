@@ -68,9 +68,20 @@ const About: React.FC = () => {
   });
   return (
     <main css={css`
+      position: relative;
       margin: 0 auto;
       max-width: 1920px;
     `}>
+      <div css={css`
+        position: relative;
+        margin: 0 auto;
+      `}>
+        <div css={css`
+          background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
+          padding: 22% 0;
+          width: 100%;
+        `}/>
+      </div>
       <div css={css`
         margin: 50px auto;
         ${mq({
@@ -85,11 +96,11 @@ const About: React.FC = () => {
           display: none;
         `}>This page was made by jdm.</div>
         <section css={sectionStyle}>
-          <div css={css`
+          {/* <div css={css`
             background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
             padding: 23% 0;
             width: 100%;
-          `}/>
+          `}/> */}
           <h2 css={h2Style}>
             Environment
           </h2>
@@ -160,6 +171,9 @@ const About: React.FC = () => {
           </p>
           <p css={pStyle}>
             지속성 있게 기능 및 컨텐츠 업데이트
+          </p>
+          <p css={pStyle}>
+            운영 비용 최소화
           </p>
           <a
             href="https://github.com/jdm85kor/vlogdev/projects/1"
@@ -291,7 +305,7 @@ const About: React.FC = () => {
                 `}
               >
                 <p>
-                  취미: 골프
+                  취미: 골프, 여행
                 </p>
                 <div css={css`
                   ${mq({
