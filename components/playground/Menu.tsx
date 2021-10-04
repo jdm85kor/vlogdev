@@ -5,6 +5,7 @@ import Hamberger from '@public/svg/hamberger.svg';
 import Link from 'next/link'
 import Unfold from '@public/svg/unfold.svg';
 import Fold from '@public/svg/fold.svg';
+import { getDeviceSize } from '@utils/device';
 
 const listItemStyle = css`
   position: relative;
@@ -33,7 +34,7 @@ const Menu: React.FC = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const [importsFiles, setImportsFiles] = useState<ImportsFiles>({});
 
-  const isMobile = useMemo(() => typeof window !== 'undefined' ? document.documentElement.clientWidth < 640 : false, []);
+  const isMobile = getDeviceSize() === 'mobile' ;
 
   useEffect(() => {
     const imports: ImportsFiles = {};

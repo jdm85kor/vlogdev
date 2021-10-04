@@ -73,6 +73,7 @@ const thumbnailStyle = (thumbnails: Record<'default' | 'high' | 'high', {
   url: string;
 }>) => css`
   display: inline-block;
+  margin: 0 auto;
   width: 100px;
   height: 100px;
   ${mq({
