@@ -59,6 +59,9 @@ const Menu: React.FC = () => {
       }
     }
     setImportsFiles(imports);
+
+    isMobile && setIsFoldMenu(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
