@@ -9,12 +9,12 @@ const Playground: React.FC = () => {
         <meta property="og:title" content="Playground" />
         <meta property="og:url" content="https://vlog.dev/playground/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />
-        <meta property="og:description" content="Record yourself. Record do something. Record whatever." />
+        <meta property="og:description" content="Play" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Playground" />
         <meta name="twitter:url" content="https://v-log.dev//playground/" />
-        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
-        <meta name="twitter:description" content="Record yourself. Record do something. Record whatever." />
+        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.png" />
+        <meta name="twitter:description" content="Play" />
       </Head>
       <PlaygroundC>
         <h1>
@@ -33,7 +33,8 @@ const Playground: React.FC = () => {
             text-align: left;
           `}
         >
-          Playground
+          좌측 메뉴 버튼을 누르면 게시된 컨텐츠의 리스트를 볼 수 있습니다.<br />
+          자유로운 주제로 다양한 컨텐츠가 추가 될 것입니다.
         </section>
       </PlaygroundC>
     </div>

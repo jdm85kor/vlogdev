@@ -153,17 +153,20 @@ const About: React.FC = () => {
             Plan
           </h2>
           <p css={pStyle}>
-            blog, youtube 컨텐츠 정리<br />
+            blog, youtube 컨텐츠 정리
           </p>
           <p css={pStyle}>
-            다양한 library 실험 및 새로운 학습 자료들 정리<br />
+            다양한 실험 및 새로운 학습 자료들 정리
+          </p>
+          <p css={pStyle}>
+            지속성 있게 기능 및 컨텐츠 업데이트
           </p>
           <a
             href="https://github.com/jdm85kor/vlogdev/projects/1"
             target="_blank"
             rel="noreferrer"
             css={css`
-              text-decoration: none;
+              text-decoration: underline;
               color: #777;
             `}
           >
