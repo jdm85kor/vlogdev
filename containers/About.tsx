@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import Facebook from '@public/svg/facebook.svg';
 import Instagram from '@public/svg/instagram.svg';
@@ -92,6 +92,12 @@ const About: React.FC = () => {
           if (progress > 1) progress = 1;
           (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(200 * progress)], 0, 0);
 
+          const opacity = progress < 0.3 ?
+            progress / 3 * 10 :
+            progress > 0.7 ?
+            Math.abs(1 - progress) / 3 * 10 : 1;
+          canvas.style.opacity = opacity.toString();
+
           window.addEventListener('scroll', handleScroll);
         }
       });
@@ -108,7 +114,8 @@ const About: React.FC = () => {
     const ctx = canvas.getContext('2d');
     const currentFrame = Math.round(200 * progress);
 
-    (ctx as CanvasRenderingContext2D).drawImage(motions.current[currentFrame], 0, 0);
+    if (motions.current[currentFrame])
+      (ctx as CanvasRenderingContext2D).drawImage(motions.current[currentFrame], 0, 0);
 
     const opacity = progress < 0.3 ?
       progress / 3 * 10 :
@@ -131,6 +138,7 @@ const About: React.FC = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <main css={css`
