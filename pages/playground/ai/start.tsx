@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 
-const Ready: React.FC = () => {
+const Start: React.FC = () => {
   return (
     <div>
       <Head>
@@ -18,26 +18,31 @@ const Ready: React.FC = () => {
       </Head>
       <Playground>
         <h1>
-          Frontend AI
+          AI
         </h1>
         <div
           css={css`
-            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
+            background: no-repeat center/contain url(https://d6c63ppcwec2x.cloudfront.net/books/deeplearningjavascript.jpeg);
             width: 100%;
             padding: 25% 0;
           `}
         />
         <section
           css={css`
-            padding: 0 20px;
+            margin: 20px;
+            padding: 0;
             text-align: left;
+            line-height: 1.5;
+            white-space: pre-line;
           `}
         >
-          Understand the evolution of machine learning deep learning and now artificial intelligence AI. In this course youll follow a series of practical examples of training machine learning models to come up with accurate predictions. Youll use TensorFlow to create the models and Keras a high-level Python API for building and training deep learning models on top of TensorFlow. Examples in this course include: identifying animal breeds in photos analyzing blocks of text to determine which renowned author wrote it and stylizing images trained by famous painters!
+          <p>
+            Deep learning has transformed the fields of computer vision, image processing, and natural language applications. Thanks to TensorFlow.js, now JavaScript developers can build deep learning apps without relying on Python or R. Deep Learning with JavaScript shows developers how they can bring DL technology to the web. Written by the main authors of the TensorFlow library, this new book provides fascinating use cases and in-depth instruction for deep learning apps in JavaScript in your browser or on Node.
+          </p>
         </section>
       </Playground>
     </div>
   );
 };
 
-export default Ready;
+export default Start;
