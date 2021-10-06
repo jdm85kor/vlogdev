@@ -60,19 +60,19 @@ const titleStyle = css`
 `;
 
 interface Props {
-  vlog: {
+  vlog?: {
     channels: any[];
     videos: { [key: string]: any[] };
     addChannels: (channels: any[]) => void;
     addVideos: (id: string, videos: any[]) => void;
   };
-}
+};
 const Vlog: React.FC<Props> = ({
   vlog,
 }) => {
   const [isLoadingChannel, setIsLoadingChannel] = useState<boolean>(false);
   const [chooseChannel, setChooseChannel] = useState<string>('');
-  const { channels, videos, addChannels, addVideos } = vlog;
+  const { channels, videos, addChannels, addVideos } = vlog || {};
 
   const fetchChannels = useCallback(async () => {
     if (isLoadingChannel) return;
@@ -82,7 +82,7 @@ const Vlog: React.FC<Props> = ({
         method: 'get',
         url: '/vlogdev/channel',
       });
-      addChannels(data.items);
+      addChannels!(data.items);
     } catch(e) {
       console.error(e);
     } finally {
@@ -108,17 +108,17 @@ const Vlog: React.FC<Props> = ({
     offset && (options.query['offset'] = offset);
     const { data } = await apiCall(options);
     const r = data.items.reverse().slice(0, 102);
-    addVideos(id, r);
+    addVideos!(id, r);
   };
 
   const onClickChannel = (channelId: string)=> {
     if (!channelId) return;
-    if (!videos[channelId]) fetchVideos(channelId);
+    if (!videos![channelId]) fetchVideos(channelId);
     setChooseChannel(channelId);
   };
   
   useEffect(() => {
-    !channels.length && fetchChannels();
+    !channels!.length && fetchChannels();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -157,7 +157,7 @@ const Vlog: React.FC<Props> = ({
             `}>
               <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
+                  channels!.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -181,7 +181,7 @@ const Vlog: React.FC<Props> = ({
             `}>
               <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
+                  channels!.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -205,7 +205,7 @@ const Vlog: React.FC<Props> = ({
             `}>
               <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
+                  channels!.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -229,7 +229,7 @@ const Vlog: React.FC<Props> = ({
             `}>
               <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
+                  channels!.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -253,7 +253,7 @@ const Vlog: React.FC<Props> = ({
             `}>
               <ul css={channelUlStyle}>
                 {
-                  channels.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
+                  channels!.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -288,8 +288,8 @@ const Vlog: React.FC<Props> = ({
                 flex-wrap: wrap;
               `}>
                 {
-                  !!videos[chooseChannel] ?
-                  videos[chooseChannel].map(v => (
+                  !!videos![chooseChannel] ?
+                  videos![chooseChannel].map(v => (
                     <li
                       key={v.videoId}
                       css={css`
