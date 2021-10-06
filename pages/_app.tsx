@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Provider } from 'mobx-react';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
 import Head from 'next/head';
 import 'normalize.css/normalize.css';
@@ -85,4 +84,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 };
 
-export default withAuthenticator(MyApp);
+export default MyApp;

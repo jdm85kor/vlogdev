@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { observer, inject } from "mobx-react";
 import { AmplifySignOut } from '@aws-amplify/ui-react';
@@ -36,47 +37,47 @@ const Admin: React.FC<Props> = ({ user }) => {
         word-break: break-word;
         box-sizing: border-box;
       `}>
-        <div>
-          <ul css={css`
-            display: flex;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            flex-direction: row;
-          `}>
-            {
-              tabs.map((c, id) => (
-                <li
-                  key={id}
-                  css={css`
-                    display: inline-block;
-                    margin: 0 5px;
-                    padding: 0;
-                    border: 1px solid ${colors.hermes};
-                    box-shadow: 2px 2px 2px grey;
-                  `}
-                >
-                  <button
-                    type="button"
-                    onClick={() => handleClickTab(c)}
-                    css={css`
-                      cursor: pointer;
-                      background: inherit;
-                      border: none;
-                      padding: 5px;
-                      color: ${colors.hermes};
-                    `}
-                  >
-                    { c }
-                  </button>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
         <h1>Admin Page</h1>
         { isAdmin ?
           <>
+            <div>
+              <ul css={css`
+                display: flex;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                flex-direction: row;
+              `}>
+                {
+                  tabs.map((c, id) => (
+                    <li
+                      key={id}
+                      css={css`
+                        display: inline-block;
+                        margin: 0 5px;
+                        padding: 0;
+                        border: 1px solid ${colors.hermes};
+                        box-shadow: 2px 2px 2px grey;
+                      `}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleClickTab(c)}
+                        css={css`
+                          cursor: pointer;
+                          background: inherit;
+                          border: none;
+                          padding: 5px;
+                          color: ${colors.hermes};
+                        `}
+                      >
+                        { c }
+                      </button>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
             <h2>
               Owner
             </h2>
@@ -97,14 +98,10 @@ const Admin: React.FC<Props> = ({ user }) => {
             This page is for admin.
           </p>
         }
-        {auth ? (
-          <AmplifySignOut />
-        ) : (
-          <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
-        )}
+        {!!auth && <AmplifySignOut />}
       </div>
     </main>
   );
 };
 
-export default inject('user')(observer(Admin));
+export default withAuthenticator(inject('user')(observer(Admin)));
