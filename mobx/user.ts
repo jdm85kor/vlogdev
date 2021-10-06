@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable, computed, action, flow } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 
 class User {
   profile: { [key: string]: string | number } = {};
@@ -8,14 +8,14 @@ class User {
     makeAutoObservable(this);
   }
 
-  setProfile(values: {[key: string]: string | number}) {
+  setProfile = (values: {[key: string]: string | number}) => {
     this.profile = {
       ...this.profile,
       ...values,
     };
   }
 
-  setAuth(auth: any) {
+  setAuth = (auth: any) => {
     this.auth = auth;
   }
   get isAdmin() {

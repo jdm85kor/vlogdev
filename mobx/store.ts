@@ -1,12 +1,12 @@
-import { createContext } from 'react';
 import User from './user';
+import Vlog from './vlog';
 
-class Store {
+export default class Store {
   user;
+  vlog;
 
   constructor() {
     this.user = new User();
+    this.vlog = new Vlog();
   }
 }
-
-export default createContext(new Store());

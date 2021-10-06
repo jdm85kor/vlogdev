@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { css } from '@emotion/react';
+import { observer, inject } from "mobx-react";
 import { apiCall } from '@utils/apis';
 import { AxiosRequestConfig } from 'axios';
 import { mq, colors } from '@styles/theme';
@@ -58,11 +59,20 @@ const titleStyle = css`
   white-space: nowrap;
 `;
 
-const Vlog: React.FC = () => {
-  const [channels, setChannels] = useState<any[]>([]);
-  const [videos, setVideos] = useState<Record<string, any[]>>({});
+interface Props {
+  vlog: {
+    channels: any[];
+    videos: { [key: string]: any[] };
+    addChannels: (channels: any[]) => void;
+    addVideos: (id: string, videos: any[]) => void;
+  };
+}
+const Vlog: React.FC<Props> = ({
+  vlog,
+}) => {
   const [isLoadingChannel, setIsLoadingChannel] = useState<boolean>(false);
   const [chooseChannel, setChooseChannel] = useState<string>('');
+  const { channels, videos, addChannels, addVideos } = vlog;
 
   const fetchChannels = useCallback(async () => {
     if (isLoadingChannel) return;
@@ -72,7 +82,7 @@ const Vlog: React.FC = () => {
         method: 'get',
         url: '/vlogdev/channel',
       });
-      setChannels(data.items);
+      addChannels(data.items);
     } catch(e) {
       console.error(e);
     } finally {
@@ -98,10 +108,7 @@ const Vlog: React.FC = () => {
     offset && (options.query['offset'] = offset);
     const { data } = await apiCall(options);
     const r = data.items.reverse().slice(0, 102);
-    setVideos(prev => ({
-      ...prev,
-      [id]: r,
-    }));
+    addVideos(id, r);
   };
 
   const onClickChannel = (channelId: string)=> {
@@ -111,7 +118,7 @@ const Vlog: React.FC = () => {
   };
   
   useEffect(() => {
-    fetchChannels();
+    !channels.length && fetchChannels();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
@@ -354,4 +361,4 @@ const Vlog: React.FC = () => {
   );
 };
 
-export default Vlog;
+export default inject('vlog')(observer(Vlog));

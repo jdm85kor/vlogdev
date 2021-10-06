@@ -1,4 +1,4 @@
-import React, { useMemo, useEffect, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useEffect, useCallback } from 'react';
 import { Provider } from 'mobx-react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth, Hub } from 'aws-amplify';
@@ -10,15 +10,16 @@ import Amplify from 'aws-amplify';
 import Gnb from '@components/common/Gnb';
 import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
-import rootStore from '@mobx/store'
+import RootStore from '@mobx/store'
 
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const [store] = useState(new RootStore());
   const isPlaygroundPages = useMemo(() => router.route.includes('/playground'), [router]);
 
-  const { user } = useContext(rootStore);
+  const { user } = store;
 
   useEffect((): void => {
     Hub.listen('auth', ({ payload: { event, data } }) => {
@@ -71,7 +72,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
       </Head>
       <Gnb />
-      <Provider {...rootStore}>
+      <Provider {...store}>
         {
           isPlaygroundPages ?
           <PlaygroundLayout>

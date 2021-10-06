@@ -1,8 +1,7 @@
-import React, { useContext, useState, useMemo, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Auth } from 'aws-amplify';
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import { AmplifySignOut } from '@aws-amplify/ui-react';
-import Store from '@mobx/store'
 import { css } from '@emotion/react';
 import { mq, colors } from '@styles/theme';
 import Request from '@components/admin/RequestInfo';
@@ -11,8 +10,12 @@ import Youtube from '@components/admin/YoutubeInfo';
 type Tab = 'YoutubeChannel' | 'Request' | 'Vlog'
 const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog'];
 
-const Admin: React.FC = () => {
-  const { user: { auth, isAdmin } } = useContext(Store);
+interface Props {
+  user?: any;
+}
+
+const Admin: React.FC<Props> = ({ user }) => {
+  const  { auth, isAdmin } = user;
   const [currentTab, setCurrentTab] = useState<Tab>('YoutubeChannel');
 
   const handleClickTab = useCallback((id: Tab): void => {
@@ -104,4 +107,4 @@ const Admin: React.FC = () => {
   );
 };
 
-export default observer(Admin);
+export default inject('user')(observer(Admin));
