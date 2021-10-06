@@ -24,11 +24,12 @@ type ChannelInfoKeys = 'channelId' | 'channelTitle' | 'group';
 
 
 const Vlog: React.FC<Props> = ({ user }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [channels, setChannels] = useState<any[]>([]);
   const [channelInfo, setChannelInfo] = useState<{[key in ChannelInfoKeys]: string}>({
     channelId: '', channelTitle: '', group: '',
   });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [displayForm, setDisplayForm] = useState<boolean>(false);
 
   const handleChangeInput = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.currentTarget;
@@ -113,41 +114,61 @@ const Vlog: React.FC<Props> = ({ user }) => {
     <div css={css`
       margin-bottom: 30px;
     `}>
-      <h3>YOUTUBE 채널 추가</h3>
-      <form>
-        {
-          ['channelId', 'channelTitle', 'group'].map((v) => (
-            <div key={v} css={inputStyle}>
-              <label htmlFor={v}>
-                {v}
-              </label>
-              <input
-                id={v}
-                value={channelInfo[v as ChannelInfoKeys]}
-                onChange={handleChangeInput}
-              />
-            </div>
-          ))
-        }
-        <div css={css`
-          text-align: right;
-        `}>
-          <button
-            type="button"
-            onClick={addChannel}
-            css={css`
-              margin: 10px auto;
-              height: 40px;
-              width: 100%;
-              border: 1px solid blue;
-              border-radius: 15px;
-              background: blue;
-              color: #fff;
-              cursor: pointer;
-            `}
-          >추가</button>
-        </div>
-      </form>
+      <div css={css`
+        display: flex;
+        justify-content: space-between;
+        
+      `}>
+        <h3>YOUTUBE 채널 추가</h3>
+        <button
+          css={css`
+            border: none;
+            background: inherit;
+            color: blue;
+            cursor: pointer;
+          `}
+          onClick={() => setDisplayForm(prev => !prev)}
+          >
+            { displayForm ? '닫기' : '열기'}
+          </button>
+      </div>
+      {
+        displayForm &&
+        <form>
+          {
+            ['channelId', 'channelTitle', 'group'].map((v) => (
+              <div key={v} css={inputStyle}>
+                <label htmlFor={v}>
+                  {v}
+                </label>
+                <input
+                  id={v}
+                  value={channelInfo[v as ChannelInfoKeys]}
+                  onChange={handleChangeInput}
+                />
+              </div>
+            ))
+          }
+          <div css={css`
+            text-align: right;
+          `}>
+            <button
+              type="button"
+              onClick={addChannel}
+              css={css`
+                margin: 10px auto;
+                height: 40px;
+                width: 100%;
+                border: 1px solid blue;
+                border-radius: 15px;
+                background: blue;
+                color: #fff;
+                cursor: pointer;
+              `}
+            >추가</button>
+          </div>
+        </form>
+      }
 
       <h3>YOUTUBE 채널 리스트</h3>
       {

@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import React, { useContext, useState, useMemo, useCallback } from 'react';
+import { Auth } from 'aws-amplify';
+import { observer } from "mobx-react";
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import Store from '@mobx/store'
 import { css } from '@emotion/react';
-import { Auth, Hub } from 'aws-amplify';
 import { mq, colors } from '@styles/theme';
 import Request from '@components/admin/RequestInfo';
 import Youtube from '@components/admin/YoutubeInfo';
@@ -10,43 +12,12 @@ type Tab = 'YoutubeChannel' | 'Request' | 'Vlog'
 const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog'];
 
 const Admin: React.FC = () => {
-  const [user, setUser] = useState<Record<string, any> | null>(null);
+  const { user: { auth, isAdmin } } = useContext(Store);
   const [currentTab, setCurrentTab] = useState<Tab>('YoutubeChannel');
 
   const handleClickTab = useCallback((id: Tab): void => {
     setCurrentTab(id);
   }, []);
-
-  useEffect((): void => {
-    Hub.listen('auth', ({ payload: { event, data } }) => {
-      switch (event) {
-        case 'signIn':
-        case 'cognitoHostedUI':
-          getUser().then(userData => setUser(userData));
-          break;
-        case 'signOut':
-          setUser(null);
-          break;
-        case 'signIn_failure':
-        case 'cognitoHostedUI_failure':
-          alert(data);
-          break;
-      }
-    });
-
-    getUser().then(userData => setUser(userData));
-  }, []);
-
-  const getUser = useCallback(() => {
-    return Auth.currentAuthenticatedUser()
-      .then(userData => userData)
-      .catch(() => console.error('Not signed in'));
-  }, []);
-
-  const isAdmin = useMemo((): boolean => {
-    const groups = (user as any)?.signInUserSession?.accessToken?.payload["cognito:groups"] || [];
-    return groups.includes('admin');
-  }, [user]);
 
   return (
     <main css={css`
@@ -107,15 +78,15 @@ const Admin: React.FC = () => {
               Owner
             </h2>
             <p>
-              provider name: {JSON.parse((user as any)?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
-              username: {(user as any)?.username || ''}<br />
-              email: {(user as any)?.attributes.email}
+              provider name: {JSON.parse(auth ?.attributes?.identities || '[{}]')[0]?.providerName || 'none'}<br />
+              username: {auth ?.username || ''}<br />
+              email: {auth ?.attributes.email}
             </p>
             {
               currentTab === 'Request' ?
-              <Request user={user} /> :
+              <Request user={auth} /> :
               currentTab === 'YoutubeChannel' ? 
-              <Youtube user={user} /> :
+              <Youtube user={auth} /> :
               <></> 
             }
           </> : 
@@ -123,7 +94,7 @@ const Admin: React.FC = () => {
             This page is for admin.
           </p>
         }
-        {user ? (
+        {auth ? (
           <AmplifySignOut />
         ) : (
           <button onClick={() => Auth.federatedSignIn()}>Federated Sign In</button>
@@ -133,4 +104,4 @@ const Admin: React.FC = () => {
   );
 };
 
-export default withAuthenticator(Admin);
+export default observer(Admin);
