@@ -22,6 +22,7 @@
       "@styles/*":["styles/*"],
       "@public/*":["public/*"],
       "@utils/*":["utils/*"],
+      "@mobx/*":["mobx/*"],
     },
     "typeRoots": [
       "./type",

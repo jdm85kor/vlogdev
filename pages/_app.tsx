@@ -1,4 +1,7 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useCallback, useContext } from 'react';
+import { Provider } from 'mobx-react';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import { Auth, Hub } from 'aws-amplify';
 import Head from 'next/head';
 import 'normalize.css/normalize.css';
 import type { AppProps } from 'next/app'
@@ -7,12 +10,42 @@ import Amplify from 'aws-amplify';
 import Gnb from '@components/common/Gnb';
 import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
+import rootStore from '@mobx/store'
 
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isPlaygroundPages = useMemo(() => router.route.includes('/playground'), [router]);
+
+  const { user } = useContext(rootStore);
+
+  useEffect((): void => {
+    Hub.listen('auth', ({ payload: { event, data } }) => {
+      switch (event) {
+        case 'signIn':
+        case 'cognitoHostedUI':
+          getAuth().then(auth => user.setAuth(auth));
+          break;
+        case 'signOut':
+          // setUser(null);
+          break;
+        case 'signIn_failure':
+        case 'cognitoHostedUI_failure':
+          alert(data);
+          break;
+      }
+    });
+
+    getAuth().then(auth => user.setAuth(auth));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getAuth = useCallback(() => {
+    return Auth.currentAuthenticatedUser()
+      .then(auth => auth)
+      .catch(() => console.error('Not signed in'));
+  }, []);
 
   return (
     <>
@@ -38,15 +71,17 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
       </Head>
       <Gnb />
-      {
-        isPlaygroundPages ?
-        <PlaygroundLayout>
+      <Provider {...rootStore}>
+        {
+          isPlaygroundPages ?
+          <PlaygroundLayout>
+            <Component role="main" {...pageProps} />
+          </PlaygroundLayout> :
           <Component role="main" {...pageProps} />
-        </PlaygroundLayout> :
-        <Component role="main" {...pageProps} />
-      }
+        }
+      </Provider>
     </>
   );
 };
 
-export default MyApp;
+export default withAuthenticator(MyApp);
