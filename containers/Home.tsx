@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import Link from 'next/link'
+import { observer, inject } from "mobx-react";
 import RequestModal from '@components/RequestModal';
 import { css } from '@emotion/react';
 import { mq, colors } from '@styles/theme';
@@ -93,12 +94,21 @@ const titleStyle = css`
   white-space: nowrap;
 `;
 
-const Home: React.FC = () => {
+interface Props {
+  vlog?: {
+    latestVideos: any[];
+    setLatestVideos: (videos: any[]) => void;
+  },
+};
+
+const Home: React.FC<Props> = ({
+  vlog,
+ }) => {
   const [isShowRequest, setIsShowRequest] = useState(false);
-  const [latestVideos, setLatestVideos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<string>('');
   const [currentHours, setCurrentHours] = useState<number | null>(null);
+  const { latestVideos, setLatestVideos } = vlog || {};
 
   const fetchLatestVideo = useCallback(async () => {
     if (isLoading) return;
@@ -109,7 +119,7 @@ const Home: React.FC = () => {
         url: '/vlogdev/video',
         query: { type: 'latest' },
       });
-      setLatestVideos(data.items);
+      setLatestVideos!(data.items.sort((a: {publishTime: number} , b: {publishTime: number}) => b.publishTime - a.publishTime));
     } catch (e) {
       console.error(e);
     } finally {
@@ -124,7 +134,7 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetchLatestVideo();
+    !latestVideos!.length && fetchLatestVideo();
     setCurrentHours(new Date().getHours());
   // eslint-disable-next-line react-hooks/exhaustive-deps
   } ,[]);
@@ -222,8 +232,7 @@ const Home: React.FC = () => {
             white-space: nowrap;
           `}>
             {
-              latestVideos
-                .sort((a: {publishTime: number} , b: {publishTime: number}) => b.publishTime - a.publishTime)
+              latestVideos!
                 .map((v: any) => (
                 <li
                   key={v.videoId}
@@ -329,4 +338,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default inject('vlog')(observer(Home));
