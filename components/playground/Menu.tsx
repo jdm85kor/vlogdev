@@ -83,7 +83,7 @@ const Menu: React.FC = () => {
       css={css`
         ${mq({
           position: [isFoldMenu ? 'fixed' : 'fixed', 'sticky'],
-          width: [isFoldMenu ? '50px' : '100vw', isFoldMenu ? '50px' : '320px'],
+          width: [isFoldMenu ? '52px' : '100vw', isFoldMenu ? '52px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
           height: [isFoldMenu ? '53px' : '100vh', 'calc(100vh - 54px)'],
           zIndex: [6000, 'auto', 'auto'],
@@ -106,7 +106,7 @@ const Menu: React.FC = () => {
       `}
     >
       <div css={css`
-        height: 50px;
+        height: 48px;
         text-align: right;
       `}>
         <button
@@ -117,13 +117,14 @@ const Menu: React.FC = () => {
             background: none;
             border: none;
             cursor: pointer;
+            height: 48px;
           `}
           onClick={() => setIsFoldMenu(prev => !prev)}
         >
           <Hamberger
             css={css`
-              width: 50px;
-              height: 50px;
+              width: 48px;
+              height: 48px;
               & > path {
                 fill: ${colors.hermes};
               }

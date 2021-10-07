@@ -14,8 +14,22 @@ const Footer: React.FC = () => {
         background: #333;
       `}
     >
-      <div>
-        
+      <div css={css`
+        margin: 0 auto;
+        padding: 20px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 1024px;
+        height: 100px;
+        color: #aaa;
+        font-size: 12px;
+      `}>
+        <p>
+          v-log.dev | KIMPO
+        </p>
+        <p>
+          사업자 등록번호: 365-11-01858 | jdm85kor@gmail.com
+        </p>
       </div>
       
     </footer>

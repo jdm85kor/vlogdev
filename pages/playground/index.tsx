@@ -34,7 +34,7 @@ const Playground: React.FC = () => {
           `}
         >
           <p>
-            좌측 메뉴 버튼을 누르면 게시된 컨텐츠의 리스트를 볼 수 있습니다.<br />
+            Deep learning, Quant, Book, Front-end, Visualize 등의 주제로 여러 실험을 해보고 있습니다.
           </p>
           <p>
             자유로운 주제로 다양한 컨텐츠가 추가 될 것입니다.
