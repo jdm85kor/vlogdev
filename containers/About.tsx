@@ -73,11 +73,11 @@ const About: React.FC = () => {
   const initCanvasResource = () => {
     const imgs: HTMLImageElement[] = [];
     let loadedImgsCnt = 0;
-    const total = 201;
+    const total = 265;
     
     for (let i = 0 ; i < total ; i++) {
       const imgEl = new Image();
-      imgEl.src = `https://d6c63ppcwec2x.cloudfront.net/video/golf/motion/wood${i.toString().padStart(3, '0')}.jpg`;
+      imgEl.src = `https://d6c63ppcwec2x.cloudfront.net/video/golf/capture/20211008${i.toString().padStart(3, '0')}.jpg`;
       imgs.push(imgEl);
 
       imgEl.addEventListener('load', function () {
@@ -90,7 +90,7 @@ const About: React.FC = () => {
           let progress: number = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
           if (progress < 0) progress = 0;
           if (progress > 1) progress = 1;
-          (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(200 * progress)], 0, 0);
+          (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(264 * progress)], 0, 0);
 
           const opacity = progress < 0.3 ?
             progress / 3 * 10 :
@@ -112,7 +112,7 @@ const About: React.FC = () => {
     const canvas: HTMLCanvasElement = canvasRef.current;
 
     const ctx = canvas.getContext('2d');
-    const currentFrame = Math.round(200 * progress);
+    const currentFrame = Math.round(264 * progress);
 
     if (motions.current[currentFrame])
       (ctx as CanvasRenderingContext2D).drawImage(motions.current[currentFrame], 0, 0);
@@ -355,7 +355,7 @@ const About: React.FC = () => {
               <div css={css`text-align: center;`}>
                 <img
                   alt="weight"
-                  src="https://d6c63ppcwec2x.cloudfront.net/weight.jpg"
+                  src="https://d6c63ppcwec2x.cloudfront.net/images/weight65.jpg"
                   css={css`
                     margin: 0 auto;
                     width: 150px;
