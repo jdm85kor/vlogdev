@@ -73,11 +73,11 @@ const About: React.FC = () => {
   const initCanvasResource = () => {
     const imgs: HTMLImageElement[] = [];
     let loadedImgsCnt = 0;
-    const total = 265;
+    const total = 321;
     
     for (let i = 0 ; i < total ; i++) {
       const imgEl = new Image();
-      imgEl.src = `https://d6c63ppcwec2x.cloudfront.net/video/golf/capture/20211008${i.toString().padStart(3, '0')}.jpg`;
+      imgEl.src = `https://d6c63ppcwec2x.cloudfront.net/video/golf/driver/driver${i.toString().padStart(3, '0')}.jpg`;
       imgs.push(imgEl);
 
       imgEl.addEventListener('load', function () {
@@ -90,7 +90,7 @@ const About: React.FC = () => {
           let progress: number = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
           if (progress < 0) progress = 0;
           if (progress > 1) progress = 1;
-          (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(264 * progress)], 0, 0);
+          (ctx as CanvasRenderingContext2D).drawImage(imgs[Math.round(320 * progress)], 0, 0);
 
           const opacity = progress < 0.3 ?
             progress / 3 * 10 :
@@ -112,7 +112,7 @@ const About: React.FC = () => {
     const canvas: HTMLCanvasElement = canvasRef.current;
 
     const ctx = canvas.getContext('2d');
-    const currentFrame = Math.round(264 * progress);
+    const currentFrame = Math.round(320 * progress);
 
     if (motions.current[currentFrame])
       (ctx as CanvasRenderingContext2D).drawImage(motions.current[currentFrame], 0, 0);
@@ -389,11 +389,19 @@ const About: React.FC = () => {
             font-style: italic;
             font-size: 12px;
           `}>
+            &#183;<br />
+            &#183;<br />
+            &#183;<br />
+            <br />
             누군가 나에게 이렇게 말했다<br />
             가만히 있으면 누군가 해결해 줄거라고<br />
             <br />
             그런데<br />
-            나는 아직 한번도 그런 사람을 만나보지 못했다.
+            나는 아직 한번도 그런 사람을 만나보지 못했다.<br />
+            <br />
+            &#183;<br />
+            &#183;<br />
+            &#183;<br />
           </p>
         </section>
         <div css={css`

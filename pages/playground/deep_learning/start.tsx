@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
+import Utteranc from '@components/common/Utteranc';
 
 const Start: React.FC = () => {
   return (
@@ -41,6 +42,7 @@ const Start: React.FC = () => {
           </p>
         </section>
       </Playground>
+      <Utteranc />
     </div>
   );
 };

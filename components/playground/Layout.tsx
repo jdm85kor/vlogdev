@@ -12,7 +12,7 @@ const Template: React.FC<Props> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Lab</title>
+        <title>Playground</title>
         <meta name="description" content="Let's play and study." />
       </Head>
       <div css={css`
