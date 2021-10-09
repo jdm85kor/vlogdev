@@ -230,7 +230,7 @@ const About: React.FC = () => {
         </section>
         <section css={sectionStyle}>
           <h2 css={h2Style}>
-            Plan
+            Plan & Goal
           </h2>
           <p css={pStyle}>
             blog, youtube 컨텐츠 정리
@@ -382,6 +382,19 @@ const About: React.FC = () => {
               </div>
             </div>
           }
+          <p css={css`
+            margin: 60px auto 0;
+            color: ${colors.hermes};
+            text-align: center;
+            font-style: italic;
+            font-size: 12px;
+          `}>
+            누군가 나에게 이렇게 말했다<br />
+            가만히 있으면 누군가 해결해 줄거라고<br />
+            <br />
+            그런데<br />
+            나는 아직 한번도 그런 사람을 만나보지 못했다.
+          </p>
         </section>
         <div css={css`
           position: fixed;

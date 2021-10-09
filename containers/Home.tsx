@@ -15,6 +15,18 @@ const news = [{
 }, {
   url: 'https://news.hada.io/weekly/202122',
   title: '재미로 만든 작은 인터넷 프로젝트 팔기',
+}, {
+  url: 'https://kentcdodds.com/blog/how-i-built-a-modern-website-in-2021',
+  title: 'How I built a modern website in 2021',
+}, {
+  url: 'https://css-tricks.com/web-streams-everywhere-and-fetch-for-node-js/',
+  title: 'Web Streams Everywhere',
+}, {
+  url: 'https://www.newline.co/@kchan/writing-a-custom-react-hook-for-spotifys-web-api-implicit-grant-flow--25967253',
+  title: "Writing a Custom React Hook for Spotify's Web API",
+}, {
+  url: 'https://casparwre.de/blog/launching-a-product-without-a-login/',
+  title: "Why you should launch your product without a login",
 }];
 
 const sectionStyle = css`
@@ -119,7 +131,9 @@ const Home: React.FC<Props> = ({
         url: '/vlogdev/video',
         query: { type: 'latest' },
       });
-      setLatestVideos!(data.items.sort((a: {publishTime: number} , b: {publishTime: number}) => b.publishTime - a.publishTime));
+      setLatestVideos!(data.items
+        .sort((a: {publishTime: number} , b: {publishTime: number}) => b.publishTime - a.publishTime)
+      );
     } catch (e) {
       console.error(e);
     } finally {

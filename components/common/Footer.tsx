@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           v-log.dev | KIMPO
         </p>
         <p>
-          사업자 등록번호: 365-11-01858 | jdm85kor@gmail.com
+          사업자 등록번호: 365-11-01858 | jdm85kor@gmail.com | 장동민
         </p>
       </div>
       
