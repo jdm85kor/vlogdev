@@ -23,6 +23,7 @@ const Footer: React.FC = () => {
         height: 100px;
         color: #aaa;
         font-size: 12px;
+        word-break: keep-all;
       `}>
         <p>
           v-log.dev | KIMPO

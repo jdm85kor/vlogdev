@@ -27,6 +27,12 @@ const news = [{
 }, {
   url: 'https://casparwre.de/blog/launching-a-product-without-a-login/',
   title: "Why you should launch your product without a login",
+}, {
+  url: 'https://dev.to/caroso1222/how-i-went-from-frontend-dev-to-machine-learning-engineer-6ao',
+  title: "How I went from Frontend Dev to Machine Learning Engineer",
+}, {
+  url: 'https://webandcrafts.com/blog/ai-machine-learning-impact-front-end-development/',
+  title: "AI & Machine Learning : Impact on Front-End Development",
 }];
 
 const sectionStyle = css`
@@ -115,7 +121,7 @@ interface Props {
 
 const Home: React.FC<Props> = ({
   vlog,
- }) => {
+}) => {
   const [isShowRequest, setIsShowRequest] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<string>('');

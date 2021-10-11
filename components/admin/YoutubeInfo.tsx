@@ -96,7 +96,8 @@ const Vlog: React.FC<Props> = ({ user }) => {
         });
         setChannels(prev => {
           const idx = prev.findIndex(p => p.channelTitle === channelTitle && p.group === group);
-          return idx > -1 ? prev.splice(idx, 1) : prev;
+          idx > -1 && prev.splice(idx, 1);
+          return prev;
         });
         window.alert(`${channelTitle} 채널 삭제 완료 `);
       } catch(e) {
