@@ -277,15 +277,17 @@ const About: React.FC = () => {
             <dt css={dtStyle}>Blog</dt>
             <dd css={ddStyle}>
             <a
-                href="https://github.com/jdm85kor/vlogdev"
-                css={css`
-                  text-decoration: none;
-                  color: slateblue;
-                `}
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-              >https://dongmin-jang.medium.com/</a>
-              </dd>
+              href="https://github.com/jdm85kor/vlogdev"
+              css={css`
+                text-decoration: none;
+                color: slateblue;
+              `}
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+            >
+              https://dongmin-jang.medium.com/
+            </a>
+            </dd>
             <dt css={dtStyle}>Email</dt>
             <dd css={ddStyle}>jdm85kor@gmail.com</dd>
             <dt css={dtStyle}>Career</dt>
@@ -378,6 +380,34 @@ const About: React.FC = () => {
               >
                 <p>
                   취미: 골프, 여행
+                </p>
+                <p>
+                  골프를 치는 이유: 내 몸을 얼마만큼 내가 원하는데로 쓸 수 있는지 시험해보고 싶은데, 가장 빠르고 편리하게 혼자 해볼 수 있는 종목.
+                </p>
+                <p>
+                  수강 중인 수업: <br />
+                  &nbsp;&nbsp; - <a
+                    href="https://www.coursera.org/learn/browser-based-models-tensorflow"
+                    css={css`
+                      text-decoration: none;
+                      color: slateblue;
+                    `}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
+                    Browser-based Models with TensorFlow.js
+                  </a><br />
+                  &nbsp;&nbsp; - <a
+                    href="https://www.tensorflow.org/resources/learn-ml/basics-of-tensorflow-for-js-development"
+                    css={css`
+                      text-decoration: none;
+                      color: slateblue;
+                    `}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                  >
+                    TensorFlow for JavaScript development
+                  </a>
                 </p>
               </div>
             </div>
