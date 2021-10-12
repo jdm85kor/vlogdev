@@ -7,7 +7,7 @@ import { mq, colors } from '@styles/theme';
 import Link from 'next/link';
 import Loading from '@components/common/Loading';
 
-const channelSectionsStyle = css`
+const channelsStyle = css`
   position: relative;
   margin-bottom: 50px;
   &::before {
@@ -224,25 +224,27 @@ const Vlog: React.FC<Props> = ({
                 </ul>
               }
               {
-                !!chooseGroup && <ul css={channelUlStyle}>
-                {
-                  channels!.filter(c => !!c.publishTime && c.group === chooseGroup).map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
+                !!chooseGroup && <div css={channelsStyle}>
+                  <ul css={channelUlStyle}>
+                  {
+                    channels!.filter(c => !!c.publishTime && c.group === chooseGroup).map(c => (
+                      <li
+                        key={c.channelId}
+                        css={channelLiStyle(chooseChannel === c.channelId)}
                       >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
+                        <button
+                          type="button"
+                          onClick={() => onClickChannel(c.channelId)}
+                          css={buttonStyle}
+                        >
+                          <div css={thumbnailStyle(c.thumbnails)} />
+                          <span css={titleStyle}>{ c.channelTitle }</span>
+                        </button>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
               }
             </section>
           </>
