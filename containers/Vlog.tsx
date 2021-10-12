@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { observer, inject } from "mobx-react";
 import { apiCall } from '@utils/apis';
@@ -7,11 +7,39 @@ import { mq, colors } from '@styles/theme';
 import Link from 'next/link';
 import Loading from '@components/common/Loading';
 
+const channelSectionsStyle = css`
+  position: relative;
+  margin-bottom: 50px;
+  &::before {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    width: 30px;
+    height: 100%;
+    z-index: 100;
+    background-image: linear-gradient(270deg,hsla(0,0%,100%,0),#fff 50%);
+  }
+  &::after {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    content: '';
+    width: 30px;
+    height: 100%;
+    z-index: 100;
+    background-image: linear-gradient(90deg,hsla(0,0%,100%,0),#fff 50%);
+  }
+`;
 const channelUlStyle = css`
   margin: 0;
-  padding: 0;
+  padding: 0 20px;
+  width: calc(100% - 40px);
   list-style: none;
-  width: 100%;
   height: 140px;
   overflow-x: auto;
   white-space: nowrap;
@@ -71,6 +99,7 @@ const Vlog: React.FC<Props> = ({
   vlog,
 }) => {
   const [isLoadingChannel, setIsLoadingChannel] = useState<boolean>(false);
+  const [chooseGroup, setChooseGroup] = useState<string>('DEV');
   const [chooseChannel, setChooseChannel] = useState<string>('');
   const { channels, videos, addChannels, addVideos } = vlog || {};
 
@@ -121,6 +150,14 @@ const Vlog: React.FC<Props> = ({
     !channels!.length && fetchChannels();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  const groups = useMemo(
+    (): string[] => {
+      const g: string[] = [];
+      new Set((channels || [])!.map(c => c.group)).forEach((ch) => {
+        g.push(ch);
+      });
+      return g;
+    }, [channels]);
   return (
     <main css={css`
       margin: 0 auto;
@@ -151,13 +188,45 @@ const Vlog: React.FC<Props> = ({
             `}>
               <span>매일 1회 업데이트 됩니다</span>
             </div>
-            <h3>DEV</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
+            <section>
+              {
+                !!groups.length && <ul css={css`
+                  margin: 15px;
+                  padding: 0;
+                  list-style: none;
+                `}>
                 {
-                  channels!.filter(c => !!c.publishTime && c.group === 'DEV').map(c => (
+                  groups.map((g, gIdx) => (
+                    <li
+                      key={gIdx}
+                      css={css`
+                        margin-bottom: 10px;
+                        display: inline-block;
+                      `}
+                    >
+                      <button
+                        type="button"
+                        css={css`
+                          border: none;
+                          background: inherit;
+                          cursor: pointer;
+                          color: ${chooseGroup === g ? colors.hermes : '#333'};
+                        `}
+                        onClick={() => {
+                          setChooseGroup(g);
+                        }}
+                      >
+                        { g }
+                      </button>
+                    </li>
+                  ))
+                }
+                </ul>
+              }
+              {
+                !!chooseGroup && <ul css={channelUlStyle}>
+                {
+                  channels!.filter(c => !!c.publishTime && c.group === chooseGroup).map(c => (
                     <li
                       key={c.channelId}
                       css={channelLiStyle(chooseChannel === c.channelId)}
@@ -174,102 +243,7 @@ const Vlog: React.FC<Props> = ({
                   ))
                 }
               </ul>
-            </section>
-            <h3>ECONOMIC</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels!.filter(c => !!c.publishTime && c.group === 'ECONOMIC').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>GOLF</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels!.filter(c => !!c.publishTime && c.group === 'GOLF').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>HEALTH</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels!.filter(c => !!c.publishTime && c.group === 'HEALTH').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-            <h3>COMMON SENSE</h3>
-            <section css={css`
-              margin-bottom: 50px;
-            `}>
-              <ul css={channelUlStyle}>
-                {
-                  channels!.filter(c => !!c.publishTime && c.group === 'COMMONSENSE').map(c => (
-                    <li
-                      key={c.channelId}
-                      css={channelLiStyle(chooseChannel === c.channelId)}
-                    >
-                      <button
-                        type="button"
-                        onClick={() => onClickChannel(c.channelId)}
-                        css={buttonStyle}
-                      >
-                        <div css={thumbnailStyle(c.thumbnails)} />
-                        <span css={titleStyle}>{ c.channelTitle }</span>
-                      </button>
-                    </li>
-                  ))
-                }
-              </ul>
+              }
             </section>
           </>
         }
