@@ -10,6 +10,7 @@ import Gnb from '@components/common/Gnb';
 import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
 import RootStore from '@mobx/store'
+import { colors } from '@styles/theme';
 
 Amplify.configure(awsconfig);
 
@@ -69,6 +70,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo_96x96.png" sizes="96x96"></link>
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
         <link rel="icon" href="https://d6c63ppcwec2x.cloudfront.net/logo144.png" sizes="144x144"></link>
+        <meta name="theme-color" content={colors.hermes}></meta>
+        <meta name="format-detection" content="telephone=no"></meta>
       </Head>
       <Gnb />
       <Provider {...store}>
