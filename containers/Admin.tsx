@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { Auth } from 'aws-amplify';
 import { observer, inject } from "mobx-react";
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { css } from '@emotion/react';
