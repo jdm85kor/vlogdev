@@ -6,6 +6,7 @@ const Playground: React.FC = () => {
   return (
     <div>
       <Head>
+        <title>Playground | Lab</title>
         <meta property="og:title" content="Playground" />
         <meta property="og:url" content="https://vlog.dev/playground/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />

@@ -183,10 +183,15 @@ const Vlog: React.FC<Props> = ({
           <>
             <h2>Channels</h2>
             <div css={css`
-              text-align: right;
+              ${mq({
+                textAlign: ['left', 'right'],
+              })}
               color: ${colors.hermes};
+              opacity: 0.6;
             `}>
-              <span>매일 1회 업데이트 됩니다</span>
+              <p>
+                태그를 선택하고 채널을 선택하면 하단에 비디오 리스트가 노출됩니다.
+              </p>
             </div>
             <section>
               {
@@ -247,6 +252,13 @@ const Vlog: React.FC<Props> = ({
               </div>
               }
             </section>
+            <div css={css`
+              text-align: right;
+              color: ${colors.hermes};
+              opacity: 0.6;
+            `}>
+              <p>매일 1회 업데이트</p>
+            </div>
           </>
         }
 

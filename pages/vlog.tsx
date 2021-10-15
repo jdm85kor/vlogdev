@@ -6,7 +6,7 @@ const Vlog: React.FC = () => {
   return (
     <div>
       <Head>
-        <title>Video</title>
+        <title>Video log</title>
         <meta name="description" content="Show me your records" />
       </Head>
       <VlogC />
