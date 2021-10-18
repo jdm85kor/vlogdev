@@ -8,12 +8,12 @@ const Start: React.FC = () => {
     <div>
       <Head>
         <meta property="og:title" content="Frontend Quant" />
-        <meta property="og:url" content="https://vlog.dev/playground/quant/start/" />
+        <meta property="og:url" content="https://v-log.dev/playground/quant/start/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />
         <meta property="og:description" content="Record yourself. Record do something. Record whatever." />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Front Quant" />
-        <meta name="twitter:url" content="https://v-log.dev//playground/quant/start/" />
+        <meta name="twitter:url" content="https://v-log.dev/playground/quant/start/" />
         <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
         <meta name="twitter:description" content="Record yourself. Record do something. Record whatever." />
       </Head>

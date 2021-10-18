@@ -9,12 +9,12 @@ const Today: React.FC = () => {
       <Head>
         <title>Playground | Lab</title>
         <meta property="og:title" content="Playground" />
-        <meta property="og:url" content="https://vlog.dev/playground/idle_talk/today/" />
+        <meta property="og:url" content="https://v-log.dev/playground/idle_talk/today/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />
         <meta property="og:description" content="Play" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Playground" />
-        <meta name="twitter:url" content="https://v-log.dev//playground/idle_talk/today/" />
+        <meta name="twitter:url" content="https://v-log.dev/playground/idle_talk/today/" />
         <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.png" />
         <meta name="twitter:description" content="Play" />
       </Head>

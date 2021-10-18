@@ -15,13 +15,13 @@ const Start: React.FC = () => {
       <Head>
         <title>Browser based models with tf.js</title>
         <meta property="og:title" content="Browser based models with tf.js" />
-        <meta property="og:url" content="https://vlog.dev/playground/deep_learning/browser_based_models_with_tfjs/" />
+        <meta property="og:url" content="https://v-log.dev/playground/deep_learning/browser_based_models_with_tfjs/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/playground/course.jpg" />
         <meta property="og:description" content="Coursesa - Browser based models with tf.js" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content="Browser based models with tf.js" />
-        <meta name="twitter:url" content="https://v-log.dev//playground/ai/ready/" />
-        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
+        <meta name="twitter:url" content="https://v-log.dev/playground/deep_learning/browser_based_models_with_tfjs/" />
+        <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/playground/course.jpg" />
         <meta name="twitter:description" content="Coursesa - Browser based models with tf.js" />
       </Head>
       <Playground>
