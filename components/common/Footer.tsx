@@ -1,7 +1,4 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
-import { colors } from '@styles/theme';
-import { mq } from '@styles/theme';
 
 const Footer: React.FC = () => {
   return (
