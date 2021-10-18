@@ -65,6 +65,9 @@ const Start: React.FC = () => {
             raw 데이터 많이 모아서 여러가지 모델들을 만들어 보고 싶네요.
           </p>
           <div css={imgStyle('https://d6c63ppcwec2x.cloudfront.net/playground/coreapi_s.jpg')} />
+          <p>
+            몇가지 정리하고 week2로 넘어갑니다.
+          </p>
 
           <h2>Week2</h2>
           <h2>Week3</h2>
