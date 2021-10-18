@@ -61,8 +61,14 @@ const Start: React.FC = () => {
             사실은 sigmoid, relu, softmax 와 같은 activation function은 잘 알지도 못한채, units을 바꿨을 때 어떻게 모델을 영향을 미치는지 정확히 알지도 못한채 이것저것 돌려서 운좋게 모델이 만들어졌습니다.
             <br />
             epochs랑 batch만 겨우 이해하고 넘어갔는데, 이러한 raw 데이터로 모델이 만들어 진다는게 너무 신기합니다.
+            <br />
+            raw 데이터 많이 모아서 여러가지 모델들을 만들어 보고 싶네요.
           </p>
           <div css={imgStyle('https://d6c63ppcwec2x.cloudfront.net/playground/coreapi_s.jpg')} />
+
+          <h2>Week2</h2>
+          <h2>Week3</h2>
+          <h2>Week4</h2>
         </section>
       </Playground>
       <Utteranc />
