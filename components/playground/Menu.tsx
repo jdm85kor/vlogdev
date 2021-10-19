@@ -72,9 +72,13 @@ const Menu: React.FC = () => {
       // top:0;
       // bottom: 0;
       document.body.style.overflowY = 'hidden';
+      return () => {
+        document.body.style.overflowY = '';
+      };
     } else {
       document.body.style.overflowY = '';
     }
+
   }, [isFoldMenu, isMobile]);
   
   return (
@@ -85,7 +89,7 @@ const Menu: React.FC = () => {
           position: [isFoldMenu ? 'fixed' : 'fixed', 'sticky'],
           width: [isFoldMenu ? '52px' : '100vw', isFoldMenu ? '52px' : '320px'],
           transition: ['none', 'all 0.5s ease'],
-          height: [isFoldMenu ? '53px' : '100vh', 'calc(100vh - 54px)'],
+          height: [isFoldMenu ? '54px' : '100vh', 'calc(100vh - 54px)'],
           zIndex: [6000, 'auto', 'auto'],
         })}
         flex: 0 0 ${isFoldMenu? '50px' : '320px'};
