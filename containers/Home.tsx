@@ -226,7 +226,7 @@ const Home: React.FC<Props> = ({
               top: 0;
               bottom: 0;
               content: '';
-              width: 30px;
+              width: 32px;
               height: 100%;
               z-index: 100;
               background-image: linear-gradient(270deg,hsla(0,0%,100%,0),#fff 50%);
@@ -238,7 +238,7 @@ const Home: React.FC<Props> = ({
               top: 0;
               bottom: 0;
               content: '';
-              width: 30px;
+              width: 32px;
               height: 100%;
               z-index: 100;
               background-image: linear-gradient(90deg,hsla(0,0%,100%,0),#fff 50%);
@@ -249,7 +249,7 @@ const Home: React.FC<Props> = ({
             margin: 0;
             padding: 0 20px;
             list-style: none;
-            width: calc(100% - 40px);
+            width: calc(100% - 42px);
             height: 140px;
             overflow-x: auto;
             white-space: nowrap;

@@ -38,7 +38,7 @@ const channelsStyle = css`
 const channelUlStyle = css`
   margin: 0;
   padding: 0 20px;
-  width: calc(100% - 40px);
+  width: calc(100% - 42px);
   list-style: none;
   height: 140px;
   overflow-x: auto;
