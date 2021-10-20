@@ -10,6 +10,74 @@ const imgStyle = (url: string, padding: number = 25) => css`
   padding: ${padding}% 0;
 `;
 
+const Week2example = () => (
+  <div  css={css`
+    ${mq({
+      width: ['calc(100vw - 40px)', 'inherit'],
+    })}
+    background: #eee;
+    overflow-x: auto;
+  `}
+  >
+    <p css={css`
+      word-break: break-all;
+      ${mq({
+        whiteSpace: ['pre', 'pre-wrap'],
+      })}
+    `}
+  >{`
+  function getModel() {
+      model = tf.sequential();
+
+      model.add(tf.layers.conv2d({inputShape: [28, 28, 1], kernelSize: 3, filters: 8, activation: 'relu'}));
+      model.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
+      model.add(tf.layers.conv2d({filters: 16, kernelSize: 3, activation: 'relu'}));
+      model.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
+      model.add(tf.layers.flatten());
+      model.add(tf.layers.dense({units: 128, activation: 'relu'}));
+      model.add(tf.layers.dense({units: 10, activation: 'softmax'}));
+
+      model.compile({optimizer: tf.train.adam(), loss: 'categoricalCrossentropy', metrics: ['accuracy']});
+
+      return model;
+  }
+
+  async function train(model, data) {
+      const metrics = ['loss', 'val_loss', 'accuracy', 'val_accuracy'];
+      const container = { name: 'Model Training', styles: { height: '640px' } };
+      const fitCallbacks = tfvis.show.fitCallbacks(container, metrics);
+    
+      const BATCH_SIZE = 512;
+      const TRAIN_DATA_SIZE = 5500;
+      const TEST_DATA_SIZE = 1000;
+
+      const [trainXs, trainYs] = tf.tidy(() => {
+          const d = data.nextTrainBatch(TRAIN_DATA_SIZE);
+          return [
+            d.xs.reshape([TRAIN_DATA_SIZE, 28, 28, 1]),
+            d.labels
+          ];
+      });
+
+      const [testXs, testYs] = tf.tidy(() => {
+          const d = data.nextTestBatch(TEST_DATA_SIZE);
+          return [
+            d.xs.reshape([TEST_DATA_SIZE, 28, 28, 1]),
+            d.labels
+          ];
+      });
+
+      return model.fit(trainXs, trainYs, {
+          batchSize: BATCH_SIZE,
+          validationData: [testXs, testYs],
+          epochs: 20,
+          shuffle: true,
+          callbacks: fitCallbacks
+      });
+  }
+  `}</p>
+</div>);
+
 const Start: React.FC = () => {
   return (
     <div>
@@ -114,6 +182,7 @@ const Start: React.FC = () => {
           <div css={imgStyle('https://miro.medium.com/max/666/1*nrxtwp6rzqdFhgYh0x-eVw.png')} />
 
           <h2>Week2</h2>
+          <Week2example />
           <h2>Week3</h2>
           <h2>Week4</h2>
         </section>
