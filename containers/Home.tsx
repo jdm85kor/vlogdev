@@ -222,24 +222,24 @@ const Home: React.FC<Props> = ({
             &::before {
               position: absolute;
               display: inline-block;
-              left: 0;
+              left: -1px;
               top: 0;
               bottom: 0;
               content: '';
               width: 32px;
-              height: 100%;
+              height: 130px;
               z-index: 100;
               background-image: linear-gradient(270deg,hsla(0,0%,100%,0),#fff 50%);
             }
             &::after {
               position: absolute;
               display: inline-block;
-              right: 0;
+              right: -1px;
               top: 0;
               bottom: 0;
               content: '';
               width: 32px;
-              height: 100%;
+              height: 130px;
               z-index: 100;
               background-image: linear-gradient(90deg,hsla(0,0%,100%,0),#fff 50%);
             }
