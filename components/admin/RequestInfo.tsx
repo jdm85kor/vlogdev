@@ -7,7 +7,7 @@ interface Props {
   user: any;
 };
 
-const Request: React.FC<Props> = ({ user }) => {
+const Request = ({ user }: Props) => {
   const [requests, setRequests] = useState<any[]>([]);
 
   const fetchRequest = async (Authorization: string) => {

@@ -6,9 +6,9 @@ interface Props {
   children: React.ReactNode,
 };
 
-const Playground: React.FC<Props> = ({
+const Playground = ({
   children,
-}) => {
+}: Props) => {
   return (
     <main css={css`
       margin: 0 auto;

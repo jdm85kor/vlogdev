@@ -26,11 +26,11 @@ interface Props {
   type: string,
 }
 
-const RequestModal: React.FC<Props> = ({
+const RequestModal = ({
   isShow,
   setShow,
   type,
-}) => {
+}: Props) => {
   const [modalInfo, setModalInfo] = useState<Record<string, string>>({
     name: '',
     tel: '',

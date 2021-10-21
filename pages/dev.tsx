@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Footer from "@components/common/Footer";
 import DevC from '@containers/Dev';
+import { NextPage } from 'next';
 
-const Dev: React.FC = () => {
+const Dev: NextPage = () => {
   return (
     <div>
       <Head>

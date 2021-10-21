@@ -122,9 +122,9 @@ interface Props {
   },
 };
 
-const Home: React.FC<Props> = ({
+const Home = ({
   vlog,
-}) => {
+}: Props) => {
   const [isShowRequest, setIsShowRequest] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [type, setType] = useState<string>('');

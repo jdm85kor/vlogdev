@@ -9,7 +9,7 @@ type Props = {
   onClose: () => void,
   children: React.ReactNode,
 }
-const Modal: React.FC<Props> = ({ title, isShow, onClose, children }) => {
+const Modal = ({ title, isShow, onClose, children }: Props) => {
   return (
     isShow ?
       <div>

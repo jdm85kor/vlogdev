@@ -2,8 +2,9 @@ import Head from 'next/head'
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
+import { NextPage } from 'next';
 
-const WebRTC: React.FC = () => {
+const WebRTC: NextPage = () => {
   return (
     <div>
       <Head>

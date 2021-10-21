@@ -9,7 +9,7 @@ const anchorStyle = css`
   color: ${colors.hermes};
 `;
 
-const Dev: React.FC = () => {
+const Dev = () => {
 
   return (
     <main css={css`

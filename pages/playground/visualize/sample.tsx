@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import { css } from '@emotion/react';
+import { NextPage } from 'next';
 import PlaygroundC from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
 
-const Sample: React.FC = () => {
+const Sample: NextPage = () => {
   return (
     <div>
       <Head>

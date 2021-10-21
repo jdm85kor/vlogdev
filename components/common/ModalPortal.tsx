@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 type Props = {
   children: React.ReactNode;
 };
-const ModalPortal: React.FC<Props> = ({ children }) => {
+const ModalPortal = ({ children }: Props) => {
   const modalRoot = document.getElementById('modal-root');
   return modalRoot ? ReactDOM.createPortal(
     children,

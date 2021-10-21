@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer
       role="contentinfo"

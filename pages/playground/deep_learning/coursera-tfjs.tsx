@@ -1,8 +1,13 @@
+import { useState } from 'react';
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
 import { mq } from '@styles/theme';
+import { NextPage } from 'next';
+
+let DigitModel = () => (<div>현재 환경에서는 사용이 불가능합니다.</div>);
 
 const imgStyle = (url: string, padding: number = 25) => css`
   background: no-repeat center/contain url(${url});
@@ -10,7 +15,7 @@ const imgStyle = (url: string, padding: number = 25) => css`
   padding: ${padding}% 0;
 `;
 
-const Week2example = () => (
+const Week2codes = () => (
   <div  css={css`
     ${mq({
       width: ['calc(100vw - 40px)', 'inherit'],
@@ -78,7 +83,8 @@ const Week2example = () => (
   `}</p>
 </div>);
 
-const Start: React.FC = () => {
+const CourseraTfjs: NextPage = () => {
+  const [isShowWeek2Example, setIsShowWeek2Example] = useState<boolean>(false);
   return (
     <div>
       <Head>
@@ -182,7 +188,24 @@ const Start: React.FC = () => {
           <div css={imgStyle('https://miro.medium.com/max/666/1*nrxtwp6rzqdFhgYh0x-eVw.png')} />
 
           <h2>Week2</h2>
-          <Week2example />
+          <Week2codes />
+          {
+            !isShowWeek2Example ?
+            <button
+              type="button"
+              css={css`
+                margin-top: 20px;
+              `}
+              onClick={() => {
+                setIsShowWeek2Example(true);
+                DigitModel = dynamic(() => import('@components/playground/deep-learning/DigitModel'));
+              }}
+            >
+              실험하기(pc 환경 권장)
+            </button> :
+            <DigitModel />
+          }
+
           <h2>Week3</h2>
           <h2>Week4</h2>
         </section>
@@ -192,4 +215,4 @@ const Start: React.FC = () => {
   );
 };
 
-export default Start;
+export default CourseraTfjs;

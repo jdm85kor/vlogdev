@@ -30,7 +30,7 @@ interface ImportsFiles {
   };
 };
 
-const Menu: React.FC = () => {
+const Menu = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const [importsFiles, setImportsFiles] = useState<ImportsFiles>({});
 

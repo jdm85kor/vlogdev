@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { css } from '@emotion/react';
 import PlaygroundC from '@containers/Playground';
+import { NextPage } from 'next';
 
-const Playground: React.FC = () => {
+const Playground: NextPage = () => {
   return (
     <div>
       <Head>

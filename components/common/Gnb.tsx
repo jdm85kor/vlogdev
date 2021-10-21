@@ -1,11 +1,12 @@
-import styled from '@emotion/styled';
+/* eslint-disable @next/next/no-img-element */
+import React, { ReactElement } from 'react';
 import { css } from '@emotion/react';
 import Link from 'next/link';
 import { colors } from '@styles/theme';
 import Setting from '@public/svg/setting.svg';
 import { mq } from '@styles/theme';
 
-const Div = styled.div`
+const div = css`
   margin: 0 auto;
   position: sticky;
   ${mq({
@@ -18,7 +19,7 @@ const Div = styled.div`
   z-index: 5000;
 `;
 
-const Nav = styled.nav`
+const nav = css`
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -26,11 +27,11 @@ const Nav = styled.nav`
   height: 50px;
 `;
 
-const Img = styled.img`
+const img = css`
   vertical-align: middle;
 `;
 
-const Ul = styled.ul`
+const ul = css`
   flex: 1 1 1024px;
   display: flex;
   margin: 0;
@@ -41,7 +42,7 @@ const Ul = styled.ul`
   max-width: 1024px;
   min-width: 230px;
 `;
-const Li = styled.li`
+const li = css`
   display: inline-block;
   flex: auto;
   height: inherit;
@@ -54,7 +55,7 @@ const Li = styled.li`
   }
 `;
 
-const A = styled.a`
+const a = css`
   flex: 1 1 auto;
   color: ${colors.hermes};
   text-decoration: none;
@@ -70,41 +71,41 @@ const A = styled.a`
   }
 `;
 
-const Gnb: React.FC = () => {
+const Gnb = () => {
   return (
-    <Div role="banner">
-      <Nav>
+    <div css={div} role="banner">
+      <nav css={nav}>
         <Link href="/" passHref>
-          <A>
-            <Img src="https://d6c63ppcwec2x.cloudfront.net/logo_96x96.png" alt="" width="30" height="30" />
-          </A>
+          <a css={a}>
+            <img css={img} src="https://d6c63ppcwec2x.cloudfront.net/logo_96x96.png" alt="" width="30" height="30" />
+          </a>
         </Link>
-        <Ul>
-          <Li>
-            <Link href="/vlog" passHref><A>VLOG</A></Link>
-          </Li>
-          <Li>
-            <Link href="/playground" passHref><A>PLAYGROUND</A></Link>
-          </Li>
-          <Li>
-            <Link href="/dev" passHref><A>DEV</A></Link>
-          </Li>
-          <Li>
-            <Link href="/about" passHref><A>ABOUT</A></Link>
-          </Li>
-        </Ul>
+        <ul css={ul}>
+          <li css={li}>
+            <Link href="/vlog" passHref><a css={a}>VLOG</a></Link>
+          </li>
+          <li css={li}>
+            <Link href="/playground" passHref><a css={a}>PLAYGROUND</a></Link>
+          </li>
+          <li css={li}>
+            <Link href="/dev" passHref><a css={a}>DEV</a></Link>
+          </li>
+          <li css={li}>
+            <Link href="/about" passHref><a css={a}>ABOUT</a></Link>
+          </li>
+        </ul>
         <Link href="/admin" passHref>
-          <A>
+          <a css={a}>
             <Setting css={css`
               width: 20px;
               height: 20px;
               display: inline-block;
               vertical-align: middle;
             `} />
-          </A>
+          </a>
           </Link>
-      </Nav>
-    </Div>
+      </nav>
+    </div>
   );
 };
 

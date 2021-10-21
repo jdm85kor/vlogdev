@@ -8,7 +8,7 @@ interface Props {
   children?: React.ReactNode;
 };
 
-const Template: React.FC<Props> = ({ children }) => {
+const Template = ({ children }: Props) => {
   return (
     <>
       <Head>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const Utteranc: React.FC = () => {
+const Utteranc = () => {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

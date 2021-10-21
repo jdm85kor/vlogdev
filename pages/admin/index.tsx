@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import AdminC from '@containers/Admin';
+import { NextPage } from 'next';
 
-const Admin: React.FC = () => {
+const Admin: NextPage = () => {
   return (
     <div>
       <Head>

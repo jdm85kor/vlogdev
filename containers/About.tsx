@@ -63,7 +63,7 @@ const foldStyle = css`
   margin: 0 5px;
 `;
 
-const About: React.FC = () => {
+const About = () => {
   const [collabseStatus, setCollabseStatus] = useState<{ [key: string]: boolean}>({
     indivisual: false,
   });

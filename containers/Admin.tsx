@@ -13,8 +13,7 @@ const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog'];
 interface Props {
   user?: any;
 }
-
-const Admin: React.FC<Props> = ({ user }) => {
+const Admin = ({ user }: Props) => {
   const  { auth, isAdmin } = user;
   const [currentTab, setCurrentTab] = useState<Tab>('YoutubeChannel');
 

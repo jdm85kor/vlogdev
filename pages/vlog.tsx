@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Footer from "@components/common/Footer";
 import VlogC from '@containers/Vlog';
+import { NextPage } from 'next';
 
-const Vlog: React.FC = () => {
+const Vlog: NextPage = () => {
   return (
     <div>
       <Head>

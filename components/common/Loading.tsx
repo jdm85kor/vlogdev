@@ -96,7 +96,7 @@ const block = (left: number, top: number) => css`
   top: ${top}px;
 `;
 
-const Loading: React.FC = () => {
+const Loading = () => {
   return (
     <div css={css`
       position: absolute;

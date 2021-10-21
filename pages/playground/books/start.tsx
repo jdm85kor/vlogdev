@@ -3,8 +3,8 @@ import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
 import Books from '@public/svg/books.svg';
-
-const Start: React.FC = () => {
+import { NextPage } from 'next';
+const Start: NextPage = () => {
   return (
     <div>
       <Head>

@@ -95,9 +95,9 @@ interface Props {
     addVideos: (id: string, videos: any[]) => void;
   };
 };
-const Vlog: React.FC<Props> = ({
+const Vlog = ({
   vlog,
-}) => {
+}: Props) => {
   const [isLoadingChannel, setIsLoadingChannel] = useState<boolean>(false);
   const [chooseGroup, setChooseGroup] = useState<string>('DEV');
   const [chooseChannel, setChooseChannel] = useState<string>('');

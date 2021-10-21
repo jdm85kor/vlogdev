@@ -23,7 +23,7 @@ interface Props {
 type ChannelInfoKeys = 'channelId' | 'channelTitle' | 'group';
 
 
-const Vlog: React.FC<Props> = ({ user }) => {
+const Vlog = ({ user }: Props) => {
   const [channels, setChannels] = useState<any[]>([]);
   const [channelInfo, setChannelInfo] = useState<{[key in ChannelInfoKeys]: string}>({
     channelId: '', channelTitle: '', group: '',

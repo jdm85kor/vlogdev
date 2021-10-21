@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Head from 'next/head';
+import Script from 'next/script'
 
 declare global {
   interface Window {
@@ -7,7 +7,11 @@ declare global {
   }
 }
 
-const Ga: React.FC = ({ children }) => {
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Ga = ({ children }: Props) => {
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production') return;
 
@@ -22,10 +26,7 @@ const Ga: React.FC = ({ children }) => {
   });
   return (
     <>
-      <Head>
-        {/* Global site tag (gtag.js) - Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LLLCDYD99J"></script>
-      </Head>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-LLLCDYD99J"></Script>
       {children}
     </>
   );
