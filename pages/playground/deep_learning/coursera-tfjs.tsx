@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import { css } from '@emotion/react';
@@ -7,7 +7,7 @@ import Utteranc from '@components/common/Utteranc';
 import { mq } from '@styles/theme';
 import { NextPage } from 'next';
 
-let DigitModel = () => (<div>현재 환경에서는 사용이 불가능합니다.</div>);
+let DigitModel: any;
 
 const imgStyle = (url: string, padding: number = 25) => css`
   background: no-repeat center/contain url(${url});
@@ -197,13 +197,16 @@ const CourseraTfjs: NextPage = () => {
                 margin-top: 20px;
               `}
               onClick={() => {
-                setIsShowWeek2Example(true);
+                
                 DigitModel = dynamic(() => import('@components/playground/deep-learning/DigitModel'));
+                setTimeout(() => {
+                  setIsShowWeek2Example(true);
+                }, 1000);
               }}
             >
               실험하기(pc 환경 권장)
             </button> :
-            <DigitModel />
+            !!DigitModel ? <DigitModel /> : <div />
           }
 
           <h2>Week3</h2>

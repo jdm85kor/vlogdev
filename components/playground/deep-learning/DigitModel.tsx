@@ -2,9 +2,17 @@
 import React, { useRef } from 'react';
 import { css } from '@emotion/react';
 // import * as tfvis from '@tensorflow/tfjs-vis';
-import * as tf from '@tensorflow/tfjs';
+// import * as tf from '@tensorflow/tfjs';
 import { MnistData } from './data.js';
 import Script from 'next/script'
+
+declare global {
+  interface Window {
+    tfvis: any;
+    tf: any;
+  }
+}
+
 
 
 const  DigitModel = () => {
@@ -18,13 +26,13 @@ const  DigitModel = () => {
   const train = async (model: any, data: any) => {
     const metrics = ['loss', 'val_loss', 'accuracy', 'val_accuracy'];
     const container = { name: 'Model Training', styles: { height: '640px' } };
-    const fitCallbacks = tfvis.show.fitCallbacks(container, metrics);
+    const fitCallbacks = window.tfvis.show.fitCallbacks(container, metrics);
     
     const BATCH_SIZE = 512;
     const TRAIN_DATA_SIZE = 5500;
     const TEST_DATA_SIZE = 1000;
 
-    const [trainXs, trainYs] = tf.tidy(() => {
+    const [trainXs, trainYs] = window.tf.tidy(() => {
       const d = data.nextTrainBatch(TRAIN_DATA_SIZE);
       return [
         d.xs.reshape([TRAIN_DATA_SIZE, 28, 28, 1]),
@@ -32,7 +40,7 @@ const  DigitModel = () => {
       ];
     });
 
-    const [testXs, testYs] = tf.tidy(() => {
+    const [testXs, testYs] = window.tf.tidy(() => {
       const d = data.nextTestBatch(TEST_DATA_SIZE);
       return [
         d.xs.reshape([TEST_DATA_SIZE, 28, 28, 1]),
@@ -50,17 +58,17 @@ const  DigitModel = () => {
   }
 
   const getModel = () => {
-    model.current = tf.sequential();
+    model.current = window.tf.sequential();
 
-    model.current.add(tf.layers.conv2d({inputShape: [28, 28, 1], kernelSize: 3, filters: 8, activation: 'relu'}));
-    model.current.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
-    model.current.add(tf.layers.conv2d({filters: 16, kernelSize: 3, activation: 'relu'}));
-    model.current.add(tf.layers.maxPooling2d({poolSize: [2, 2]}));
-    model.current.add(tf.layers.flatten());
-    model.current.add(tf.layers.dense({units: 128, activation: 'relu'}));
-    model.current.add(tf.layers.dense({units: 10, activation: 'softmax'}));
+    model.current.add(window.tf.layers.conv2d({inputShape: [28, 28, 1], kernelSize: 3, filters: 8, activation: 'relu'}));
+    model.current.add(window.tf.layers.maxPooling2d({poolSize: [2, 2]}));
+    model.current.add(window.tf.layers.conv2d({filters: 16, kernelSize: 3, activation: 'relu'}));
+    model.current.add(window.tf.layers.maxPooling2d({poolSize: [2, 2]}));
+    model.current.add(window.tf.layers.flatten());
+    model.current.add(window.tf.layers.dense({units: 128, activation: 'relu'}));
+    model.current.add(window.tf.layers.dense({units: 10, activation: 'softmax'}));
 
-    model.current.compile({optimizer: tf.train.adam(), loss: 'categoricalCrossentropy', metrics: ['accuracy']});
+    model.current.compile({optimizer: window.tf.train.adam(), loss: 'categoricalCrossentropy', metrics: ['accuracy']});
 
     return model.current;
   }
@@ -75,23 +83,25 @@ const  DigitModel = () => {
   }
 
   const run = async () => {
-    const data = new MnistData();
-    await data.load();
-    const model = getModel();
-    // tfvis.show.modelSummary({name: 'Model Architecture'}, model);
-    tfvis.show.modelSummary({ drawArea: result.current}, model);
-    await train(model, data);
-    init();
-    alert("Training is done, try classifying your handwriting!");
+    if (typeof window !== 'undefined') {
+      const data = new MnistData();
+      await data.load();
+      const model = getModel();
+      // window.tfvis.show.modelSummary({name: 'Model Architecture'}, model);
+      window.tfvis.show.modelSummary({ drawArea: result.current}, model);
+      await train(model, data);
+      init();
+      alert("Training is done, try classifying your handwriting!");
+    }
   };
 
-  const setPosition = (e) => {
+  const setPosition = (e: any) => {
     const { left, top } = canvas.current.getBoundingClientRect();
     pos.current.x = e.clientX - left;
     pos.current.y = e.clientY - top;
   }
       
-  const draw = (e) => {
+  const draw = (e: any) => {
     if(e.buttons!=1) return;
     ctx.current.beginPath();
     ctx.current.lineWidth = 24;
@@ -110,11 +120,11 @@ const  DigitModel = () => {
   }
       
   const save = () => {
-    let raw = tf.browser.fromPixels(rawImage.current,1);
-    let resized = tf.image.resizeBilinear(raw, [28,28]);
+    let raw = window.tf.browser.fromPixels(rawImage.current,1);
+    let resized = window.tf.image.resizeBilinear(raw, [28,28]);
     let tensor = resized.expandDims(0);
     let prediction = model.current.predict(tensor);
-    let pIndex = tf.argMax(prediction, 1).dataSync();
+    let pIndex = window.tf.argMax(prediction, 1).dataSync();
 
     alert(pIndex);
   }
