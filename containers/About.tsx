@@ -387,7 +387,7 @@ const About = () => {
                 <p>
                   수강 중인 수업: <br />
                   &nbsp;&nbsp; - <a
-                    href="https://www.coursera.org/learn/browser-based-models-tensorflow"
+                    href="https://www.coursera.org/specializations/tensorflow-data-and-deployment"
                     css={css`
                       text-decoration: none;
                       color: slateblue;
@@ -395,7 +395,7 @@ const About = () => {
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
-                    Browser-based Models with TensorFlow.js
+                    TensorFlow: Data and Deployment Specialization
                   </a><br />
                   &nbsp;&nbsp; - <a
                     href="https://www.tensorflow.org/resources/learn-ml/basics-of-tensorflow-for-js-development"
