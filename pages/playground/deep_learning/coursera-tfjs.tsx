@@ -209,8 +209,21 @@ const CourseraTfjs: NextPage = () => {
             !!DigitModel ? <DigitModel /> : <div />
           }
 
-          <h2>Week3</h2>
-          <h2>Week4</h2>
+          <h2>Week3 & Week4</h2>
+          <p>
+            Week3와 Week4에서는 Jupyter Notebook 사용과 브라우저 웹캠을 이용한 간단한 기능을 구현합니다.
+            <br />
+            &#40;수강을 마무리 했지만, 정리는 잠시 미룹니다.&#41;
+            <br />
+            이 강좌는 총 4개 강좌의 첫번째로 뒤에 강좌가 3개가 더 있는데, 브라우저가 아닌 다른 환경에서 tensorflow를 다뤄야 해서 많은 학습을 필요로 합니다.
+            <br />
+            진행하다보니 머신러닝, 딥러닝에 대한 내용에 학습이 필요하여 현재는 스탠포드 대학의 Machine Learning 강좌 &#40;Andrew Ng&#41; 수강중입니다.
+            <br />
+            전반적으로 깊게 학습하지는 않지만, tensorflow에 대해서 부담 없이 학습을 시작하게 해주는 강의로 생각됩니다.
+            <br />
+            강추합니다.
+          </p>
+          <div css={imgStyle('https://d6c63ppcwec2x.cloudfront.net/course/coursera-tensorflow.jpg')} />
         </section>
       </Playground>
       <Utteranc />
