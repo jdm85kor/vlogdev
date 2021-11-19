@@ -135,8 +135,7 @@ const  DigitModel = () => {
       margin: 10px auto;
     `}>
       <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
-      {/* <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></Script> */}
-      <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></Script>
+      <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></Script>
       <canvas
         width={280}
         height={280}

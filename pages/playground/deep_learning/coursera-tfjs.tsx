@@ -8,6 +8,7 @@ import { mq } from '@styles/theme';
 import { NextPage } from 'next';
 
 let DigitModel: any;
+let ImageModel: any;
 
 const imgStyle = (url: string, padding: number = 25) => css`
   background: no-repeat center/contain url(${url});
@@ -85,6 +86,7 @@ const Week2codes = () => (
 
 const CourseraTfjs: NextPage = () => {
   const [isShowWeek2Example, setIsShowWeek2Example] = useState<boolean>(false);
+  const [isShowWeek4Example, setIsShowWeek4Example] = useState<boolean>(false);
   return (
     <div>
       <Head>
@@ -195,16 +197,18 @@ const CourseraTfjs: NextPage = () => {
               type="button"
               css={css`
                 margin-top: 20px;
+                ${mq({
+                  display: ['none', 'none', 'inline-block'],
+                })}
               `}
               onClick={() => {
-                
                 DigitModel = dynamic(() => import('@components/playground/deep-learning/DigitModel'));
                 setTimeout(() => {
                   setIsShowWeek2Example(true);
                 }, 1000);
               }}
             >
-              실험하기(pc 환경 권장)
+              숫자 인식 실험하기 (pc 환경 권장)
             </button> :
             !!DigitModel ? <DigitModel /> : <div />
           }
@@ -214,6 +218,30 @@ const CourseraTfjs: NextPage = () => {
             Week3와 Week4에서는 Jupyter Notebook 사용과 브라우저 웹캠을 이용한 간단한 기능을 구현합니다.
             <br />
             &#40;수강을 마무리 했지만, 정리는 잠시 미룹니다.&#41;
+          </p>
+          {
+            !isShowWeek4Example ?
+            <button
+              type="button"
+              css={css`
+                margin-top: 20px;
+                ${mq({
+                  display: ['none', 'none', 'inline-block'],
+                })}
+              `}
+              onClick={() => {
+                ImageModel = dynamic(() => import('@components/playground/deep-learning/ImageModel'));
+                setTimeout(() => {
+                  setIsShowWeek4Example(true);
+                }, 1000);
+              }}
+            >
+              이미지 인식 실험하기 (pc 환경 권장)
+            </button> :
+            !!ImageModel ? <ImageModel /> : <div />
+
+          }
+          <p>
             <br />
             이 강좌는 총 4개 강좌의 첫번째로 뒤에 강좌가 3개가 더 있는데, 브라우저가 아닌 다른 환경에서 tensorflow를 다뤄야 해서 많은 학습을 필요로 합니다.
             <br />

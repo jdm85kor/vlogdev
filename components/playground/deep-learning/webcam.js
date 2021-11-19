@@ -18,7 +18,7 @@
  */
 
 
-class Webcam {
+export default class Webcam {
   /**
    * @param {HTMLVideoElement} webcamElement A HTMLVideoElement representing the
    *     webcam feed.

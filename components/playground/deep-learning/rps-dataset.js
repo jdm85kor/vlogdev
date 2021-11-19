@@ -1,4 +1,4 @@
-class RPSDataset {
+export default class RPSDataset {
   constructor() {
     this.labels = []
   }
