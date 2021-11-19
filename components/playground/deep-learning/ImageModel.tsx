@@ -68,7 +68,7 @@ const  DigitModel = () => {
     model.current.fit(dataset.current.xs, dataset.current.ys, {
       epochs: 10,
       callbacks: {
-        onBatchEnd: async (batch, logs: any) => {
+        onBatchEnd: async (batch: any, logs: any) => {
           loss = logs.loss.toFixed(5);
           console.log('LOSS: ' + loss);
           }
