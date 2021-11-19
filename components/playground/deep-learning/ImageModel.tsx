@@ -19,8 +19,8 @@ const  DigitModel = () => {
   let mobilenet: any = useRef(null);
   let model: any = useRef(null);
 
-  const webcam = useRef({});
-  const dataset = useRef({ ys: null, xs: null });
+  const webcam: any = useRef(null);
+  const dataset: any = useRef(null);
 
   const [rockSamples, setRockSamples] = useState(0);
   const [paperSamples, setPaperSamples] = useState(0);
