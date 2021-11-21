@@ -153,8 +153,8 @@ const Menu = () => {
                     key={`${f[0]}-${fIdx}`}
                     css={listItemStyle}
                   >
-                    <button
-                      type="button"
+                    <div
+                      // type="button"
                       css={css`
                         padding: 0;
                         width: 100%;
@@ -164,14 +164,15 @@ const Menu = () => {
                         color: ${colors.hermes};
                         cursor: pointer;
                         font-weight: 800;
+                        text-align: center;
                       `}
-                      onClick={() => setImportsFiles(prev => ({
-                        ...prev,
-                        [f[0]]: {
-                          ...f[1],
-                          isFold: !f[1].isFold,
-                        }
-                      }))}
+                      // onClick={() => setImportsFiles(prev => ({
+                      //   ...prev,
+                      //   [f[0]]: {
+                      //     ...f[1],
+                      //     isFold: !f[1].isFold,
+                      //   }
+                      // }))}
                     >
                       {f[0]}
                       {
@@ -179,7 +180,7 @@ const Menu = () => {
                         <Unfold css={iconStyle} />:
                         <Fold css={iconStyle} />
                       }
-                    </button>
+                    </div>
                   </li>
                   {
                     f[1].isFold && f[1].list.map((i, iIdx) => (
