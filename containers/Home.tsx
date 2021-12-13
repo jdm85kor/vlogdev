@@ -13,29 +13,11 @@ const news = [{
   url: 'https://dev.to/o1lab/how-my-open-source-project-got-angel-investment-from-its-user-12dp',
   title: '내 오픈소스 프로젝트가 유저로 부터 엔젤 투자를 받는 방법',
 }, {
-  url: 'https://kentcdodds.com/blog/how-i-built-a-modern-website-in-2021',
-  title: 'How I built a modern website in 2021',
+  url: 'http://channy.creation.net/blog/1443',
+  title: '스타트업의 개발자 채용 비법',
 }, {
-  url: 'https://css-tricks.com/web-streams-everywhere-and-fetch-for-node-js/',
-  title: 'Web Streams Everywhere',
-}, {
-  url: 'https://www.newline.co/@kchan/writing-a-custom-react-hook-for-spotifys-web-api-implicit-grant-flow--25967253',
-  title: "Writing a Custom React Hook for Spotify's Web API",
-}, {
-  url: 'https://casparwre.de/blog/launching-a-product-without-a-login/',
-  title: "Why you should launch your product without a login",
-}, {
-  url: 'https://dev.to/caroso1222/how-i-went-from-frontend-dev-to-machine-learning-engineer-6ao',
-  title: "How I went from Frontend Dev to Machine Learning Engineer",
-}, {
-  url: 'https://webandcrafts.com/blog/ai-machine-learning-impact-front-end-development/',
-  title: "AI & Machine Learning : Impact on Front-End Development",
-}, {
-  url: 'https://www.alibabacloud.com/blog/building-a-high-level-frontend-machine-learning-framework-based-on-the-tfjs-node_596990',
-  title: "Building a High-Level Frontend Machine Learning Framework Based on the tfjs-node",
-}, {
-  url: 'https://towardsdatascience.com/top-3-javascript-machine-learning-libraries-84a4b509db85',
-  title: "Top 3 JavaScript Machine Learning Libraries",
+  url: 'http://channy.creation.net/blog/1492',
+  title: 'Tech Predictions for 2022 and Beyond',
 }];
 
 const sectionStyle = css`

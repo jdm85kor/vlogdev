@@ -227,6 +227,12 @@ const About = () => {
           <p css={pStyle}>
             21.9 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가
           </p>
+          <p css={pStyle}>
+            21.10 playground contents 추가, lambda logic 수정
+          </p>
+          <p css={pStyle}>
+            21.11 tensorflowjs contents (webcam) 추가
+          </p>
         </section>
         <section css={sectionStyle}>
           <h2 css={h2Style}>
@@ -291,7 +297,7 @@ const About = () => {
             <dt css={dtStyle}>Email</dt>
             <dd css={ddStyle}>jdm85kor@gmail.com</dd>
             <dt css={dtStyle}>Career</dt>
-            <dd css={ddStyle}>SENTBE, WeMakePrice, Wantedlab, Musinsa</dd>
+            <dd css={ddStyle}>Eugene Investment, SENTBE, WeMakePrice, Wantedlab, Musinsa</dd>
             <dt css={dtStyle}>SNS</dt>
             <dd css={css`
               ${ddStyle}
@@ -382,12 +388,18 @@ const About = () => {
                   취미: 골프, 여행
                 </p>
                 <p>
+                  장점: 세상에 대한 얕고 넓은 관심 &#40;ENTP&#41;
+                </p>
+                <p>
+                  단점: 금붕어 수준의 기억력
+                </p>
+                <p>
                   골프를 치는 이유: 내 몸을 얼마만큼 내가 원하는데로 쓸 수 있는지 시험해보고 싶은데, 가장 빠르고 편리하게 혼자 해볼 수 있는 종목.
                 </p>
                 <p>
-                  수강 중인 수업: <br />
-                  &nbsp;&nbsp; - <a
-                    href="https://www.coursera.org/specializations/tensorflow-data-and-deployment"
+                  요즘은 &#63; <br />
+                  &nbsp;&nbsp; &#45; <a
+                    href="https://www.coursera.org/learn/machine-learning/home/welcome"
                     css={css`
                       text-decoration: none;
                       color: slateblue;
@@ -395,10 +407,10 @@ const About = () => {
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
-                    TensorFlow: Data and Deployment Specialization
+                    Machine Learning
                   </a><br />
-                  &nbsp;&nbsp; - <a
-                    href="https://www.tensorflow.org/resources/learn-ml/basics-of-tensorflow-for-js-development"
+                  &nbsp;&nbsp; &#45; <a
+                    href="https://www.coursera.org/learn/browser-based-models-tensorflow/home/welcome"
                     css={css`
                       text-decoration: none;
                       color: slateblue;
@@ -406,7 +418,7 @@ const About = () => {
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                   >
-                    TensorFlow for JavaScript development
+                    TensorFlow: Data and Deployment
                   </a>
                 </p>
               </div>
