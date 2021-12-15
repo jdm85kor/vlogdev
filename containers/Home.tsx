@@ -16,6 +16,9 @@ const news = [{
   url: 'http://channy.creation.net/blog/1443',
   title: '스타트업의 개발자 채용 비법',
 }, {
+  url: 'https://web.dev/bundling-non-js-resources/',
+  title: 'Bundling non-JavaScript resources',
+}, {
   url: 'http://channy.creation.net/blog/1492',
   title: 'Tech Predictions for 2022 and Beyond',
 }];
