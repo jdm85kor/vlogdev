@@ -297,13 +297,14 @@ const About = () => {
             <dt css={dtStyle}>Email</dt>
             <dd css={ddStyle}>jdm85kor@gmail.com</dd>
             <dt css={dtStyle}>Career</dt>
-            <dd css={ddStyle}>Eugene Investment, SENTBE, WeMakePrice, Wantedlab, Musinsa</dd>
+            <dd css={ddStyle}>Eugene Investment&#44; SENTBE&#44; WeMakePrice&#44; Wantedlab&#44; Musinsa</dd>
             <dt css={dtStyle}>SNS</dt>
             <dd css={css`
               ${ddStyle}
               & > a {
+                display: inline-block;
                 ${mq({
-                  marginRight: ['5px', '20px', '50px']
+                  margin: ['0 2px 0', '0 10px 0 ', '0 20px 0']
                 })}
               }
             `}>
@@ -371,7 +372,7 @@ const About = () => {
                   `} 
                 />
                 <figcaption css={css`font-size: 10px;`}>
-                  수능 준비 때, 80kg에 육박하다가<br />
+                  수능 준비 때&#44; 80kg에 육박하다가<br />
                   졸업 전에 이 몸무게로 뺀 후 현재까지 유지
                 </figcaption>
               </div>
@@ -385,19 +386,27 @@ const About = () => {
                 `}
               >
                 <p>
-                  취미: 골프, 여행
+                  <b>취미</b>&#58; 골프&#44; 여행
                 </p>
                 <p>
-                  장점: 세상에 대한 얕고 넓은 관심 &#40;ENTP&#41;
+                  <b>장점</b>&#58; 세상에 대한 얕고 넓은 관심 &#40;ENTP&#41;
                 </p>
                 <p>
-                  단점: 금붕어 수준의 기억력
+                  <b>단점</b>&#58; 금붕어 수준의 기억력
                 </p>
                 <p>
-                  골프를 치는 이유: 내 몸을 얼마만큼 내가 원하는데로 쓸 수 있는지 시험해보고 싶은데, 가장 빠르고 편리하게 혼자 해볼 수 있는 종목.
+                  <b>골프를 치는 이유&#63;</b><br />
+                  내 몸을 얼마만큼 내가 원하는데로 쓸 수 있는지 시험해보고 싶은데&#44; 가장 빠르고 편리하게 혼자 해볼 수 있다&#46; 내가 생각하는데로 내 몸과 공이 움직였을 때 기쁘다&#46;
                 </p>
                 <p>
-                  요즘은 &#63; <br />
+                  <b>코드 작성시 주로 하는 생각&#47;고민&#63;</b><br />
+                  예전에 술자리에서 존 카맥&#40;둠&#44; 퀘이크&#44; 울펜슈타인&#41;은 코드를 볼 때&#44; 방향키를 사용하지 않고 page up&#47;down 키를 사용한다고 들었다&#46;<br />
+                  사실 여부는 모르겠으나&#44; 나도 그렇게 코드를 빨리 보고 싶다는 생각이 들었고 남들도 내 코드를 빨리 볼 수 있으면 좋겠다는 생각을 했다&#46;<br />
+                  어떻게 그게 가능할지 고민하다가 최대한 담백하고 기본에 충실한 코드를 작성하면 되겠다고 생각했다&#46;<br />
+                  그래서 코드 작성시에 내가 어떻게 어떤 문제를 풀려고 하는지 잘 담으려고 노력하고&#44; 문제가 발생 되면 다른 이가 내 코드를 보고 문제에 대한 접근이 잘못 된건지&#44; 코드 작성 과정이 잘못 된건지 바로 확인할 수 있게 하려고 노력한다&#46;
+                </p>
+                <p>
+                  <b>요즘은 &#63;</b><br />
                   &nbsp;&nbsp; &#45; <a
                     href="https://www.coursera.org/learn/machine-learning/home/welcome"
                     css={css`
