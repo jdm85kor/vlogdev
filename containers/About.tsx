@@ -6,6 +6,7 @@ import Instagram from '@public/svg/instagram.svg';
 import Linkedin from '@public/svg/linkedin.svg';
 import Twitter from '@public/svg/twitter.svg';
 import Youtube from '@public/svg/youtube.svg';
+import Medium from '@public/svg/medium.svg';
 import { mq, colors } from '@styles/theme';
 import Unfold from '@public/svg/unfold.svg';
 import Fold from '@public/svg/fold.svg';
@@ -322,6 +323,9 @@ const About = () => {
               </a>
               <a href="https://www.youtube.com/channel/UCmW86kc2yoMLRSO0uZ72jGA" target="_blank" rel="noreferrer">
                 <Youtube css={snsStyle}/>
+              </a>
+              <a href="https://medium.com/@dongmin-jang" target="_blank" rel="noreferrer">
+                <Medium css={snsStyle}/>
               </a>
             </dd>
           </dl>
