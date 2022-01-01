@@ -1,14 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { observer, inject } from "mobx-react";
+import { observer, inject } from 'mobx-react';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { css } from '@emotion/react';
 import { mq, colors } from '@styles/theme';
 import Request from '@components/admin/RequestInfo';
 import Youtube from '@components/admin/YoutubeInfo';
+import Daily from '@components/admin/Daily';
 
-type Tab = 'YoutubeChannel' | 'Request' | 'Vlog'
-const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog'];
+type Tab = 'YoutubeChannel' | 'Request' | 'Vlog' | 'Daily';
+const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog', 'Daily'];
 
 interface Props {
   user?: any;
@@ -89,6 +90,8 @@ const Admin = ({ user }: Props) => {
               <Request user={auth} /> :
               currentTab === 'YoutubeChannel' ? 
               <Youtube user={auth} /> :
+              currentTab === 'Daily' ? 
+              <Daily user={auth} /> :
               <></> 
             }
           </> : 
