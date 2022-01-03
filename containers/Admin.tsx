@@ -7,9 +7,10 @@ import { mq, colors } from '@styles/theme';
 import Request from '@components/admin/RequestInfo';
 import Youtube from '@components/admin/YoutubeInfo';
 import Daily from '@components/admin/Daily';
+import Books from '@components/admin/Books';
 
-type Tab = 'YoutubeChannel' | 'Request' | 'Vlog' | 'Daily';
-const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog', 'Daily'];
+type Tab = 'YoutubeChannel' | 'Request' | 'Vlog' | 'Daily' | 'Books';
+const tabs: Tab[] = ['YoutubeChannel', 'Request', 'Vlog', 'Daily', 'Books'];
 
 interface Props {
   user?: any;
@@ -92,6 +93,8 @@ const Admin = ({ user }: Props) => {
               <Youtube user={auth} /> :
               currentTab === 'Daily' ? 
               <Daily user={auth} /> :
+              currentTab === 'Books' ? 
+              <Books user={auth} /> :
               <></> 
             }
           </> : 
