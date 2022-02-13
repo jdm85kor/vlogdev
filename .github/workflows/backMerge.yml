@@ -28,5 +28,5 @@ jobs:
           git fetch --unshallow
           git checkout dev
           git pull
-          git merge --ff main -m "Auto-merge master back to dev"
+          git merge main
           git push
