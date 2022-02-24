@@ -29,4 +29,4 @@ jobs:
           git switch dev
           git pull
           git merge --no-ff main -m "Auto-merge main back to dev"
-          git push -f origin dev
+          git push
