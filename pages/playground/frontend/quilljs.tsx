@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Head from 'next/head'
-import Quill from 'quill';
+// import Quill from 'quill';
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
