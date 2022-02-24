@@ -8,11 +8,11 @@ import { NextPage } from 'next';
 
 const Quilljs: NextPage = () => {
   const quillEl = useRef(null);
-  // useEffect(()=> {
-  //   if (quillEl?.current) {
-  //     const quill = new Quill(quillEl.current, { theme: 'snow'});
-  //   }
-  // }, [])
+  useEffect(()=> {
+    if (quillEl?.current) {
+      const quill = new Quill(quillEl.current, { theme: 'snow'});
+    }
+  }, [])
   
   return (
     <div>
