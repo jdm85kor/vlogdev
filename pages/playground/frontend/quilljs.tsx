@@ -10,7 +10,7 @@ const Quilljs: NextPage = () => {
   const quillEl = useRef(null);
   useEffect(()=> {
     if (quillEl?.current) {
-      const quill = new Quill(quillEl.current, { theme: 'snow'});
+      new Quill(quillEl.current, { theme: 'snow'});
     }
   }, [])
   
