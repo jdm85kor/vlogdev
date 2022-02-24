@@ -20,8 +20,8 @@ jobs:
     
     - name: Set Git config
       run: |
-          git config --local user.email "42103905+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email "jdm85kor@gmail.com"
+          git config --local user.name "jdm85kor"
     
     - name: Merge main back to dev
       run: |
