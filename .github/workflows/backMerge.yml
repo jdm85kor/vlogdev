@@ -20,13 +20,13 @@ jobs:
     
     - name: Set Git config
       run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "Github Actions"
+          git config --local user.email "jdm85kor@gmail.com"
+          git config --local user.name "jdm85kor"
     
     - name: Merge main back to dev
       run: |
           git fetch --unshallow
-          git checkout dev
+          git switch dev
           git pull
-          git merge --no-ff main -m "Auto-merge master back to dev"
-          git push
+          git merge --no-ff main -m "Auto-merge main back to dev"
+          git push origin dev
