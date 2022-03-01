@@ -1,19 +1,17 @@
-import { useRef } from 'react';
+import { NextPage } from 'next';
 import Head from 'next/head'
-// import Quill from 'quill';
 import { css } from '@emotion/react';
+import { mq } from '@styles/theme';
+import { useQuill } from 'react-quilljs';
+import 'quill/dist/quill.snow.css';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
-import { NextPage } from 'next';
+import { getDeviceSize } from '@utils/device';
+
 
 const Quilljs: NextPage = () => {
-  const quillEl = useRef(null);
-  // useEffect(()=> {
-  //   if (quillEl?.current) {
-  //     const quill = new Quill(quillEl.current, { theme: 'snow'});
-  //   }
-  // }, [])
-  
+  const { quill, quillRef } = useQuill();
+  console.log(getDeviceSize())
   return (
     <div>
       <Head>
@@ -42,10 +40,16 @@ const Quilljs: NextPage = () => {
             white-space: pre-line;
           `}
         >
-          <div id='editor' ref={quillEl} css={css`
-            height: 500px;
-          `}
-          />
+          <div css={css`
+            position: relative;
+            margin: 0 auto;
+            ${mq({
+              width: ['calc(100% - 10px)', 'calc(100% - 30px)'],
+            })}
+            height: 200px;
+          `}>
+            <div ref={quillRef} />
+          </div>
         </section>
       </Playground>
       <Utteranc />
