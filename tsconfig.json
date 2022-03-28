@@ -16,19 +16,16 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
-      "@components/*":["components/*"],
-      "@pages/*":["pages/*"],
-      "@containers/*":["containers/*"],
-      "@styles/*":["styles/*"],
-      "@public/*":["public/*"],
-      "@utils/*":["utils/*"],
-      "@mobx/*":["mobx/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@containers/*": ["containers/*"],
+      "@styles/*": ["styles/*"],
+      "@public/*": ["public/*"],
+      "@utils/*": ["utils/*"],
+      "@mobx/*": ["mobx/*"]
     },
-    "typeRoots": [
-      "./type",
-      "./node_modules/@types"
-    ],
-    "types": ["node", "webpack-env"],
+    "typeRoots": ["./type", "./node_modules/@types"],
+    "types": ["node", "webpack-env"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
