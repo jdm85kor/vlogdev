@@ -1,45 +1,59 @@
+import { useRef } from 'react';
 import Head from 'next/head';
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
+import SceneComponent from '@components/playground/babylonjs/SceneComponent';
 import { NextPage } from 'next';
-import { Scene, Engine } from 'babylonjs';
+import { FreeCamera, Vector3, HemisphericLight, MeshBuilder } from '@babylonjs/core';
 
 const Babylonjs: NextPage = () => {
-  var createScene = function () {
-    // This creates a basic Babylon Scene object (non-mesh)
-    var scene = new BABYLON.Scene(engine);
+  const boxRef = useRef<any>(undefined);
 
+  const onSceneReady = (scene: any) => {
     // This creates and positions a free camera (non-mesh)
-    var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 5, -10), scene);
+    var camera = new FreeCamera('camera1', new Vector3(0, 5, -10), scene);
 
     // This targets the camera to scene origin
-    camera.setTarget(BABYLON.Vector3.Zero());
+    camera.setTarget(Vector3.Zero());
+
+    const canvas = scene.getEngine().getRenderingCanvas();
 
     // This attaches the camera to the canvas
     camera.attachControl(canvas, true);
 
     // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
-    var light = new BABYLON.HemisphericLight('light', new BABYLON.Vector3(0, 1, 0), scene);
+    var light = new HemisphericLight('light', new Vector3(0, 1, 0), scene);
 
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 0.7;
 
-    // Our built-in 'sphere' shape.
-    var sphere = BABYLON.MeshBuilder.CreateSphere('sphere', { diameter: 2, segments: 32 }, scene);
+    // Our built-in 'box' shape.
+    boxRef.current = MeshBuilder.CreateBox('box', { size: 2 }, scene);
 
-    // Move the sphere upward 1/2 its height
-    sphere.position.y = 1;
+    // Move the box upward 1/2 its height
+    boxRef.current.position.y = 1;
 
     // Our built-in 'ground' shape.
-    var ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 6, height: 6 }, scene);
-
-    return scene;
+    MeshBuilder.CreateGround('ground', { width: 6, height: 6 }, scene);
   };
+
+  /**
+   * Will run on every frame render.  We are spinning the box on y-axis.
+   */
+  const onRender = (scene: any) => {
+    if (boxRef.current !== undefined) {
+      var deltaTimeInMillis = scene.getEngine().getDeltaTime();
+
+      const rpm = 10;
+      boxRef.current.rotation.y += (rpm / 60) * Math.PI * 2 * (deltaTimeInMillis / 1000);
+    }
+  };
+
   return (
     <div>
       <Head>
-        <meta property="og:title" content="Frontend web-rtc" />
+        <meta property="og:title" content="Frontend babylonjs" />
         <meta property="og:url" content="https://v-log.dev/playground/frontend/babylonjs/" />
         <meta property="og:image" content="https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg" />
         <meta
@@ -65,7 +79,16 @@ const Babylonjs: NextPage = () => {
             line-height: 1.5;
             white-space: pre-line;
           `}
-        ></section>
+        >
+          <div>
+            <SceneComponent
+              antialias
+              onSceneReady={onSceneReady}
+              onRender={onRender}
+              id="my-canvas"
+            />
+          </div>
+        </section>
       </Playground>
       <Utteranc />
     </div>
