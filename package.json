@@ -48,6 +48,8 @@
     "@babel/preset-typescript": "^7.14.5",
     "@babylonjs/core": "^4.2.2",
     "@babylonjs/gui": "^5.0.0",
+    "@babylonjs/inspector": "^5.0.0",
+    "@babylonjs/loaders": "^5.0.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@emotion/babel-preset-css-prop": "^11.2.0",
     "@svgr/webpack": "^5.5.0",

@@ -1039,4 +1039,6 @@ class App {
     //webpack served from public
   }
 }
-new App();
+// new App();
+
+export { App };
