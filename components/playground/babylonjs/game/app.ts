@@ -23,19 +23,19 @@ import {
   Quaternion,
   AssetsManager,
 } from '@babylonjs/core';
-// import { PlayerInput } from './inputController';
-// import { Player } from './characterController';
-// import { Hud } from './ui';
-// import {
-//   AdvancedDynamicTexture,
-//   StackPanel,
-//   Button,
-//   TextBlock,
-//   Rectangle,
-//   Control,
-//   Image,
-// } from '@babylonjs/gui';
-// import { Environment } from './environment';
+import { PlayerInput } from './inputController';
+import { Player } from './characterController';
+import { Hud } from './ui';
+import {
+  AdvancedDynamicTexture,
+  StackPanel,
+  Button,
+  TextBlock,
+  Rectangle,
+  Control,
+  Image,
+} from '@babylonjs/gui';
+import { Environment } from './environment';
 
 //enum for states
 enum State {
@@ -53,7 +53,7 @@ class App {
   private _engine: Engine;
 
   //Game State Related
-  public assets;
+  public assets: any;
   private _input: PlayerInput;
   private _player: Player;
   private _ui: Hud;
