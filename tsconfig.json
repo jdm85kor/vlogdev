@@ -28,6 +28,15 @@
     "typeRoots": ["./type", "./node_modules/@types"],
     "types": ["node", "webpack-env"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "features/lexical/plugins/TreeViewPlugin.jsx",
+    "features/lexical/plugins/ToolbarPlugin.jsx",
+    "features/lexical/plugins/ListMaxIndentLevelPlugin.jsx",
+    "pages/playground/frontend/lexical.jsx",
+    "features/lexical/theme.js"
+  ],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { css } from '@emotion/react';
 import { colors, mq } from '@styles/theme';
 import Hamberger from '@public/svg/hamberger.svg';
-import Link from 'next/link'
+import Link from 'next/link';
 import Unfold from '@public/svg/unfold.svg';
 import Fold from '@public/svg/fold.svg';
 import { getDeviceSize } from '@utils/device';
@@ -28,26 +28,25 @@ interface ImportsFiles {
     list: string[];
     isFold: boolean;
   };
-};
+}
 
 const Menu = () => {
   const [isFoldMenu, setIsFoldMenu] = useState<boolean>(false);
   const [importsFiles, setImportsFiles] = useState<ImportsFiles>({});
 
-  const isMobile = getDeviceSize() === 'mobile' ;
+  const isMobile = getDeviceSize() === 'mobile';
 
   useEffect(() => {
     const imports: ImportsFiles = {};
-    const context = require.context('../../pages/playground', true, /\.tsx$/);
+    const context = require.context('../../pages/playground', true, /\.[tj]sx$/);
 
     for (const c of context
       .keys()
-      .filter(name => name.startsWith('./') && name !== './index.tsx')
-    ) {
+      .filter((name) => name.startsWith('./') && name !== './index.tsx')) {
       const splitedName: string[] = c.split('/');
       splitedName[1] = splitedName[1].toUpperCase();
 
-      const fileName = splitedName[2].replace('.tsx', '');
+      const fileName = splitedName[2].replace('.tsx', '').replace('.jsx', '');
       if (splitedName.length === 3) {
         if (imports[splitedName[1]]) {
           imports[splitedName[1]].list.push(fileName);
@@ -62,7 +61,7 @@ const Menu = () => {
     setImportsFiles(imports);
 
     isMobile && setIsFoldMenu(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -78,9 +77,8 @@ const Menu = () => {
     } else {
       document.body.style.overflowY = '';
     }
-
   }, [isFoldMenu, isMobile]);
-  
+
   return (
     <div
       role="navigation"
@@ -92,7 +90,7 @@ const Menu = () => {
           height: [isFoldMenu ? '54px' : '100vh', 'calc(100vh - 54px)'],
           zIndex: [6000, 'auto', 'auto'],
         })}
-        flex: 0 0 ${isFoldMenu? '50px' : '320px'};
+        flex: 0 0 ${isFoldMenu ? '50px' : '320px'};
         top: 50px;
         bottom: 0;
         left: 0;
@@ -110,10 +108,12 @@ const Menu = () => {
       `}
     >
       <nav>
-        <div css={css`
-          height: 50px;
-          text-align: right;
-        `}>
+        <div
+          css={css`
+            height: 50px;
+            text-align: right;
+          `}
+        >
           <button
             type="button"
             css={css`
@@ -124,7 +124,7 @@ const Menu = () => {
               cursor: pointer;
               height: 48px;
             `}
-            onClick={() => setIsFoldMenu(prev => !prev)}
+            onClick={() => setIsFoldMenu((prev) => !prev)}
           >
             <Hamberger
               css={css`
@@ -133,114 +133,104 @@ const Menu = () => {
                 & > path {
                   fill: ${colors.hermes};
                 }
-              `
-              }
+              `}
             />
           </button>
         </div>
-        {
-          !isFoldMenu &&
-          <ul css={css`
-            list-style: none;
-            margin: 0;
-            padding: 0 0 180px;
-            overflow-y: auto;
-          `}>
-            {
-              Object.entries(importsFiles).map((f, fIdx) => (
-                <React.Fragment key={`group-${f[0]}-${fIdx}`}>
-                  <li
-                    key={`${f[0]}-${fIdx}`}
-                    css={listItemStyle}
-                  >
-                    <button
-                      type="button"
-                      css={css`
-                        padding: 0;
-                        width: 100%;
-                        height: 100%;
-                        background: inherit;
-                        border: none;
-                        color: ${colors.hermes};
-                        cursor: pointer;
-                        font-weight: 800;
-                        text-align: center;
-                      `}
-                      onClick={() => setImportsFiles(prev => ({
+        {!isFoldMenu && (
+          <ul
+            css={css`
+              list-style: none;
+              margin: 0;
+              padding: 0 0 180px;
+              overflow-y: auto;
+            `}
+          >
+            {Object.entries(importsFiles).map((f, fIdx) => (
+              <React.Fragment key={`group-${f[0]}-${fIdx}`}>
+                <li key={`${f[0]}-${fIdx}`} css={listItemStyle}>
+                  <button
+                    type="button"
+                    css={css`
+                      padding: 0;
+                      width: 100%;
+                      height: 100%;
+                      background: inherit;
+                      border: none;
+                      color: ${colors.hermes};
+                      cursor: pointer;
+                      font-weight: 800;
+                      text-align: center;
+                    `}
+                    onClick={() =>
+                      setImportsFiles((prev) => ({
                         ...prev,
                         [f[0]]: {
                           ...f[1],
                           isFold: !f[1].isFold,
-                        }
-                      }))}
+                        },
+                      }))
+                    }
+                  >
+                    {f[0]}
+                    {f[1].isFold ? <Unfold css={iconStyle} /> : <Fold css={iconStyle} />}
+                  </button>
+                </li>
+                {f[1].isFold &&
+                  f[1].list.map((i, iIdx) => (
+                    <li
+                      key={`${i}-${iIdx}`}
+                      css={css`
+                        ${listItemStyle}
+                        text-align: right;
+                      `}
                     >
-                      {f[0]}
-                      {
-                        f[1].isFold ?
-                        <Unfold css={iconStyle} />:
-                        <Fold css={iconStyle} />
-                      }
-                    </button>
-                  </li>
-                  {
-                    f[1].isFold && f[1].list.map((i, iIdx) => (
-                      <li
-                        key={`${i}-${iIdx}`}
-                        css={css`
-                          ${listItemStyle}
-                          text-align: right;
-                      `}>
-                        <Link
-                          href={`/playground/${f[0].toLowerCase()}/${i}`}
-                          passHref
+                      <Link href={`/playground/${f[0].toLowerCase()}/${i}`} passHref>
+                        <a
+                          css={css`
+                            position: absolute;
+                            left: 0;
+                            right: 0;
+                            top: 0;
+                            bottom: 0;
+                            margin: 0;
+                            padding: 0;
+                            background: inherit;
+                            border: none;
+                            cursor: pointer;
+                            color: ${colors.hermes};
+                            text-decoration: none;
+                            &:hover {
+                              background: ${colors.hermes};
+                              color: #fff;
+                              opacity: 0.5;
+                            }
+                          `}
+                          onClick={() => isMobile && setIsFoldMenu((prev) => !prev)}
                         >
-                          <a
+                          <span
                             css={css`
+                              display: inline-block;
                               position: absolute;
-                              left: 0;
-                              right: 0;
-                              top: 0;
-                              bottom: 0;
-                              margin: 0;
-                              padding: 0;
-                              background: inherit;
-                              border: none;
-                              cursor: pointer;
-                              color: ${colors.hermes};
-                              text-decoration: none;
-                              &:hover {
-                                background: ${colors.hermes};
-                                color: #fff;
-                                opacity: 0.5;
-                              }
+                              top: 50%;
+                              left: 10px;
+                              transform: translateY(-50%);
+                              overflow: hidden;
+                              text-overflow: ellipsis;
+                              width: 90%;
+                              white-space: nowrap;
                             `}
-                            onClick={() => isMobile && setIsFoldMenu(prev => !prev)}
                           >
-                            <span
-                              css={css`
-                                display: inline-block;
-                                position: absolute;
-                                top: 50%;
-                                left: 10px;
-                                transform: translateY(-50%);
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                width: 90%;
-                                white-space: nowrap;
-                              `}
-                            >
-                              {i}
-                            </span>
-                          </a>
-                        </Link>
-                      </li>
-                    ))
-                  }
-                </React.Fragment>
-              ))
-            }
+                            {i}
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  ))}
+              </React.Fragment>
+            ))}
           </ul>
-        }
+        )}
       </nav>
     </div>
   );
