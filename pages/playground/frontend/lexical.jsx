@@ -126,11 +126,43 @@ const Lexical = () => {
           `}
         >
           <LexicalComposer initialConfig={editorConfig}>
-            <div className="editor-container">
+            <div
+              css={css`
+                margin: 20px auto 20px auto;
+                border-radius: 2px;
+                max-width: 600px;
+                color: #000;
+                position: relative;
+                line-height: 20px;
+                font-weight: 400;
+                text-align: left;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+              `}
+            >
               <ToolbarPlugin />
-              <div className="editor-inner">
+              <div
+                css={css`
+                  background: #fff;
+                  position: relative;
+                `}
+              >
                 <RichTextPlugin
-                  contentEditable={<ContentEditable className="editor-input" />}
+                  contentEditable={
+                    <ContentEditable
+                      css={css`
+                        min-height: 150px;
+                        resize: none;
+                        font-size: 15px;
+                        caret-color: rgb(5, 5, 5);
+                        position: relative;
+                        tab-size: 1;
+                        outline: 0;
+                        padding: 15px 10px;
+                        caret-color: #444;
+                      `}
+                    />
+                  }
                   placeholder={<Placeholder />}
                 />
                 <HistoryPlugin />
