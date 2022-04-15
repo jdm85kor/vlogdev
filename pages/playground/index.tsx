@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from 'next/head';
 import { css } from '@emotion/react';
 import PlaygroundC from '@containers/Playground';
 import { NextPage } from 'next';
@@ -11,12 +11,11 @@ const Playground: NextPage = () => {
         <meta name="description" content="Play" />
       </Head>
       <PlaygroundC>
-        <h1>
-          Playground
-        </h1>
+        <h1>Playground</h1>
         <div
           css={css`
-            background: no-repeat 100%/contain url(https://d6c63ppcwec2x.cloudfront.net/desk_s.jpg);
+            background: no-repeat 100% / contain
+              url(${process.env.NEXT_PUBLIC_ASSET_URL}/desk_s.jpg);
             width: 100%;
             padding: 25% 0;
           `}
@@ -28,11 +27,10 @@ const Playground: NextPage = () => {
           `}
         >
           <p>
-            Deep learning, Quant, Book, Front-end, Visualize 등의 주제로 여러 실험을 해보고 있습니다.
+            Deep learning, Quant, Book, Front-end, Visualize 등의 주제로 여러 실험을 해보고
+            있습니다.
           </p>
-          <p>
-            자유로운 주제로 다양한 컨텐츠가 추가 될 것입니다.
-          </p>
+          <p>자유로운 주제로 다양한 컨텐츠가 추가 될 것입니다.</p>
         </section>
       </PlaygroundC>
     </div>

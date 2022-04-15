@@ -77,33 +77,49 @@ const Gnb = () => {
       <nav css={nav}>
         <Link href="/" passHref>
           <a css={a}>
-            <img css={img} src="https://d6c63ppcwec2x.cloudfront.net/logo_96x96.png" alt="" width="30" height="30" />
+            <img
+              css={img}
+              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/logo_96x96.png`}
+              alt=""
+              width="30"
+              height="30"
+            />
           </a>
         </Link>
         <ul css={ul}>
           <li css={li}>
-            <Link href="/vlog" passHref><a css={a}>VLOG</a></Link>
+            <Link href="/vlog" passHref>
+              <a css={a}>VLOG</a>
+            </Link>
           </li>
           <li css={li}>
-            <Link href="/playground" passHref><a css={a}>PLAYGROUND</a></Link>
+            <Link href="/playground" passHref>
+              <a css={a}>PLAYGROUND</a>
+            </Link>
           </li>
           <li css={li}>
-            <Link href="/dev" passHref><a css={a}>DEV</a></Link>
+            <Link href="/dev" passHref>
+              <a css={a}>DEV</a>
+            </Link>
           </li>
           <li css={li}>
-            <Link href="/about" passHref><a css={a}>ABOUT</a></Link>
+            <Link href="/about" passHref>
+              <a css={a}>ABOUT</a>
+            </Link>
           </li>
         </ul>
         <Link href="/admin" passHref>
           <a css={a}>
-            <Setting css={css`
-              width: 20px;
-              height: 20px;
-              display: inline-block;
-              vertical-align: middle;
-            `} />
+            <Setting
+              css={css`
+                width: 20px;
+                height: 20px;
+                display: inline-block;
+                vertical-align: middle;
+              `}
+            />
           </a>
-          </Link>
+        </Link>
       </nav>
     </div>
   );
