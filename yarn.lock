@@ -7503,6 +7503,11 @@ regjsparser@^0.8.2:
   dependencies:
     jsesc "~0.5.0"
 
+remotion@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/remotion/-/remotion-3.0.8.tgz#f66c085c6f1c0c2c96a1fd089f41208f3be6ca69"
+  integrity sha512-Vbp1J0F82Pddf0frIEjmGxhSrLC52Q6chZe/dWCXAGq4mIKG2PiD4uiJtjVNh2+VXn5D07hxapHEI0cS8LlKjg==
+
 request-progress@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/request-progress/-/request-progress-3.0.0.tgz#4ca754081c7fec63f505e4faa825aa06cd669dbe"
