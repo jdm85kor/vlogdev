@@ -241,12 +241,15 @@ const About = () => {
           <h2 css={h2Style}>History</h2>
           <p css={pStyle}>21.8 site 오픈</p>
           <p css={pStyle}>21.9 admin 계정 인증 기능 추가, youtube 개발 컨텐츠 추가</p>
-          <p css={pStyle}>21.10 playground contents 추가, lambda logic 수정</p>
-          <p css={pStyle}>21.11 tensorflowjs contents (webcam) 추가</p>
-          <p css={pStyle}>21.12 최신 youtube list 속도 개선, 포스팅 추가</p>
+          <p css={pStyle}>21.4/4</p>
+          <p css={pStyle}>&nbsp;&nbsp;&#45;&nbsp;playground contents 추가, lambda logic 수정</p>
+          <p css={pStyle}>&nbsp;&nbsp;&#45;&nbsp;tensorflowjs contents (webcam) 추가</p>
+          <p css={pStyle}>&nbsp;&nbsp;&#45;&nbsp;최신 youtube list 속도 개선, 포스팅 추가</p>
+          <p css={pStyle}>22.1/4</p>
+          <p css={pStyle}>&nbsp;&nbsp;&#45;&nbsp;js lib 추가</p>
         </section>
         <section css={sectionStyle}>
-          <h2 css={h2Style}>Plan & Goal</h2>
+          <h2 css={h2Style}>Plan &#38; Goal</h2>
           <p css={pStyle}>blog, youtube 컨텐츠 정리</p>
           <p css={pStyle}>다양한 실험 및 새로운 학습 자료들 정리</p>
           <p css={pStyle}>지속성 있게 기능 및 컨텐츠 업데이트</p>

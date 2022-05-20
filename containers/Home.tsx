@@ -24,8 +24,8 @@ const news = [
     title: 'Bundling non-JavaScript resources',
   },
   {
-    url: 'http://channy.creation.net/blog/1492',
-    title: 'Tech Predictions for 2022 and Beyond',
+    url: 'https://github.com/jongman/articles/wiki/solving-every-sudoku-puzzle#%EC%8A%A4%EB%8F%84%EC%BF%A0-%EC%9A%A9%EC%96%B4%EC%99%80-%EC%9E%90%EB%A3%8C-%EA%B5%AC%EC%A1%B0-%ED%91%9C%ED%98%84',
+    title: 'sudoku 문제 풀기',
   },
 ];
 
