@@ -288,7 +288,7 @@ const About = () => {
             <dt css={dtStyle}>Blog</dt>
             <dd css={ddStyle}>
               <a
-                href="https://github.com/jdm85kor/vlogdev"
+                href="https://dongmin-jang.medium.com"
                 css={css`
                   text-decoration: none;
                   color: slateblue;
