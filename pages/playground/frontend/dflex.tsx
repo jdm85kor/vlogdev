@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Head from 'next/head'
 import { NextPage } from 'next';
 import { css } from '@emotion/react';
@@ -23,12 +23,12 @@ const Task = ({ id, task }: { id: string, task: string }) => {
   useEffect(() => {
     // Wait until component is mounted to get the reference
     if (liRef) {
-      store.register({ id, ref: liRef.current });
+      // store.register({ id, ref: liRef.current });
       // All the following inputs work fine:
       // store.register({ ref: ref.current });
       // store.register({ id });
       // store.register({ id, ref: ref.current, depth: 0 });
-      // store.register({ id, ref: ref.current, parentID: "my-first-todo" });
+      store.register({ id, ref: liRef.current, parentID: "my-first-todo" });
     }
   }, [liRef]);
 
@@ -69,7 +69,22 @@ const Task = ({ id, task }: { id: string, task: string }) => {
         document.addEventListener("mousemove", onMouseMove);
 
         // Create DnD instance with no custom options.
-        dndEvent = new DnD(id, { x: clientX, y: clientY });
+        dndEvent = new DnD(
+          id,
+          {
+            x: clientX,
+            y: clientY,
+          },
+          {
+            restrictions: {
+              container: {
+                allowLeavingFromTop: false,
+                allowLeavingFromBottom: false,
+                allowLeavingFromLeft: true,
+                allowLeavingFromRight: false,
+              }
+            }
+          });
       }
     }
   };
@@ -120,6 +135,9 @@ const Dflex: NextPage = () => {
           `}
           id="dflex-section"
         >
+          <p>
+            list 왼쪽으로만 item이 벗어날 수 있게 조건 걸림.
+          </p>
           <ul
             id="my-first-todo"
             css={css`
