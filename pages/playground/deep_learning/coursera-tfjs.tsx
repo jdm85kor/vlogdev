@@ -240,7 +240,7 @@ const CourseraTfjs: NextPage = () => {
               `}
               onClick={() => {
                 DigitModel = dynamic(
-                  () => import('@components/playground/deep-learning/DigitModel'),
+                  () => import('@components/playground/deep-learning/coursera-tfjs/DigitModel'),
                 );
                 setTimeout(() => {
                   setIsShowWeek2Example(true);
@@ -273,7 +273,7 @@ const CourseraTfjs: NextPage = () => {
               `}
               onClick={() => {
                 ImageModel = dynamic(
-                  () => import('@components/playground/deep-learning/ImageModel'),
+                  () => import('@components/playground/deep-learning/coursera-tfjs/DigitModel'),
                 );
                 setTimeout(() => {
                   setIsShowWeek4Example(true);
