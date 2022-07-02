@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
+import Script from 'next/script';
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
@@ -19,6 +20,14 @@ const BostonHousing: NextPage = () => {
   return (
     <div>
       <Head>
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></Script>
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
+          integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        ></Script>
         <meta property="og:title" content="Frontend Boston housing" />
         <meta
           property="og:url"

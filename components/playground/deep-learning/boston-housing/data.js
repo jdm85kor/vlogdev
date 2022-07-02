@@ -52,7 +52,7 @@ export const loadCsv = async (filename) => {
     const url = `${BASE_URL}${filename}`;
 
     console.log(`  * 다음 주소에서 데이터 다운로드 중: ${url}`);
-    Papa.parse(url, {
+    window?.Papa?.parse(url, {
       download: true,
       header: true,
       complete: (results) => {
