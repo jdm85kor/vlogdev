@@ -1,11 +1,25 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Script from 'next/script';
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
-import { init } from '@components/playground/deep-learning/boston-housing/index';
+import {
+  linearRegressionModel,
+  multiLayerPerceptronRegressionModel1Hidden,
+  multiLayerPerceptronRegressionModel2Hidden,
+  multiLayerPerceptronRegressionModel1HiddenNoSigmoid,
+  run,
+  arraysToTensors,
+  updateStatus,
+  updateBaselineStatus,
+  computeBaseline,
+} from '@components/playground/deep-learning/boston-housing/index';
+import {
+  BostonHousingDataset,
+  // featureDescriptions,
+} from '@components/playground/deep-learning/boston-housing/data.js';
 
 const descriptionHead = css`
   font-variant: small-caps;
@@ -13,10 +27,41 @@ const descriptionHead = css`
   color: #818181;
 `;
 
+const bostonData = new BostonHousingDataset();
+
 const BostonHousing: NextPage = () => {
+  const handleClickSimpleMlr = useCallback(async (e) => {
+    const model = linearRegressionModel();
+    await run(model, 'linear', true);
+  }, []);
+
+  const handleClickNnMlr1hidden = useCallback(async (e) => {
+    const model = multiLayerPerceptronRegressionModel1Hidden();
+    await run(model, 'oneHidden', false);
+  }, []);
+
+  const handleClickNnMlr2hidden = useCallback(async (e) => {
+    const model = multiLayerPerceptronRegressionModel2Hidden();
+    await run(model, 'twoHidden', false);
+  }, []);
+
+  const handleClickNnMlr1hiddenNoSigmoid = useCallback(async (e) => {
+    const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid();
+    await run(model, 'nosigHidden', false);
+  }, []);
+
+  const init = useCallback(async () => {
+    await bostonData.loadData();
+    updateStatus('데이터가 로드되었고 텐서로 변환합니다');
+    arraysToTensors();
+    updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
+    updateBaselineStatus('기준 손실을 추정합니다.');
+    computeBaseline();
+  }, []);
+
   useEffect(() => {
     init();
-  }, []);
+  }, [init]);
   return (
     <div>
       <Head>
@@ -25,8 +70,8 @@ const BostonHousing: NextPage = () => {
         <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
           integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
         ></Script>
         <meta property="og:title" content="Frontend Boston housing" />
         <meta
@@ -101,9 +146,15 @@ const BostonHousing: NextPage = () => {
 
             <div id="buttons">
               <div className="with-cols">
-                <button id="simple-mlr">선형 회귀 모델 훈련</button>
-                <button id="nn-mlr-1hidden">신경망 회귀 모델 훈련 (은닉층 1개)</button>
-                <button id="nn-mlr-2hidden">신경망 회귀 모델 훈련 (은닉층 2개)</button>
+                <button type="button" id="simple-mlr" onClick={handleClickSimpleMlr}>
+                  선형 회귀 모델 훈련
+                </button>
+                <button type="button" id="nn-mlr-1hidden" onClick={handleClickNnMlr1hidden}>
+                  신경망 회귀 모델 훈련 (은닉층 1개)
+                </button>
+                <button type="button" id="nn-mlr-2hidden" onClick={handleClickNnMlr2hidden}>
+                  신경망 회귀 모델 훈련 (은닉층 2개)
+                </button>
               </div>
             </div>
 
@@ -118,7 +169,11 @@ const BostonHousing: NextPage = () => {
 
             <div id="buttons">
               <div className="with-cols">
-                <button id="nn-mlr-1hidden-no-sigmoid">
+                <button
+                  type="button"
+                  id="nn-mlr-1hidden-no-sigmoid"
+                  onClick={handleClickNnMlr1hiddenNoSigmoid}
+                >
                   신경망 회귀 모델 훈련
                   <br />
                   (은닉층 1개 + 시그모이드 없음)

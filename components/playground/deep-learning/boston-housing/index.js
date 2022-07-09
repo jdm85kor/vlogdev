@@ -17,7 +17,6 @@
 
 import { BostonHousingDataset, featureDescriptions } from './data.js';
 import * as normalization from './normalization.js';
-import * as ui from './ui.js';
 
 // 모델 훈련을 위한 하이퍼파라미터
 const NUM_EPOCHS = 200;
@@ -152,14 +151,14 @@ export async function run(model, modelName, weightsIllustration) {
   let trainLogs = [];
   const container = document.querySelector(`#${modelName} .chart`);
 
-  ui.updateStatus('훈련 과정을 시작합니다...');
+  updateStatus('훈련 과정을 시작합니다...');
   await model.fit(tensors.trainFeatures, tensors.trainTarget, {
     batchSize: BATCH_SIZE,
     epochs: NUM_EPOCHS,
     validationSplit: 0.2,
     callbacks: {
       onEpochEnd: async (epoch, logs) => {
-        await ui.updateModelStatus(`에포크 ${NUM_EPOCHS}번 중 ${epoch + 1}번째 완료.`, modelName);
+        await updateModelStatus(`에포크 ${NUM_EPOCHS}번 중 ${epoch + 1}번째 완료.`, modelName);
         trainLogs.push(logs);
         tfvis.show.history(container, trainLogs, ['loss', 'val_loss'], {
           xLabel: '반복(에포크)',
@@ -172,14 +171,14 @@ export async function run(model, modelName, weightsIllustration) {
             .data()
             .then((kernelAsArr) => {
               const weightsList = describeKernelElements(kernelAsArr);
-              ui.updateWeightDescription(weightsList);
+              updateWeightDescription(weightsList);
             });
         }
       },
     },
   });
 
-  ui.updateStatus('테스트 데이터에서 평가합니다...');
+  updateStatus('테스트 데이터에서 평가합니다...');
   const result = model.evaluate(tensors.testFeatures, tensors.testTarget, {
     batchSize: BATCH_SIZE,
   });
@@ -187,7 +186,7 @@ export async function run(model, modelName, weightsIllustration) {
 
   const trainLoss = trainLogs[trainLogs.length - 1].loss;
   const valLoss = trainLogs[trainLogs.length - 1].val_loss;
-  await ui.updateModelStatus(
+  await updateModelStatus(
     `훈련 세트 최종 손실: ${trainLoss.toFixed(4)}\n` +
       `검증 세트 최종 손실: ${valLoss.toFixed(4)}\n` +
       `테스트 세트 손실: ${testLoss.toFixed(4)}`,
@@ -201,15 +200,52 @@ export function computeBaseline() {
   const baseline = tensors.testTarget.sub(avgPrice).square().mean();
   console.log(`기준 손실: ${baseline.dataSync()}`);
   const baselineMsg = `기준 손실(meanSquaredError): ${baseline.dataSync()[0].toFixed(2)}`;
-  ui.updateBaselineStatus(baselineMsg);
+  updateBaselineStatus(baselineMsg);
 }
 
-export async function init() {
-  await bostonData.loadData();
-  ui.updateStatus('데이터가 로드되었고 텐서로 변환합니다');
-  arraysToTensors();
-  ui.updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
-  ui.updateBaselineStatus('기준 손실을 추정합니다.');
-  computeBaseline();
-  await ui.setup();
+export function updateStatus(message) {
+  const statusElement = document.getElementById('status');
+  statusElement.innerText = message;
+}
+
+export function updateBaselineStatus(message) {
+  const baselineStatusElement = document.getElementById('baselineStatus');
+  baselineStatusElement.innerText = message;
+}
+
+export function updateModelStatus(message, modelName) {
+  const statElement = document.querySelector(`#${modelName} .status`);
+  statElement.innerText = message;
+}
+
+/**
+ * 간단한 선형 모델에서 학습된 가중치에 관한 정보를 업데이트합니다.
+ *
+ * @param {List} weightsList 'value':number 와 'description':string 의 객체 리스트
+ */
+export function updateWeightDescription(weightsList) {
+  const NUM_TOP_WEIGHTS_TO_DISPLAY = 5;
+
+  const inspectionHeadlineElement = document.getElementById('inspectionHeadline');
+  inspectionHeadlineElement.innerText = `가장 큰 가중치 상위 ${NUM_TOP_WEIGHTS_TO_DISPLAY}개`;
+  // 절댓값 크기로 가중치를 정렬합니다.
+  weightsList.sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+  var table = document.getElementById('myTable');
+  // 테이블을 초기화합니다.
+  table.innerHTML = '';
+  // 테이블에 행을 추가합니다.
+  weightsList.forEach((weight, i) => {
+    if (i < NUM_TOP_WEIGHTS_TO_DISPLAY) {
+      let row = table.insertRow(-1);
+      let cell1 = row.insertCell(0);
+      let cell2 = row.insertCell(1);
+      if (weight.value < 0) {
+        cell2.setAttribute('class', 'negativeWeight');
+      } else {
+        cell2.setAttribute('class', 'positiveWeight');
+      }
+      cell1.innerHTML = weight.description;
+      cell2.innerHTML = weight.value.toFixed(4);
+    }
+  });
 }
