@@ -1,25 +1,13 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Script from 'next/script';
 import { css } from '@emotion/react';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
-import {
-  linearRegressionModel,
-  multiLayerPerceptronRegressionModel1Hidden,
-  multiLayerPerceptronRegressionModel2Hidden,
-  multiLayerPerceptronRegressionModel1HiddenNoSigmoid,
-  run,
-  arraysToTensors,
-  updateStatus,
-  updateBaselineStatus,
-  computeBaseline,
-} from '@components/playground/deep-learning/boston-housing/index';
-import {
-  BostonHousingDataset,
-  // featureDescriptions,
-} from '@components/playground/deep-learning/boston-housing/data.js';
+import { run } from '@components/playground/deep-learning/boston-housing/index';
+import { BostonHousingDataset } from '@components/playground/deep-learning/boston-housing/data.js';
+import * as normalization from '@components/playground/deep-learning/boston-housing/normalization.js';
 
 const descriptionHead = css`
   font-variant: small-caps;
@@ -30,34 +18,143 @@ const descriptionHead = css`
 const bostonData = new BostonHousingDataset();
 
 const BostonHousing: NextPage = () => {
+  const [tensors, setTensors] = useState<any>(null);
+  const [stautsText, setStatusText] = useState<string>("데이터를 로딩합니다...");
+  const [baseLineStatus, setBaseLineStatus] = useState<string>("기준 손실을 계산하기 전입니다...");
+  const [model, setModel] = useState(null);
+
+  const arraysToTensors = useCallback(() => {
+    const t: {
+      rawTrainFeatures?: any,
+      trainTarget?: any,
+      rawTestFeatures?: any,
+      testTarget?: any,
+      trainFeatures?: any,
+      testFeatures?: any,
+    } = {};
+    const { tf } = window;
+    t.rawTrainFeatures = tf.tensor2d(bostonData.trainFeatures);
+    t.trainTarget = tf.tensor2d(bostonData.trainTarget);
+    t.rawTestFeatures = tf.tensor2d(bostonData.testFeatures);
+    t.testTarget = tf.tensor2d(bostonData.testTarget);
+    // 평균과 표준 편차로 정규화합니다.
+    const { dataMean, dataStd }: any = normalization.determineMeanAndStddev(t.rawTrainFeatures);
+
+    t.trainFeatures = normalization.normalizeTensor(
+      t.rawTrainFeatures,
+      dataMean,
+      dataStd,
+    );
+    t.testFeatures = normalization.normalizeTensor(t.rawTestFeatures, dataMean, dataStd);
+    setTensors(t);
+  }, [setTensors]);
+
+  const computeBaseline = useCallback(() => {
+    const avgPrice = tensors.trainTarget.mean();
+    console.log(`평균 가격: ${avgPrice.dataSync()}`);
+    const baseline = tensors.testTarget.sub(avgPrice).square().mean();
+    console.log(`기준 손실: ${baseline.dataSync()}`);
+    const baselineMsg = `기준 손실(meanSquaredError): ${baseline.dataSync()[0].toFixed(2)}`;
+    setBaseLineStatus(baselineMsg);
+  }, [tensors]);
+
+  /**
+ * 선형 회귀 모델을 만들어 반환합니다.
+ *
+ * @returns {tf.Sequential} 선형 회귀 모델
+ */
   const handleClickSimpleMlr = useCallback(async (e) => {
-    const model = linearRegressionModel();
-    await run(model, 'linear', true);
+    const { tf } = window;
+    const m = tf.sequential();
+    m.add(tf.layers.dense({ inputShape: [bostonData.numFeatures], units: 1 }));
+
+    m.summary();
+    await run(m, 'linear', true);
+    setModel(m);
   }, []);
 
+  /**
+ * 50개의 유닛과 시그모이드 함수를 가진 1개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
+ *
+ * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
+ */
   const handleClickNnMlr1hidden = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel1Hidden();
-    await run(model, 'oneHidden', false);
+    const { tf } = window;
+    const m = tf.sequential();
+    m.add(
+      tf.layers.dense({
+        inputShape: [bostonData.numFeatures],
+        units: 50,
+        activation: 'sigmoid',
+        kernelInitializer: 'leCunNormal',
+      }),
+    );
+    m.add(tf.layers.dense({ units: 1 }));
+
+    m.summary();
+    await run(m, 'oneHidden', false);
+    setModel(m);
   }, []);
 
+
+  /**
+ * 50개의 유닛과 시그모이드 함수를 가진 2개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
+ *
+ * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
+ */
   const handleClickNnMlr2hidden = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel2Hidden();
-    await run(model, 'twoHidden', false);
+    const { tf } = window;
+    const m = tf.sequential();
+    m.add(
+      tf.layers.dense({
+        inputShape: [bostonData.numFeatures],
+        units: 50,
+        activation: 'sigmoid',
+        kernelInitializer: 'leCunNormal',
+      }),
+    );
+    m.add(
+      tf.layers.dense({ units: 50, activation: 'sigmoid', kernelInitializer: 'leCunNormal' }),
+    );
+    m.add(tf.layers.dense({ units: 1 }));
+
+    m.summary();
+    await run(m, 'twoHidden', false);
+    setModel(m);
   }, []);
 
+  /**
+ * 50개의 유닛을 가진 2개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
+ * (시그모이드 활성화 함수 사용하지 않음)
+ *
+ * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
+ */
   const handleClickNnMlr1hiddenNoSigmoid = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid();
-    await run(model, 'nosigHidden', false);
+    const { tf } = window;
+    const m = tf.sequential();
+    m.add(
+      tf.layers.dense({
+        inputShape: [bostonData.numFeatures],
+        units: 50,
+        // activation: 'sigmoid',
+        kernelInitializer: 'leCunNormal',
+      }),
+    );
+    m.add(tf.layers.dense({ units: 1 }));
+
+    m.summary();
+    await run(m, 'nosigHidden', false);
+    setModel(m);
   }, []);
 
   const init = useCallback(async () => {
     await bostonData.loadData();
-    updateStatus('데이터가 로드되었고 텐서로 변환합니다');
+    setStatusText('데이터가 로드되었고 텐서로 변환합니다');
     arraysToTensors();
-    updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
-    updateBaselineStatus('기준 손실을 추정합니다.');
+    setStatusText('데이터가 텐서로 변환되었습니다..\n훈련 버튼을 눌러 시작하세요.');
+    setBaseLineStatus('기준 손실을 추정합니다.');
     computeBaseline();
-  }, []);
+  }, [arraysToTensors, computeBaseline]);
 
   useEffect(() => {
     init();
@@ -119,8 +216,8 @@ const BostonHousing: NextPage = () => {
 
           <section>
             <p css={descriptionHead}>상태</p>
-            <p id="status">데이터를 로딩합니다...</p>
-            <p id="baselineStatus">기준 손실을 계산하기 전입니다...</p>
+            <p id="status">{stautsText}</p>
+            <p id="baselineStatus">{baseLineStatus}</p>
           </section>
 
           <section>

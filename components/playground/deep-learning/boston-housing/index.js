@@ -16,7 +16,7 @@
  */
 
 import { BostonHousingDataset, featureDescriptions } from './data.js';
-import * as normalization from './normalization.js';
+// import * as normalization from './normalization.js';
 
 // 모델 훈련을 위한 하이퍼파라미터
 const NUM_EPOCHS = 200;
@@ -27,79 +27,79 @@ const bostonData = new BostonHousingDataset();
 const tensors = {};
 
 // 로딩된 데이터를 텐서로 변환하고 특성을 정규화합니다.
-export function arraysToTensors() {
-  tensors.rawTrainFeatures = tf.tensor2d(bostonData.trainFeatures);
-  tensors.trainTarget = tf.tensor2d(bostonData.trainTarget);
-  tensors.rawTestFeatures = tf.tensor2d(bostonData.testFeatures);
-  tensors.testTarget = tf.tensor2d(bostonData.testTarget);
-  // 평균과 표준 편차로 정규화합니다.
-  let { dataMean, dataStd } = normalization.determineMeanAndStddev(tensors.rawTrainFeatures);
+// export function arraysToTensors() {
+//   tensors.rawTrainFeatures = tf.tensor2d(bostonData.trainFeatures);
+//   tensors.trainTarget = tf.tensor2d(bostonData.trainTarget);
+//   tensors.rawTestFeatures = tf.tensor2d(bostonData.testFeatures);
+//   tensors.testTarget = tf.tensor2d(bostonData.testTarget);
+//   // 평균과 표준 편차로 정규화합니다.
+//   let { dataMean, dataStd } = normalization.determineMeanAndStddev(tensors.rawTrainFeatures);
 
-  tensors.trainFeatures = normalization.normalizeTensor(
-    tensors.rawTrainFeatures,
-    dataMean,
-    dataStd,
-  );
-  tensors.testFeatures = normalization.normalizeTensor(tensors.rawTestFeatures, dataMean, dataStd);
-}
+//   tensors.trainFeatures = normalization.normalizeTensor(
+//     tensors.rawTrainFeatures,
+//     dataMean,
+//     dataStd,
+//   );
+//   tensors.testFeatures = normalization.normalizeTensor(tensors.rawTestFeatures, dataMean, dataStd);
+// }
 
 /**
  * 선형 회귀 모델을 만들어 반환합니다.
  *
  * @returns {tf.Sequential} 선형 회귀 모델
  */
-export function linearRegressionModel() {
-  const model = tf.sequential();
-  model.add(tf.layers.dense({ inputShape: [bostonData.numFeatures], units: 1 }));
+// export function linearRegressionModel() {
+//   const model = tf.sequential();
+//   model.add(tf.layers.dense({ inputShape: [bostonData.numFeatures], units: 1 }));
 
-  model.summary();
-  return model;
-}
+//   model.summary();
+//   return model;
+// }
 
 /**
  * 50개의 유닛과 시그모이드 함수를 가진 1개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel1Hidden() {
-  const model = tf.sequential();
-  model.add(
-    tf.layers.dense({
-      inputShape: [bostonData.numFeatures],
-      units: 50,
-      activation: 'sigmoid',
-      kernelInitializer: 'leCunNormal',
-    }),
-  );
-  model.add(tf.layers.dense({ units: 1 }));
+// export function multiLayerPerceptronRegressionModel1Hidden() {
+//   const model = tf.sequential();
+//   model.add(
+//     tf.layers.dense({
+//       inputShape: [bostonData.numFeatures],
+//       units: 50,
+//       activation: 'sigmoid',
+//       kernelInitializer: 'leCunNormal',
+//     }),
+//   );
+//   model.add(tf.layers.dense({ units: 1 }));
 
-  model.summary();
-  return model;
-}
+//   model.summary();
+//   return model;
+// }
 
 /**
  * 50개의 유닛과 시그모이드 함수를 가진 2개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel2Hidden() {
-  const model = tf.sequential();
-  model.add(
-    tf.layers.dense({
-      inputShape: [bostonData.numFeatures],
-      units: 50,
-      activation: 'sigmoid',
-      kernelInitializer: 'leCunNormal',
-    }),
-  );
-  model.add(
-    tf.layers.dense({ units: 50, activation: 'sigmoid', kernelInitializer: 'leCunNormal' }),
-  );
-  model.add(tf.layers.dense({ units: 1 }));
+// export function multiLayerPerceptronRegressionModel2Hidden() {
+//   const model = tf.sequential();
+//   model.add(
+//     tf.layers.dense({
+//       inputShape: [bostonData.numFeatures],
+//       units: 50,
+//       activation: 'sigmoid',
+//       kernelInitializer: 'leCunNormal',
+//     }),
+//   );
+//   model.add(
+//     tf.layers.dense({ units: 50, activation: 'sigmoid', kernelInitializer: 'leCunNormal' }),
+//   );
+//   model.add(tf.layers.dense({ units: 1 }));
 
-  model.summary();
-  return model;
-}
+//   model.summary();
+//   return model;
+// }
 
 /**
  * 50개의 유닛을 가진 2개의 은닉층이 있는 다층 퍼셉트론 회귀 모델을 만들어 반환합니다.
@@ -107,21 +107,21 @@ export function multiLayerPerceptronRegressionModel2Hidden() {
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel1HiddenNoSigmoid() {
-  const model = tf.sequential();
-  model.add(
-    tf.layers.dense({
-      inputShape: [bostonData.numFeatures],
-      units: 50,
-      // activation: 'sigmoid',
-      kernelInitializer: 'leCunNormal',
-    }),
-  );
-  model.add(tf.layers.dense({ units: 1 }));
+// export function multiLayerPerceptronRegressionModel1HiddenNoSigmoid() {
+//   const model = tf.sequential();
+//   model.add(
+//     tf.layers.dense({
+//       inputShape: [bostonData.numFeatures],
+//       units: 50,
+//       // activation: 'sigmoid',
+//       kernelInitializer: 'leCunNormal',
+//     }),
+//   );
+//   model.add(tf.layers.dense({ units: 1 }));
 
-  model.summary();
-  return model;
-}
+//   model.summary();
+//   return model;
+// }
 
 /**
  * 현재 가중치를 읽기 쉬운 형태로 출력합니다.
@@ -194,24 +194,24 @@ export async function run(model, modelName, weightsIllustration) {
   );
 }
 
-export function computeBaseline() {
-  const avgPrice = tensors.trainTarget.mean();
-  console.log(`평균 가격: ${avgPrice.dataSync()}`);
-  const baseline = tensors.testTarget.sub(avgPrice).square().mean();
-  console.log(`기준 손실: ${baseline.dataSync()}`);
-  const baselineMsg = `기준 손실(meanSquaredError): ${baseline.dataSync()[0].toFixed(2)}`;
-  updateBaselineStatus(baselineMsg);
-}
+// export function computeBaseline() {
+//   const avgPrice = tensors.trainTarget.mean();
+//   console.log(`평균 가격: ${avgPrice.dataSync()}`);
+//   const baseline = tensors.testTarget.sub(avgPrice).square().mean();
+//   console.log(`기준 손실: ${baseline.dataSync()}`);
+//   const baselineMsg = `기준 손실(meanSquaredError): ${baseline.dataSync()[0].toFixed(2)}`;
+//   updateBaselineStatus(baselineMsg);
+// }
 
-export function updateStatus(message) {
-  const statusElement = document.getElementById('status');
-  statusElement.innerText = message;
-}
+// export function updateStatus(message) {
+//   const statusElement = document.getElementById('status');
+//   statusElement.innerText = message;
+// }
 
-export function updateBaselineStatus(message) {
-  const baselineStatusElement = document.getElementById('baselineStatus');
-  baselineStatusElement.innerText = message;
-}
+// export function updateBaselineStatus(message) {
+//   const baselineStatusElement = document.getElementById('baselineStatus');
+//   baselineStatusElement.innerText = message;
+// }
 
 export function updateModelStatus(message, modelName) {
   const statElement = document.querySelector(`#${modelName} .status`);

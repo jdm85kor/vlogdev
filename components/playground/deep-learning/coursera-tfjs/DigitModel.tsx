@@ -27,7 +27,7 @@ const  DigitModel = () => {
     const metrics = ['loss', 'val_loss', 'accuracy', 'val_accuracy'];
     const container = { name: 'Model Training', styles: { height: '640px' } };
     const fitCallbacks = window.tfvis.show.fitCallbacks(container, metrics);
-    
+
     const BATCH_SIZE = 512;
     const TRAIN_DATA_SIZE = 5500;
     const TEST_DATA_SIZE = 1000;
