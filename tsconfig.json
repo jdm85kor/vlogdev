@@ -35,7 +35,6 @@
     "features/lexical/plugins/TreeViewPlugin.jsx",
     "features/lexical/plugins/ToolbarPlugin.jsx",
     "features/lexical/plugins/ListMaxIndentLevelPlugin.jsx",
-    "pages/playground/frontend/lexical.jsx",
     "features/lexical/theme.js"
   ],
   "exclude": ["node_modules"]
