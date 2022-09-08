@@ -88,7 +88,6 @@ export class BostonHousingDataset {
       loadCsv(TEST_FEATURES_FN),
       loadCsv(TEST_TARGET_FN),
     ]);
-
     shuffle(this.trainFeatures, this.trainTarget);
     shuffle(this.testFeatures, this.testTarget);
   }

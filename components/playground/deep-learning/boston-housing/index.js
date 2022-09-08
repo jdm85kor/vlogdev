@@ -23,15 +23,14 @@ const NUM_EPOCHS = 200;
 const BATCH_SIZE = 40;
 const LEARNING_RATE = 0.01;
 
-const bostonData = new BostonHousingDataset();
 const tensors = {};
 
 // 로딩된 데이터를 텐서로 변환하고 특성을 정규화합니다.
-export function arraysToTensors() {
-  tensors.rawTrainFeatures = tf.tensor2d(bostonData.trainFeatures);
-  tensors.trainTarget = tf.tensor2d(bostonData.trainTarget);
-  tensors.rawTestFeatures = tf.tensor2d(bostonData.testFeatures);
-  tensors.testTarget = tf.tensor2d(bostonData.testTarget);
+export function arraysToTensors(bostonData) {
+  tensors.rawTrainFeatures = window.tf.tensor2d(bostonData.trainFeatures);
+  tensors.trainTarget = window.tf.tensor2d(bostonData.trainTarget);
+  tensors.rawTestFeatures = window.tf.tensor2d(bostonData.testFeatures);
+  tensors.testTarget = window.tf.tensor2d(bostonData.testTarget);
   // 평균과 표준 편차로 정규화합니다.
   let { dataMean, dataStd } = normalization.determineMeanAndStddev(tensors.rawTrainFeatures);
 
@@ -48,9 +47,9 @@ export function arraysToTensors() {
  *
  * @returns {tf.Sequential} 선형 회귀 모델
  */
-export function linearRegressionModel() {
-  const model = tf.sequential();
-  model.add(tf.layers.dense({ inputShape: [bostonData.numFeatures], units: 1 }));
+export function linearRegressionModel(bostonData) {
+  const model = window.tf.sequential();
+  model.add(window.tf.layers.dense({ inputShape: [bostonData.numFeatures], units: 1 }));
 
   model.summary();
   return model;
@@ -61,17 +60,17 @@ export function linearRegressionModel() {
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel1Hidden() {
-  const model = tf.sequential();
+export function multiLayerPerceptronRegressionModel1Hidden(bostonData) {
+  const model = window.tf.sequential();
   model.add(
-    tf.layers.dense({
+    window.tf.layers.dense({
       inputShape: [bostonData.numFeatures],
       units: 50,
       activation: 'sigmoid',
       kernelInitializer: 'leCunNormal',
     }),
   );
-  model.add(tf.layers.dense({ units: 1 }));
+  model.add(window.tf.layers.dense({ units: 1 }));
 
   model.summary();
   return model;
@@ -82,10 +81,10 @@ export function multiLayerPerceptronRegressionModel1Hidden() {
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel2Hidden() {
-  const model = tf.sequential();
+export function multiLayerPerceptronRegressionModel2Hidden(bostonData) {
+  const model = window.tf.sequential();
   model.add(
-    tf.layers.dense({
+    window.tf.layers.dense({
       inputShape: [bostonData.numFeatures],
       units: 50,
       activation: 'sigmoid',
@@ -93,9 +92,9 @@ export function multiLayerPerceptronRegressionModel2Hidden() {
     }),
   );
   model.add(
-    tf.layers.dense({ units: 50, activation: 'sigmoid', kernelInitializer: 'leCunNormal' }),
+    window.tf.layers.dense({ units: 50, activation: 'sigmoid', kernelInitializer: 'leCunNormal' }),
   );
-  model.add(tf.layers.dense({ units: 1 }));
+  model.add(window.tf.layers.dense({ units: 1 }));
 
   model.summary();
   return model;
@@ -107,17 +106,17 @@ export function multiLayerPerceptronRegressionModel2Hidden() {
  *
  * @returns {tf.Sequential} 다층 퍼셉트론 회귀 모델
  */
-export function multiLayerPerceptronRegressionModel1HiddenNoSigmoid() {
-  const model = tf.sequential();
+export function multiLayerPerceptronRegressionModel1HiddenNoSigmoid(bostonData) {
+  const model = window.tf.sequential();
   model.add(
-    tf.layers.dense({
+    window.tf.layers.dense({
       inputShape: [bostonData.numFeatures],
       units: 50,
       // activation: 'sigmoid',
       kernelInitializer: 'leCunNormal',
     }),
   );
-  model.add(tf.layers.dense({ units: 1 }));
+  model.add(window.tf.layers.dense({ units: 1 }));
 
   model.summary();
   return model;
@@ -130,7 +129,10 @@ export function multiLayerPerceptronRegressionModel1HiddenNoSigmoid() {
  * @returns {List} 특성 이름과 특성의 가중치로 이루어진 객체의 리스트
  */
 export function describeKernelElements(kernel) {
-  tf.util.assert(kernel.length == 12, `커널 배열의 길이는 12여야 하는데 ${kernel.length}입니다`);
+  window.tf.util.assert(
+    kernel.length == 12,
+    `커널 배열의 길이는 12여야 하는데 ${kernel.length}입니다`,
+  );
   const outList = [];
   for (let idx = 0; idx < kernel.length; idx++) {
     outList.push({ description: featureDescriptions[idx], value: kernel[idx] });
@@ -146,7 +148,7 @@ export function describeKernelElements(kernel) {
  * @param {boolean} weightsIllustration 훈련된 가중치에 대한 정보를 출력할지 여부
  */
 export async function run(model, modelName, weightsIllustration) {
-  model.compile({ optimizer: tf.train.sgd(LEARNING_RATE), loss: 'meanSquaredError' });
+  model.compile({ optimizer: window.tf.train.sgd(LEARNING_RATE), loss: 'meanSquaredError' });
 
   let trainLogs = [];
   const container = document.querySelector(`#${modelName} .chart`);

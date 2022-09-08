@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Head from 'next/head';
 import { NextPage } from 'next';
 import Script from 'next/script';
@@ -27,52 +27,75 @@ const descriptionHead = css`
   color: #818181;
 `;
 
-const bostonData = new BostonHousingDataset();
+const modelCols = css`
+  display: flex;
+  flex-direction: row;
+
+  & > * {
+    flex: 1 1 0;
+  }
+`;
 
 const BostonHousing: NextPage = () => {
+  const [bostonData, setBostonData] = useState<any>(null);
+  const [isDisabledButton, setIsDisabledButton] = useState(true);
+
   const handleClickSimpleMlr = useCallback(async (e) => {
-    const model = linearRegressionModel();
-    await run(model, 'linear', true);
+    if (bostonData) {
+      const model = linearRegressionModel(bostonData);
+      await run(model, 'linear', true);
+    }
   }, []);
 
   const handleClickNnMlr1hidden = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel1Hidden();
-    await run(model, 'oneHidden', false);
+    if (bostonData) {
+      const model = multiLayerPerceptronRegressionModel1Hidden(bostonData);
+      await run(model, 'oneHidden', false);
+    }
   }, []);
 
   const handleClickNnMlr2hidden = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel2Hidden();
-    await run(model, 'twoHidden', false);
+    if (bostonData) {
+      const model = multiLayerPerceptronRegressionModel2Hidden(bostonData);
+      await run(model, 'twoHidden', false);
+    }
   }, []);
 
   const handleClickNnMlr1hiddenNoSigmoid = useCallback(async (e) => {
-    const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid();
-    await run(model, 'nosigHidden', false);
+    if (bostonData) {
+      const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid(bostonData);
+      await run(model, 'nosigHidden', false);
+    }
   }, []);
 
-  const init = useCallback(async () => {
-    await bostonData.loadData();
-    updateStatus('데이터가 로드되었고 텐서로 변환합니다');
-    arraysToTensors();
-    updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
-    updateBaselineStatus('기준 손실을 추정합니다.');
-    computeBaseline();
-  }, []);
+  // const init = async () => {
+  //   const newBostonData = new BostonHousingDataset();
+  //   await newBostonData.loadData();
+  //   updateStatus('데이터가 로드되었고 텐서로 변환합니다');
+  //   arraysToTensors(newBostonData);
+  //   updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
+  //   updateBaselineStatus('기준 손실을 추정합니다.');
+  //   computeBaseline();
+  //   setIsDisabledButton(false);
+  //   setBostonData(newBostonData);
+  // };
 
   useEffect(() => {
-    init();
-  }, [init]);
+    (async () => {
+      const newBostonData = new BostonHousingDataset();
+      await newBostonData.loadData();
+      updateStatus('데이터가 로드되었고 텐서로 변환합니다');
+      arraysToTensors(newBostonData);
+      updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
+      updateBaselineStatus('기준 손실을 추정합니다.');
+      computeBaseline();
+      setIsDisabledButton(false);
+      setBostonData(newBostonData);
+    })();
+  }, [setIsDisabledButton]);
   return (
     <div>
       <Head>
-        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></Script>
-        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
-        <Script
-          src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
-          integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        ></Script>
         <meta property="og:title" content="Frontend Boston housing" />
         <meta
           property="og:url"
@@ -87,10 +110,18 @@ const BostonHousing: NextPage = () => {
           content="https://v-log.dev/playground/deep_learning/boston-housing/"
         />
         <meta name="twitter:image" content="https://d6c63ppcwec2x.cloudfront.net/logo.png" />
-        <meta name="twitter:description" content="React pdf" />
+        <meta name="twitter:description" content="Tensorflowjs boston housing" />
       </Head>
       <Playground>
         <h1>TensorFlow.js 예제: 다중 회귀</h1>
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></Script>
+        <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
+          integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        ></Script>
         <section
           css={css`
             margin: 20px;
@@ -125,7 +156,7 @@ const BostonHousing: NextPage = () => {
 
           <section>
             <p css={descriptionHead}>훈련 과정</p>
-            <div className="with-cols">
+            <div css={modelCols}>
               <div id="linear">
                 <div className="chart"></div>
                 <div className="status"></div>
@@ -145,20 +176,35 @@ const BostonHousing: NextPage = () => {
             </div>
 
             <div id="buttons">
-              <div className="with-cols">
-                <button type="button" id="simple-mlr" onClick={handleClickSimpleMlr}>
+              <div css={modelCols}>
+                <button
+                  disabled={isDisabledButton}
+                  type="button"
+                  id="simple-mlr"
+                  onClick={handleClickSimpleMlr}
+                >
                   선형 회귀 모델 훈련
                 </button>
-                <button type="button" id="nn-mlr-1hidden" onClick={handleClickNnMlr1hidden}>
+                <button
+                  disabled={isDisabledButton}
+                  type="button"
+                  id="nn-mlr-1hidden"
+                  onClick={handleClickNnMlr1hidden}
+                >
                   신경망 회귀 모델 훈련 (은닉층 1개)
                 </button>
-                <button type="button" id="nn-mlr-2hidden" onClick={handleClickNnMlr2hidden}>
+                <button
+                  disabled={isDisabledButton}
+                  type="button"
+                  id="nn-mlr-2hidden"
+                  onClick={handleClickNnMlr2hidden}
+                >
                   신경망 회귀 모델 훈련 (은닉층 2개)
                 </button>
               </div>
             </div>
 
-            <div className="with-cols">
+            <div css={modelCols}>
               <div id="nosigHidden">
                 <div className="chart"></div>
                 <div className="status"></div>
@@ -168,8 +214,9 @@ const BostonHousing: NextPage = () => {
             </div>
 
             <div id="buttons">
-              <div className="with-cols">
+              <div css={modelCols}>
                 <button
+                  disabled={isDisabledButton}
                   type="button"
                   id="nn-mlr-1hidden-no-sigmoid"
                   onClick={handleClickNnMlr1hiddenNoSigmoid}
