@@ -40,33 +40,45 @@ const BostonHousing: NextPage = () => {
   const [bostonData, setBostonData] = useState<any>(null);
   const [isDisabledButton, setIsDisabledButton] = useState(true);
 
-  const handleClickSimpleMlr = useCallback(async (e) => {
-    if (bostonData) {
-      const model = linearRegressionModel(bostonData);
-      await run(model, 'linear', true);
-    }
-  }, []);
+  const handleClickSimpleMlr = useCallback(
+    async (e) => {
+      if (bostonData) {
+        const model = linearRegressionModel(bostonData);
+        await run(model, 'linear', true);
+      }
+    },
+    [bostonData],
+  );
 
-  const handleClickNnMlr1hidden = useCallback(async (e) => {
-    if (bostonData) {
-      const model = multiLayerPerceptronRegressionModel1Hidden(bostonData);
-      await run(model, 'oneHidden', false);
-    }
-  }, []);
+  const handleClickNnMlr1hidden = useCallback(
+    async (e) => {
+      if (bostonData) {
+        const model = multiLayerPerceptronRegressionModel1Hidden(bostonData);
+        await run(model, 'oneHidden', false);
+      }
+    },
+    [bostonData],
+  );
 
-  const handleClickNnMlr2hidden = useCallback(async (e) => {
-    if (bostonData) {
-      const model = multiLayerPerceptronRegressionModel2Hidden(bostonData);
-      await run(model, 'twoHidden', false);
-    }
-  }, []);
+  const handleClickNnMlr2hidden = useCallback(
+    async (e) => {
+      if (bostonData) {
+        const model = multiLayerPerceptronRegressionModel2Hidden(bostonData);
+        await run(model, 'twoHidden', false);
+      }
+    },
+    [bostonData],
+  );
 
-  const handleClickNnMlr1hiddenNoSigmoid = useCallback(async (e) => {
-    if (bostonData) {
-      const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid(bostonData);
-      await run(model, 'nosigHidden', false);
-    }
-  }, []);
+  const handleClickNnMlr1hiddenNoSigmoid = useCallback(
+    async (e) => {
+      if (bostonData) {
+        const model = multiLayerPerceptronRegressionModel1HiddenNoSigmoid(bostonData);
+        await run(model, 'nosigHidden', false);
+      }
+    },
+    [bostonData],
+  );
 
   // const init = async () => {
   //   const newBostonData = new BostonHousingDataset();

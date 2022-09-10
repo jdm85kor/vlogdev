@@ -2,8 +2,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { css } from '@emotion/react';
 import Script from 'next/script';
-import WebCam from '@components/playground/deep-learning/webcam';
-import RPSDataset from '@components/playground/deep-learning/rps-dataset';
+import WebCam from './webcam';
+import RPSDataset from './rps-dataset';
 
 declare global {
   interface Window {
