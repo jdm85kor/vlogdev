@@ -226,7 +226,7 @@ const BostonHousing: NextPage = () => {
             </div>
 
             <div id="buttons">
-              <div className="with-cols">
+              <div css={modelCols}>
                 <button
                   disabled={isDisabledButton}
                   type="button"
