@@ -80,31 +80,27 @@ const BostonHousing: NextPage = () => {
     [bostonData],
   );
 
-  // const init = async () => {
-  //   const newBostonData = new BostonHousingDataset();
-  //   await newBostonData.loadData();
-  //   updateStatus('데이터가 로드되었고 텐서로 변환합니다');
-  //   arraysToTensors(newBostonData);
-  //   updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
-  //   updateBaselineStatus('기준 손실을 추정합니다.');
-  //   computeBaseline();
-  //   setIsDisabledButton(false);
-  //   setBostonData(newBostonData);
-  // };
+  const init = useCallback(async () => {
+    const newBostonData = new BostonHousingDataset();
+    await newBostonData.loadData();
+    updateStatus('데이터가 로드되었고 텐서로 변환합니다');
+    arraysToTensors(newBostonData);
+    updateStatus('데이터가 텐서로 변환되었습니다..\n훈련 버튼을 눌러 시작하세요.');
+    updateBaselineStatus('기준 손실을 추정합니다.');
+    computeBaseline();
+    setIsDisabledButton(false);
+    setBostonData(newBostonData);
+  }, []);
 
   useEffect(() => {
-    (async () => {
-      const newBostonData = new BostonHousingDataset();
-      await newBostonData.loadData();
-      updateStatus('데이터가 로드되었고 텐서로 변환합니다');
-      arraysToTensors(newBostonData);
-      updateStatus('데이터가 텐서로 변환되었습니다..\n' + '훈련 버튼을 눌러 시작하세요.');
-      updateBaselineStatus('기준 손실을 추정합니다.');
-      computeBaseline();
-      setIsDisabledButton(false);
-      setBostonData(newBostonData);
-    })();
-  }, [setIsDisabledButton]);
+    window.setTimeout(() => {
+      if (window?.tf) {
+        init();
+      } else {
+        console.warn('자료가 다운로드 되지 않았습니다. 다시 시도해주세요.');
+      }
+    }, 2000);
+  }, [init]);
   return (
     <div>
       <Head>
@@ -128,12 +124,12 @@ const BostonHousing: NextPage = () => {
         <h1>TensorFlow.js 예제: 다중 회귀</h1>
         <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></Script>
         <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
-        <Script
+        {/* <Script
           src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"
           integrity="sha512-EbdJQSugx0nVWrtyK3JdQQ/03mS3Q1UiAhRtErbwl1YL/+e2hZdlIcSURxxh7WXHTzn83sjlh2rysACoJGfb6g=="
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
-        ></Script>
+        ></Script> */}
         <section
           css={css`
             margin: 20px;
