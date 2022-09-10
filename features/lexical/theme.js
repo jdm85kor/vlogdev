@@ -1,5 +1,3 @@
-// import type { EditorThemeClasses } from 'lexical';
-
 const exampleTheme = {
   ltr: 'ltr',
   rtl: 'rtl',

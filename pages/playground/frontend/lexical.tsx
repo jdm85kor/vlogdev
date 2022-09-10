@@ -74,9 +74,9 @@ const Lexical = () => {
 
   const editorConfig = {
     // The editor theme
-    theme: ExampleTheme,
+    theme: ExampleTheme as any,
     // Handling of errors during update
-    onError(error) {
+    onError(error: any) {
       throw error;
     },
     // Any custom nodes go here
