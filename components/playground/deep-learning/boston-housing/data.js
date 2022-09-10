@@ -1,3 +1,5 @@
+import Papa from 'papaparse';
+
 /**
  * @license
  * Copyright 2018 Google LLC. All Rights Reserved.
@@ -51,8 +53,7 @@ export const loadCsv = async (filename) => {
   return new Promise((resolve) => {
     const url = `${BASE_URL}${filename}`;
 
-    console.log(`  * 다음 주소에서 데이터 다운로드 중: ${url}`);
-    window?.Papa?.parse(url, {
+    Papa.parse(url, {
       download: true,
       header: true,
       complete: (results) => {
