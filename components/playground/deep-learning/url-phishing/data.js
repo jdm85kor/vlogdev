@@ -63,8 +63,8 @@ export class WebsitePhishingDataset {
     const trainTarget = Float32Array.from([].concat.apply([], this.dataset[1]));
 
     return {
-      data: tf.tensor2d(trainData, dataShape),
-      target: tf.tensor1d(trainTarget),
+      data: window?.tf.tensor2d(trainData, dataShape),
+      target: window?.tf.tensor1d(trainTarget),
     };
   }
 
@@ -75,8 +75,8 @@ export class WebsitePhishingDataset {
     const testTarget = Float32Array.from([].concat.apply([], this.dataset[3]));
 
     return {
-      data: tf.tensor2d(testData, dataShape),
-      target: tf.tensor1d(testTarget),
+      data: window.tf.tensor2d(testData, dataShape),
+      target: window.tf.tensor1d(testTarget),
     };
   }
 }

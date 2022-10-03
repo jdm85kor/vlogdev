@@ -1,3 +1,4 @@
+import Papa from 'papaparse';
 const BASE_URL =
   'https://gist.githubusercontent.com/ManrajGrover/6589d3fd3eb9a0719d2a83128741dfc1/raw/d0a86602a87bfe147c240e87e6a9641786cafc19/';
 

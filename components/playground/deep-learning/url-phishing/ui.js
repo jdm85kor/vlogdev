@@ -15,11 +15,6 @@
  * =============================================================================
  */
 
-const statusElement = document.getElementById('status');
-export function updateStatus(message) {
-  statusElement.innerText = message;
-}
-
 export async function plotLosses(trainLogs) {
   return tfvis.show.history(document.getElementById('plotLoss'), trainLogs, ['loss', 'val_loss'], {
     width: 450,
