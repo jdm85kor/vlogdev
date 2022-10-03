@@ -26,7 +26,7 @@ const sectionHeadCss = css`
 const UrlPhishing: NextPage = () => {
   const [status, setStatus] = useState<string>('데이터를 로딩합니다...');
 
-  function falsePositives(yTrue, yPred) {
+  function falsePositives(yTrue: any, yPred: any) {
     return window.tf.tidy(() => {
       const one = window.tf.scalar(1);
       const zero = window.tf.scalar(0);
@@ -34,7 +34,7 @@ const UrlPhishing: NextPage = () => {
     });
   }
 
-  function trueNegatives(yTrue, yPred) {
+  function trueNegatives(yTrue: any, yPred: any) {
     return window.tf.tidy(() => {
       const zero = window.tf.scalar(0);
       return window.tf.logicalAnd(yTrue.equal(zero), yPred.equal(zero)).sum().cast('float32');
@@ -114,7 +114,7 @@ const UrlPhishing: NextPage = () => {
       model.compile({ optimizer: 'adam', loss: 'binaryCrossentropy', metrics: ['accuracy'] });
 
       const trainLogs: Array<any> = [];
-      let auc;
+      let auc: any;
 
       setStatus('훈련을 시작합니다...');
       await model.fit(trainData.data, trainData.target, {
