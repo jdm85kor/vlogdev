@@ -157,10 +157,7 @@ export function normalizeDataset(
  * @param {number} threshold 임곗값 (기본값: 0.5)
  * @returns {tf.Tensor} 이진 값으로 바뀐 텐서
  */
-export function binarize(y, threshold) {
-  if (threshold == null) {
-    threshold = 0.5;
-  }
+export function binarize(y, threshold = 0.5) {
   tf.util.assert(
     threshold >= 0 && threshold <= 1,
     `임곗값은 0보다 크거가 같고 1보다 작거나 같아야 합니다. 현재 값은 ${threshold}입니다.`,
