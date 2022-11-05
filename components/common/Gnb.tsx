@@ -75,50 +75,50 @@ const Gnb = () => {
   return (
     <div css={div} role="banner">
       <nav css={nav}>
-        <Link href="/" passHref>
-          <a css={a}>
-            <img
-              css={img}
-              src={`${process.env.NEXT_PUBLIC_ASSET_URL}/logo_96x96.png`}
-              alt=""
-              width="30"
-              height="30"
-            />
-          </a>
+        <Link href="/" passHref css={a}>
+
+          <img
+            css={img}
+            src={`${process.env.NEXT_PUBLIC_ASSET_URL}/logo_96x96.png`}
+            alt=""
+            width="30"
+            height="30"
+          />
+
         </Link>
         <ul css={ul}>
           <li css={li}>
-            <Link href="/vlog" passHref>
-              <a css={a}>VLOG</a>
+            <Link href="/vlog" passHref css={a}>
+              VLOG
             </Link>
           </li>
           <li css={li}>
-            <Link href="/playground" passHref>
-              <a css={a}>PLAYGROUND</a>
+            <Link href="/playground" passHref css={a}>
+              PLAYGROUND
             </Link>
           </li>
           <li css={li}>
-            <Link href="/dev" passHref>
-              <a css={a}>DEV</a>
+            <Link href="/dev" passHref css={a}>
+              DEV
             </Link>
           </li>
           <li css={li}>
-            <Link href="/about" passHref>
-              <a css={a}>ABOUT</a>
+            <Link href="/about" passHref css={a}>
+              ABOUT
             </Link>
           </li>
         </ul>
-        <Link href="/admin" passHref>
-          <a css={a}>
-            <Setting
-              css={css`
-                width: 20px;
-                height: 20px;
-                display: inline-block;
-                vertical-align: middle;
-              `}
-            />
-          </a>
+        <Link href="/admin" passHref css={a}>
+
+          <Setting
+            css={css`
+              width: 20px;
+              height: 20px;
+              display: inline-block;
+              vertical-align: middle;
+            `}
+          />
+
         </Link>
       </nav>
     </div>

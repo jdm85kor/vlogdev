@@ -185,45 +185,46 @@ const Menu = () => {
                         text-align: right;
                       `}
                     >
-                      <Link href={`/playground/${f[0].toLowerCase()}/${i}`} passHref>
-                        <a
+                      <Link
+                        href={`/playground/${f[0].toLowerCase()}/${i}`}
+                        passHref
+                        css={css`
+                          position: absolute;
+                          left: 0;
+                          right: 0;
+                          top: 0;
+                          bottom: 0;
+                          margin: 0;
+                          padding: 0;
+                          background: inherit;
+                          border: none;
+                          cursor: pointer;
+                          color: ${colors.hermes};
+                          text-decoration: none;
+                          &:hover {
+                            background: ${colors.hermes};
+                            color: #fff;
+                            opacity: 0.5;
+                          }
+                        `}
+                        onClick={() => isMobile && setIsFoldMenu((prev) => !prev)}>
+
+                        <span
                           css={css`
+                            display: inline-block;
                             position: absolute;
-                            left: 0;
-                            right: 0;
-                            top: 0;
-                            bottom: 0;
-                            margin: 0;
-                            padding: 0;
-                            background: inherit;
-                            border: none;
-                            cursor: pointer;
-                            color: ${colors.hermes};
-                            text-decoration: none;
-                            &:hover {
-                              background: ${colors.hermes};
-                              color: #fff;
-                              opacity: 0.5;
-                            }
+                            top: 50%;
+                            left: 10px;
+                            transform: translateY(-50%);
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            width: 90%;
+                            white-space: nowrap;
                           `}
-                          onClick={() => isMobile && setIsFoldMenu((prev) => !prev)}
                         >
-                          <span
-                            css={css`
-                              display: inline-block;
-                              position: absolute;
-                              top: 50%;
-                              left: 10px;
-                              transform: translateY(-50%);
-                              overflow: hidden;
-                              text-overflow: ellipsis;
-                              width: 90%;
-                              white-space: nowrap;
-                            `}
-                          >
-                            {i}
-                          </span>
-                        </a>
+                          {i}
+                        </span>
+
                       </Link>
                     </li>
                   ))}
