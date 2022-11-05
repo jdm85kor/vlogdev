@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -16,17 +20,40 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@pages/*": ["pages/*"],
-      "@containers/*": ["containers/*"],
-      "@styles/*": ["styles/*"],
-      "@public/*": ["public/*"],
-      "@utils/*": ["utils/*"],
-      "@mobx/*": ["mobx/*"],
-      "@features/*": ["features/*"]
+      "@components/*": [
+        "components/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@containers/*": [
+        "containers/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@utils/*": [
+        "utils/*"
+      ],
+      "@mobx/*": [
+        "mobx/*"
+      ],
+      "@features/*": [
+        "features/*"
+      ]
     },
-    "typeRoots": ["./type", "./node_modules/@types"],
-    "types": ["node", "webpack-env"]
+    "typeRoots": [
+      "./type",
+      "./node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "webpack-env"
+    ],
+    "incremental": true
   },
   "include": [
     "next-env.d.ts",
@@ -37,5 +64,7 @@
     "features/lexical/plugins/ListMaxIndentLevelPlugin.jsx",
     "features/lexical/theme.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
