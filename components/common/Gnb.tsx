@@ -76,7 +76,6 @@ const Gnb = () => {
     <div css={div} role="banner">
       <nav css={nav}>
         <Link href="/" passHref css={a}>
-
           <img
             css={img}
             src={`${process.env.NEXT_PUBLIC_ASSET_URL}/logo_96x96.png`}
@@ -84,7 +83,6 @@ const Gnb = () => {
             width="30"
             height="30"
           />
-
         </Link>
         <ul css={ul}>
           <li css={li}>
@@ -109,7 +107,6 @@ const Gnb = () => {
           </li>
         </ul>
         <Link href="/admin" passHref css={a}>
-
           <Setting
             css={css`
               width: 20px;
@@ -118,7 +115,6 @@ const Gnb = () => {
               vertical-align: middle;
             `}
           />
-
         </Link>
       </nav>
     </div>

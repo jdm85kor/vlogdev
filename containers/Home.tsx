@@ -271,27 +271,24 @@ const Home = ({ vlog }: Props) => {
                   box-sizing: border-box;
                 `}
               >
-                <Link href={`https://www.youtube.com/watch?v=${v.videoId}`} passHref>
-                  <a
-                    css={css`
-                      display: inline-flex;
-                      flex-direction: column;
-                      padding: 0;
-                      background: inherit;
-                      border: none;
-                      cursor: pointer;
-                      text-decoration: none;
-                      color: #555;
-                    `}
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                  >
-                    <div css={thumbnailStyle(v.thumbnails)} />
-                    <span
-                      css={titleStyle}
-                      dangerouslySetInnerHTML={{ __html: v.videoTitle }}
-                    ></span>
-                  </a>
+                <Link
+                  href={`https://www.youtube.com/watch?v=${v.videoId}`}
+                  passHref
+                  css={css`
+                    display: inline-flex;
+                    flex-direction: column;
+                    padding: 0;
+                    background: inherit;
+                    border: none;
+                    cursor: pointer;
+                    text-decoration: none;
+                    color: #555;
+                  `}
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                >
+                  <div css={thumbnailStyle(v.thumbnails)} />
+                  <span css={titleStyle} dangerouslySetInnerHTML={{ __html: v.videoTitle }}></span>
                 </Link>
               </li>
             ))}
@@ -302,19 +299,20 @@ const Home = ({ vlog }: Props) => {
         <h2>New blog posts</h2>
         <p>
           {news.map((n, idx) => (
-            <Link key={idx} href={n.url} passHref>
-              <a
-                target="_blank"
-                rel="noopener noreferrer nofollow"
-                css={css`
-                  margin: 10px 0;
-                  text-decoration: underline;
-                  color: #555;
-                  display: block;
-                `}
-              >
-                {n.title}
-              </a>
+            <Link
+              key={idx}
+              href={n.url}
+              passHref
+              target="_blank"
+              rel="noopener noreferrer nofollow"
+              css={css`
+                margin: 10px 0;
+                text-decoration: underline;
+                color: #555;
+                display: block;
+              `}
+            >
+              {n.title}
             </Link>
           ))}
         </p>
