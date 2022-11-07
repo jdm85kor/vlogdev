@@ -1,20 +1,20 @@
 import React, { useEffect, useRef } from 'react';
-import Head from 'next/head'
+import Head from 'next/head';
 import { NextPage } from 'next';
 import { css } from '@emotion/react';
-import { store, DnD } from "@dflex/dnd";
+import { store, DnD } from '@dflex/dnd';
 import Playground from '@containers/Playground';
 import Utteranc from '@components/common/Utteranc';
 import { colors } from '@styles/theme';
 
-const tasks: { id: string, msg: string }[] = [
-  { id: "mtg", msg: "Meet with Laura" },
-  { id: "meetup", msg: "Organize weekly meetup" },
-  { id: "gym", msg: "Hit the gym" },
-  { id: "proj", msg: "The Rosie Project" },
+const tasks: { id: string; msg: string }[] = [
+  { id: 'mtg', msg: 'Meet with Laura' },
+  { id: 'meetup', msg: 'Organize weekly meetup' },
+  { id: 'gym', msg: 'Hit the gym' },
+  { id: 'proj', msg: 'The Rosie Project' },
 ];
 
-const Task = ({ id, task }: { id: string, task: string }) => {
+const Task = ({ id, task }: { id: string; task: string }) => {
   let dndEvent: any;
 
   // This reference enable DFlex to move the element when required.
@@ -28,13 +28,16 @@ const Task = ({ id, task }: { id: string, task: string }) => {
       // store.register({ ref: ref.current });
       // store.register({ id });
       // store.register({ id, ref: ref.current, depth: 0 });
-      store.register({ id, ref: liRef.current, parentID: "my-first-todo" });
+      store.register({ id, ref: liRef.current, parentID: 'my-first-todo' });
     }
-  }, [liRef]);
+  }, [id, liRef]);
 
-  useEffect(() => () => {
-    store.unregister(id);  // Clear element from the store when unmounted.
-  }, []);
+  useEffect(
+    () => () => {
+      store.unregister(id); // Clear element from the store when unmounted.
+    },
+    [id],
+  );
 
   const onMouseMove = (e: MouseEvent) => {
     console.log(dndEvent);
@@ -52,8 +55,8 @@ const Task = ({ id, task }: { id: string, task: string }) => {
       dndEvent.endDragging();
       dndEvent = null;
 
-      document.removeEventListener("mouseup", onMouseUp);
-      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', onMouseMove);
     }
   };
 
@@ -61,12 +64,12 @@ const Task = ({ id, task }: { id: string, task: string }) => {
     const { button, clientX, clientY } = e;
 
     // Avoid right mouse click and ensure id
-    if (typeof button === "number" && button === 0) {
+    if (typeof button === 'number' && button === 0) {
       if (id) {
         // Add event listeners to the entire document.
         // Not just the button boundaries.
-        document.addEventListener("mouseup", onMouseUp);
-        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+        document.addEventListener('mousemove', onMouseMove);
 
         // Create DnD instance with no custom options.
         dndEvent = new DnD(
@@ -82,9 +85,10 @@ const Task = ({ id, task }: { id: string, task: string }) => {
                 allowLeavingFromBottom: false,
                 allowLeavingFromLeft: true,
                 allowLeavingFromRight: false,
-              }
-            }
-          });
+              },
+            },
+          },
+        );
       }
     }
   };
@@ -94,7 +98,7 @@ const Task = ({ id, task }: { id: string, task: string }) => {
       ref={liRef}
       id={id}
       css={css`
-        border: 1px solid ${colors.hermes}
+        border: 1px solid ${colors.hermes};
       `}
       onMouseDown={handleMouseDown}
     >
@@ -104,9 +108,12 @@ const Task = ({ id, task }: { id: string, task: string }) => {
 };
 
 const Dflex: NextPage = () => {
-  useEffect(() => () => {
-    store.destroy();  // Destroy all elements from the store when unmounted.
-  }, []);
+  useEffect(
+    () => () => {
+      store.destroy(); // Destroy all elements from the store when unmounted.
+    },
+    [],
+  );
 
   return (
     <div>
@@ -122,9 +129,7 @@ const Dflex: NextPage = () => {
         <meta name="twitter:description" content="drag and drop library" />
       </Head>
       <Playground>
-        <h1>
-          dflex
-        </h1>
+        <h1>dflex</h1>
         <section
           css={css`
             margin: 20px;
@@ -135,9 +140,7 @@ const Dflex: NextPage = () => {
           `}
           id="dflex-section"
         >
-          <p>
-            list 왼쪽으로만 item이 벗어날 수 있게 조건 걸림.
-          </p>
+          <p>list 왼쪽으로만 item이 벗어날 수 있게 조건 걸림.</p>
           <ul
             id="my-first-todo"
             css={css`
@@ -146,11 +149,9 @@ const Dflex: NextPage = () => {
               border: 1px solid black;
             `}
           >
-            {
-              tasks.map(({ msg, id }) => (
-                <Task key={id} task={msg} id={id} />
-              ))
-            }
+            {tasks.map(({ msg, id }) => (
+              <Task key={id} task={msg} id={id} />
+            ))}
           </ul>
         </section>
       </Playground>

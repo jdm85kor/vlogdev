@@ -12,5 +12,5 @@
     ["@emotion/babel-preset-css-prop"],
     ["@babel/preset-typescript"]
   ],
-  "plugins": ["@emotion/babel-plugin"]
+  "plugins": ["@emotion/babel-plugin", "inline-react-svg"]
 }
