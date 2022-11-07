@@ -11,7 +11,7 @@ import PlaygroundLayout from '@components/playground/Layout';
 import awsconfig from '../aws-exports.js';
 import RootStore from '@mobx/store';
 import { colors } from '@styles/theme';
-import '@styles/lexical.css';
+import '@styles/lexical.modules.css';
 
 Amplify.configure(awsconfig);
 
