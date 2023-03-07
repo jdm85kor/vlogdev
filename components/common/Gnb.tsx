@@ -57,7 +57,7 @@ const li = css`
 
 const a = css`
   flex: 1 1 auto;
-  color: ${colors.hermes};
+  color: ${colors.lusciousRed};
   text-decoration: none;
   text-align: center;
   &:hover {

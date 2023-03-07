@@ -98,7 +98,7 @@ const Task = ({ id, task }: { id: string; task: string }) => {
       ref={liRef}
       id={id}
       css={css`
-        border: 1px solid ${colors.hermes};
+        border: 1px solid ${colors.lusciousRed};
       `}
       onMouseDown={handleMouseDown}
     >

@@ -57,7 +57,7 @@ const requestButtonStyle = css`
   border-radius: 20px;
   cursor: pointer;
   &:hover {
-    border-color: ${colors.hermes};
+    border-color: ${colors.lusciousRed};
   }
 `;
 
@@ -210,7 +210,7 @@ const Home = ({ vlog }: Props) => {
                 ${mq({
                   fontSize: ['30px', '40px', '40px'],
                 })}
-                color: ${getDayTime === 'afternoon' ? colors.hermes : '#fff'};
+                color: ${getDayTime === 'afternoon' ? colors.lusciousRed : '#fff'};
                 font-style: italic;
                 font-weight: 600;
               `}

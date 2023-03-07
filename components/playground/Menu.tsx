@@ -96,7 +96,7 @@ const Menu = () => {
         left: 0;
         display: inline-block;
         background: #fff;
-        border: 1px solid ${colors.hermes};
+        border: 1px solid ${colors.lusciousRed};
         overflow-y: auto;
         box-sizing: border-box;
 
@@ -131,7 +131,7 @@ const Menu = () => {
                 width: 48px;
                 height: 48px;
                 & > path {
-                  fill: ${colors.hermes};
+                  fill: ${colors.lusciousRed};
                 }
               `}
             />
@@ -157,7 +157,7 @@ const Menu = () => {
                       height: 100%;
                       background: inherit;
                       border: none;
-                      color: ${colors.hermes};
+                      color: ${colors.lusciousRed};
                       cursor: pointer;
                       font-weight: 800;
                       text-align: center;
@@ -199,10 +199,10 @@ const Menu = () => {
                           background: inherit;
                           border: none;
                           cursor: pointer;
-                          color: ${colors.hermes};
+                          color: ${colors.lusciousRed};
                           text-decoration: none;
                           &:hover {
-                            background: ${colors.hermes};
+                            background: ${colors.lusciousRed};
                             color: #fff;
                             opacity: 0.5;
                           }

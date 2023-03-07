@@ -34,7 +34,7 @@ const Request = ({ user }: Props) => {
           <ul css={css`
             padding: 0;
             list-style: none;
-            border-top: solid 1px ${colors.hermes}
+            border-top: solid 1px ${colors.lusciousRed}
           `}>
             {
               requests.map(d => (
@@ -42,7 +42,7 @@ const Request = ({ user }: Props) => {
                   key={d.id}
                   css={css`
                     padding: 20px;
-                    border-bottom: solid 1px ${colors.hermes};
+                    border-bottom: solid 1px ${colors.lusciousRed};
                     white-space: pre-line;
                   `}
                 >

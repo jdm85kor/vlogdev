@@ -51,7 +51,7 @@ const channelLiStyle = (isBorder: boolean) => css`
   text-align: center;
   padding: 2px;
   border-radius: 10px;
-  border: 5px solid ${isBorder ? colors.hermes : '#fff'};
+  border: 5px solid ${isBorder ? colors.lusciousRed : '#fff'};
   box-sizing: border-box;
 `;
 const buttonStyle = css`
@@ -196,7 +196,7 @@ const Vlog = ({ vlog }: Props) => {
                 ${mq({
                   textAlign: ['left', 'right'],
                 })}
-                color: ${colors.hermes};
+                color: ${colors.lusciousRed};
                 opacity: 0.6;
               `}
             >
@@ -225,7 +225,7 @@ const Vlog = ({ vlog }: Props) => {
                           border: none;
                           background: inherit;
                           cursor: pointer;
-                          color: ${chooseGroup === g ? colors.hermes : '#333'};
+                          color: ${chooseGroup === g ? colors.lusciousRed : '#333'};
                         `}
                         onClick={() => {
                           setChooseGroup(g);
@@ -261,7 +261,7 @@ const Vlog = ({ vlog }: Props) => {
             <div
               css={css`
                 text-align: right;
-                color: ${colors.hermes};
+                color: ${colors.lusciousRed};
                 opacity: 0.6;
               `}
             >
