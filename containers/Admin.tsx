@@ -56,7 +56,7 @@ const Admin = ({ user }: Props) => {
                         display: inline-block;
                         margin: 0 5px;
                         padding: 0;
-                        border: 1px solid ${colors.hermes};
+                        border: 1px solid ${colors.lusciousRed};
                         box-shadow: 2px 2px 2px grey;
                       `}
                     >
@@ -68,7 +68,7 @@ const Admin = ({ user }: Props) => {
                           background: inherit;
                           border: none;
                           padding: 5px;
-                          color: ${colors.hermes};
+                          color: ${colors.lusciousRed};
                         `}
                       >
                         { c }

@@ -17,7 +17,7 @@ const Playground = ({
         paddingLeft: [0, 0, '20px'],
       })}
       & > h1 {
-        color: ${colors.hermes}
+        color: ${colors.lusciousRed}
       }
     `}>
       { children }

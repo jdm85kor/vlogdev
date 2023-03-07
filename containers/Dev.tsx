@@ -6,7 +6,7 @@ import { mq, colors } from '@styles/theme';
 
 const anchorStyle = css`
   text-decoration: none;
-  color: ${colors.hermes};
+  color: ${colors.lusciousRed};
 `;
 
 const Dev = () => {

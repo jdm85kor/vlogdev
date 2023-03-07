@@ -81,10 +81,10 @@ const block6 = keyframes`
     opacity: 1;
     left: 45px;
     top: 0;
-    background: ${colors.hermes};
+    background: ${colors.lusciousRed};
   }
   84% {left: 90px; top: 15px;}
-  90% {left: 90px; top: 75px;background: ${colors.hermes};}
+  90% {left: 90px; top: 75px;background: ${colors.lusciousRed};}
   100% {left: 90px; top: 75px;background: #bbb;}
 `;
 const block = (left: number, top: number) => css`
@@ -110,9 +110,9 @@ const Loading = () => {
         margin: 0 auto;
         width: 105px;
         height: 135px;
-        border-left: 1px solid ${colors.hermes};
-        border-right: 1px solid ${colors.hermes};
-        border-bottom: 1px solid ${colors.hermes};
+        border-left: 1px solid ${colors.lusciousRed};
+        border-right: 1px solid ${colors.lusciousRed};
+        border-bottom: 1px solid ${colors.lusciousRed};
       `}>
         <div css={css`
           position: absolute;
@@ -193,7 +193,7 @@ const Loading = () => {
               background: inherit;
             }
             &:first-of-type {
-              background: ${colors.hermes};
+              background: ${colors.lusciousRed};
             }
           }
         `}>

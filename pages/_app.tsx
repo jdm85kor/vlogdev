@@ -105,7 +105,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           href="https://d6c63ppcwec2x.cloudfront.net/logo144.png"
           sizes="144x144"
         ></link>
-        <meta name="theme-color" content={colors.hermes}></meta>
+        <meta name="theme-color" content={colors.lusciousRed}></meta>
         <meta name="format-detection" content="telephone=no"></meta>
       </Head>
       <Gnb />
