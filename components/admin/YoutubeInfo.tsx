@@ -182,8 +182,8 @@ const Vlog = ({ user }: Props) => {
             <tr
               key="table-head"
               css={css`
-                background-color: ${colors.hermes};
-                border-color: ${colors.hermes};
+                background-color: ${colors.lusciousRed};
+                border-color: ${colors.lusciousRed};
                 color: #fff;
               `}
             >
@@ -202,7 +202,7 @@ const Vlog = ({ user }: Props) => {
                 <tr
                   key={c.channelId}
                   css={css`
-                    background: ${c.publishTime > 0 ? 'inherit' : colors.hermes};
+                    background: ${c.publishTime > 0 ? 'inherit' : colors.lusciousRed};
                     opacity: ${c.publishTime > 0 ? 1 : 0.5};
                     & > td:last-of-type {
                       background: #fff;

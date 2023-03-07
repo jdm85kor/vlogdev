@@ -18,7 +18,7 @@ const sectionStyle = css`
   width: 100%;
 `;
 const h2Style = css`
-  color: ${colors.hermes};
+  color: ${colors.lusciousRed};
   font-style: italic;
 `;
 const dtStyle = css`
@@ -360,7 +360,7 @@ const About = () => {
                 height: 100%;
                 text-align: left;
                 text-decoration: underline;
-                color: ${colors.hermes};
+                color: ${colors.lusciousRed};
                 cursor: pointer;
               `}
               onClick={() => {
@@ -475,7 +475,7 @@ const About = () => {
           <p
             css={css`
               margin: 60px auto 0;
-              color: ${colors.hermes};
+              color: ${colors.lusciousRed};
               text-align: center;
               font-style: italic;
               font-size: 12px;

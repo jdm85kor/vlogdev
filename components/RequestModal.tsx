@@ -120,8 +120,8 @@ const RequestModal = ({
         <button
           css={css`
             margin-top: 10px;
-            background: ${colors.hermes};
-            border: 1px solid ${colors.hermes};
+            background: ${colors.lusciousRed};
+            border: 1px solid ${colors.lusciousRed};
             width: 100%;
             text-align: center;
             color: #fff;
