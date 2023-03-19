@@ -5,29 +5,7 @@ import RequestModal from '@components/RequestModal';
 import { css } from '@emotion/react';
 import { mq, colors } from '@styles/theme';
 import { apiCall } from '@utils/apis';
-
-const news = [
-  {
-    url: 'https://news.hada.io/weekly/202122',
-    title: '재미로 만든 작은 인터넷 프로젝트 팔기',
-  },
-  {
-    url: 'https://dev.to/o1lab/how-my-open-source-project-got-angel-investment-from-its-user-12dp',
-    title: '내 오픈소스 프로젝트가 유저로 부터 엔젤 투자를 받는 방법',
-  },
-  {
-    url: 'http://channy.creation.net/blog/1443',
-    title: '스타트업의 개발자 채용 비법',
-  },
-  {
-    url: 'https://web.dev/bundling-non-js-resources/',
-    title: 'Bundling non-JavaScript resources',
-  },
-  {
-    url: 'https://github.com/jongman/articles/wiki/solving-every-sudoku-puzzle#%EC%8A%A4%EB%8F%84%EC%BF%A0-%EC%9A%A9%EC%96%B4%EC%99%80-%EC%9E%90%EB%A3%8C-%EA%B5%AC%EC%A1%B0-%ED%91%9C%ED%98%84',
-    title: 'sudoku 문제 풀기',
-  },
-];
+import { mainNews } from "../assets/data/news";
 
 const sectionStyle = css`
   margin: 0 auto 20px;
@@ -298,7 +276,7 @@ const Home = ({ vlog }: Props) => {
       <section css={sectionStyle}>
         <h2>New blog posts</h2>
         <p>
-          {news.map((n, idx) => (
+          {mainNews.map((n, idx) => (
             <Link
               key={idx}
               href={n.url}
