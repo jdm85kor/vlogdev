@@ -214,6 +214,13 @@ const WebcamTransferLearning: NextPage = () => {
         <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-vis"></Script>
         <Script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-data"></Script>
         <Script src="/scripts/pacman-google.js"></Script>
+        <header>
+          <b>신경망</b>을 사용해 <b>웹캠</b>을 콘트롤러로 바꿉니다.
+        </header>
+        <div id="no-webcam">
+          웹캠을 찾을 수 없습니다. <br/>
+          이 데모를 시연하려면 웹캠이 있는 컴퓨터를 사용하세요.
+        </div>
         <div id="pacman-container">
           <div id="logo">
             <div id="logo-l">
