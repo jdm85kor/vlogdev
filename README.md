@@ -11,4 +11,4 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 
 Open [https://v-log.dev](https://v-log.dev)
 
-![Alt text](https://d6c63ppcwec2x.cloudfront.net/qrcode.svg)
+![Alt text](https://d6c63ppcwec2x.cloudfront.net/qr_code_20230621.png)
