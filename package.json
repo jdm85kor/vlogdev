@@ -35,6 +35,7 @@
     "axios": "^0.21.1",
     "camelcase-keys": "^7.0.0",
     "facepaint": "^1.2.1",
+    "graphology-layout": "^0.6.1",
     "lexical": "^0.6.0",
     "mobx": "^6.3.3",
     "mobx-react": "^7.2.0",
@@ -48,7 +49,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-pdf": "^5.7.2",
-    "react-quilljs": "^1.2.17"
+    "react-quilljs": "^1.2.17",
+    "reagraph": "^4.10.5"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
