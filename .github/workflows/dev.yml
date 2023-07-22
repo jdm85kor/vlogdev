@@ -36,7 +36,8 @@ jobs:
           wait-on: 'http://localhost:3000'
           # wait-on-timeout: 60
           browser: chrome
-          record: false
+          record: true
+          parallel: true
           component: true
           # tag: node-${{ matrix.node }}
           # auto-cancel-after-failures: 2
@@ -48,13 +49,10 @@ jobs:
           #   pages/**/*.spec.tsx
           #   mobx/**/*.spec.tsx
           #   utils/**/*.spec.tsx
-          # record: true
-          # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
-        # env:
-        #   # pass the Cypress Cloud record key as an environment variable
-        #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        #   # pass GitHub token to allow accurately detecting a build vs a re-run build
-        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_TOKEN }}
+          CYPRESS_PROJECT_ID: ${{ secrets.CYPRESS_PROJECT_ID }}
 
   # This workflow contains a single job called "build"
   build:

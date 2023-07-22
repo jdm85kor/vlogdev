@@ -126,6 +126,7 @@ const About = () => {
       progress < 0.3 ? (progress / 3) * 10 : progress > 0.7 ? (Math.abs(1 - progress) / 3) * 10 : 1;
     canvas.style.opacity = opacity.toString();
   };
+  
   const handleScroll = () => {
     let progress: number = window.pageYOffset / (document.body.offsetHeight - window.innerHeight);
     if (progress < 0) progress = 0;
@@ -143,6 +144,7 @@ const About = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <main
       css={css`
