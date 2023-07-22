@@ -17,10 +17,10 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [16, 18, 20]
-    name: E2E on Node v${{ matrix.node }}
+    # strategy:
+    #   matrix:
+    #     node: [16, 18, 20]
+    # name: E2E on Node v${{ matrix.node }}
 
     steps:
       - name: Checkout
@@ -43,7 +43,7 @@ jobs:
           # wait-on-timeout: 60
           browser: chrome
           record: false
-          tag: node-${{ matrix.node }}
+          # tag: node-${{ matrix.node }}
           # auto-cancel-after-failures: 2
           # firefox, edge
           # headed: true
