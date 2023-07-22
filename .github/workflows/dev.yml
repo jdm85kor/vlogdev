@@ -52,8 +52,8 @@ jobs:
           # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        #   # pass GitHub token to allow accurately detecting a build vs a re-run build
-        #   GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_TOKEN }}
+          #   # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.CYPRESS_GITHUB_TOKEN }}
 
   # This workflow contains a single job called "build"
   build:
