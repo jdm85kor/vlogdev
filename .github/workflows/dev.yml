@@ -26,11 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Run Component Testing
-        uses: cypress-io/github-action@v5
-        with:
-          component: true
-
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
@@ -43,6 +38,7 @@ jobs:
           # wait-on-timeout: 60
           browser: chrome
           record: false
+          component: true
           # tag: node-${{ matrix.node }}
           # auto-cancel-after-failures: 2
           # firefox, edge
