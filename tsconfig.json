@@ -51,7 +51,8 @@
     ],
     "types": [
       "node",
-      "webpack-env"
+      "webpack-env",
+      "cypress"
     ],
     "incremental": true
   },

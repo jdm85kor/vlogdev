@@ -15,23 +15,66 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     node: [16, 18, 20]
+    # name: E2E on Node v${{ matrix.node }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          install: true
+          build: yarn run static-build
+          start: yarn run start
+          # quote the url to be safe against YML parsing surprises
+          wait-on: 'http://localhost:3000'
+          # wait-on-timeout: 60
+          browser: chrome
+          record: false
+          component: true
+          # tag: node-${{ matrix.node }}
+          # auto-cancel-after-failures: 2
+          # firefox, edge
+          # headed: true
+          # spec: |
+          #   components/**/*.spec.tsx
+          #   containers/**/*.spec.tsx
+          #   pages/**/*.spec.tsx
+          #   mobx/**/*.spec.tsx
+          #   utils/**/*.spec.tsx
+          # record: true
+          # config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
+        # env:
+        #   # pass the Cypress Cloud record key as an environment variable
+        #   CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+        #   # pass GitHub token to allow accurately detecting a build vs a re-run build
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    needs: [cypress-run]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - name: Cache
+        uses: actions/cache@v3
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
-        run: yarn install
-      
+        run: yarn --frozen-lockfile
+
       - name: Build
         run: yarn run static-build
