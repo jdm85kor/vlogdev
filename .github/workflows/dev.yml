@@ -30,7 +30,7 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           # we have already installed everything
-          install: false
+          install: true
           build: yarn run static-build
           start: yarn run start
           # quote the url to be safe against YML parsing surprises
