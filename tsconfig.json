@@ -62,7 +62,8 @@
     "features/lexical/plugins/TreeViewPlugin.jsx",
     "features/lexical/plugins/ToolbarPlugin.jsx",
     "features/lexical/plugins/ListMaxIndentLevelPlugin.jsx",
-    "features/lexical/theme.js"
+    "features/lexical/theme.js",
+    "cypress.config.ts"
   ],
   "exclude": [
     "node_modules"
