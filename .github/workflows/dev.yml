@@ -36,7 +36,8 @@ jobs:
           wait-on: 'http://localhost:3000'
           # wait-on-timeout: 60
           browser: chrome
-          record: false
+          record: true
+          parallel: true
           component: true
           # tag: node-${{ matrix.node }}
           # auto-cancel-after-failures: 2
