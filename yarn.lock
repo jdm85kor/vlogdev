@@ -3384,6 +3384,18 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.2.0"
 
+"@huggingface/hub@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@huggingface/hub/-/hub-0.1.6.tgz#6e1b85a6b64471e7569687071d9f2c10261835e4"
+  integrity sha512-JjdL3lz3nR2jn3PFKUFASAgRdOtXDxhQoBkTM2eWkLZ67Gmm9ZWRXlvU8A2z55wycQccKzS6zgX4dlefDWtQcA==
+  dependencies:
+    hash-wasm "^4.9.0"
+
+"@huggingface/inference@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@huggingface/inference/-/inference-1.5.2.tgz#50c2284a7fe985f87b2cf46e37056349eee9177c"
+  integrity sha512-n1w/HcZfJv/Xpvpat0U/6RMw3ZaFKMF3XoYuvlqWUrcYItvjdZ3krgGEIwLDkrEFnpl0c1yenMqfYDwQf3gYEw==
+
 "@humanwhocodes/config-array@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.5.0.tgz#1407967d4c6eecd7388f83acf1eaf4d0c6e58ef9"
@@ -5790,6 +5802,11 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
+
+hash-wasm@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/hash-wasm/-/hash-wasm-4.9.0.tgz#7e9dcc9f7d6bd0cc802f2a58f24edce999744206"
+  integrity sha512-7SW7ejyfnRxuOc7ptQHSf4LDoZaWOivfzqw+5rpcQku0nHfmicPKE51ra9BiRLAmT8+gGLestr1XroUkqdjL6w==
 
 hoist-non-react-statics@^3.3.1:
   version "3.3.2"
