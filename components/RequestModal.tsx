@@ -24,6 +24,7 @@ interface Props {
   isShow: boolean,
   setShow: (status: boolean) => void;
   type: string,
+  test?: boolean,
 }
 
 const RequestModal = ({
