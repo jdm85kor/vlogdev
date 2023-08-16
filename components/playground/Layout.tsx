@@ -6,6 +6,8 @@ import { mq } from '@styles/theme';
 
 interface Props {
   children?: React.ReactNode;
+  test?: boolean;
+  test2?: boolean;
 };
 
 const Template = ({ children }: Props) => {
