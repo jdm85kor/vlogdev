@@ -6,6 +6,7 @@ import { mq } from '@styles/theme';
 
 interface Props {
   children?: React.ReactNode;
+  test?: number;
 };
 
 const Template = ({ children }: Props) => {
